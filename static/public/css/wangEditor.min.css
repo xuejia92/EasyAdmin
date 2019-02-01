@@ -1,0 +1,21 @@
+.wangEditor-menu-container .menu-item a {padding: 12px 0;}
+.wangEditor-menu-container .menu-item {height: 37px;width: 37px;}
+.wangEditor-menu-container .menu-group {padding: 0;}
+.wangEditor-container {border: 0px solid #fff;}
+.wangEditor-container .wangEditor-txt pre {background-color: #f8f8f8;font-size: 14px;border-radius: 0px;border: 0px solid #f8f8f8;margin: 10px 0;padding: 20px;}
+.wangEditor-container .wangEditor-txt p {color: #333;}
+.wangEditor-container .wangEditor-txt {padding: 0;margin-top: 0;}
+.wangEditor-container .wangEditor-txt blockquote {padding: 5px 10px 5px 5px;border-left: 4px solid #108ee9;margin: 10px 0 10px 10px;background-color: #f8f8f8;}
+.hljs-attribute, .hljs-name, .hljs-variable, .lisp .hljs-body {color: #555;}
+.hljs-hexcolor, .hljs-number, .ruby .hljs-constant {color: #555;}
+.hljs-doctag, .hljs-string, .hljs-tag .hljs-value, .tex .hljs-formula {color: #555;}
+.django .hljs-tag .hljs-keyword, .hljs-rule .hljs-property, .hljs-tag, .hljs-tag .hljs-title {color: #555;}
+.hljs-built_in {color: #555;}
+.hljs {padding: 0px 0px 10px 0px;color: #555;background: #f8f8f8;}
+.diff .hljs-header, .hljs-comment {color: #999;}
+.wangEditor-container .wangEditor-txt pre code {line-height: 1.8;}
+.wangEditor-container .wangEditor-txt h1, .wangEditor-container .wangEditor-txt h2, .wangEditor-container .wangEditor-txt h3, .wangEditor-container .wangEditor-txt h4, .wangEditor-container .wangEditor-txt h5, .wangEditor-container .wangEditor-txt p {margin: 15px 0;font-size: 14px;line-height: 1.8;}
+.hljs-id, .hljs-title, .scss .hljs-preprocessor {color: #333;font-weight: 100;}
+.hljs-class .hljs-title, .hljs-type, .tex .hljs-command, .vhdl .hljs-literal {color: #333;font-weight: 100;}
+.css .rule .hljs-keyword, .hljs-keyword, .hljs-request, .hljs-status, .hljs-subst, .hljs-winutils, .nginx .hljs-title {color: #333;font-weight: 100;}
+.hljs-regexp {color: #333;}

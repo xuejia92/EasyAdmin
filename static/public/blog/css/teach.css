@@ -1,0 +1,2745 @@
+/* é¦–é¡µæ ·å¼  */
+/* ----------------------------------- layout ----------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #ffffff;
+    font-size: 13px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+ol,ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #900b09;
+}
+a:hover {
+    color: #ff0000;
+}
+img {
+    border: 0;
+}
+a,input,textarea,button {
+    outline: 0;
+}
+.icon-img,.img-icon  {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.pull-right {
+    float:right;
+}
+.down-icon1 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+}
+.angle-down-icon {
+    background: url("//statics.w3cschool.cn/yimages/icon-angle-down1.png") no-repeat scroll 0% 0%;
+}
+.vip-sicon {
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    vertical-align: middle;
+}
+.vip-sicon0 {
+    background: url("//statics.w3cschool.cn/images/w3c/vip-sicon0.png") no-repeat scroll 0% 0%;
+}
+.vip-sicon1 {
+    background: url("//statics.w3cschool.cn/images/w3c/vip-sicon1.png") no-repeat scroll 0% 0%;
+}
+.vip-sicon2 {
+    background: url("//statics.w3cschool.cn/images/w3c/vip-sicon2.png") no-repeat scroll 0% 0%;
+}
+.new-icon {
+    position: relative;
+    display: inline-block;
+    width: 13px;
+    height: 14px;
+    background: url("//statics.w3cschool.cn/images/w3c/ico-new.png") no-repeat scroll 0px 0px;
+    top: -10px;
+}
+.double12-icon {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 14px;
+    background: url("//statics.w3cschool.cn/images/w3c/double12-tag.png") no-repeat scroll 0px 0px;
+    top: -10px;
+}
+.dropdown-content {
+    position: absolute;
+    left: auto;
+    top: 80%;
+    background-color: #fff;
+    padding: 9px 0;
+    width: 150px;
+    z-index: 1200;
+    border: 1px solid #eee;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+.dropdown-content .j {
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    margin-left: -8px;
+    display: block;
+}
+.dropdown-content .j::before,.dropdown-content .j::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-style: solid;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.dropdown-content .j::before {
+    border-color: transparent transparent #ddd transparent;
+}
+.dropdown-content .j::after {
+    border-color: transparent transparent #fff transparent;
+    top: 1px;
+}
+.top-banner {
+    width: 100%;
+    min-width: 1129px;
+    background-color: #fffdf0;
+    border-bottom: 1px solid #faebcc;
+    text-align: center;
+}
+
+/* ----------------------------------- header ----------------------------------- */
+#header_item {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+#header_index {
+    margin: 0 auto;
+    width: 1129px;
+    height: 80px;
+    line-height: 80px;
+}
+#header-l {
+    float: left;
+    width: 70%;
+    height: 80px;
+}
+#header-r {
+    float: right;
+    width: 30%;
+    height: 80px;
+}
+#header_index h1 {
+    float: left;
+    background: url("//statics.w3cschool.cn/images/w3c/index-logo.png") no-repeat scroll 0px 0px;
+    width: 228px;
+    height: 60px;
+    text-indent: -9999px;
+    margin: 16px 0;
+}
+#header_index .logo {
+    display: block;
+    width: 228px;
+    height: 60px;
+}
+.sig-box {
+    float: right;
+}
+.sig-box a {
+    font-size: 15px;
+    color: #333;
+}
+.sig-box a:hover {
+    color: #900b09;
+}
+.header-app {
+    position: relative;
+    float: right;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 25px;
+    background: url("//statics.w3cschool.cn/images/w3c/header-app.png?t=20171221") no-repeat 0px 0px;
+    font-size: 15px;
+    color: #333;
+    margin: 28px 15px 0 0;
+}
+.header-app:hover {
+    color: #AE4141;
+}
+.qrcode-box {
+    display: none;
+    top: 30px;
+    left: -98px;
+    width: 340px;
+    padding: 15px 10px;
+}
+.header-app:hover .qrcode-box {
+    display: block;
+}
+.qrcode-img {
+    display: inline-block;
+    float: left;
+    width: 170px;
+    text-align: center;
+}
+.qrcode-img p {
+    font-size: 15px;
+    color: #333;
+}
+.qrcode-box .j {
+    left: 40%;
+}
+.create-btn {
+    float: right;
+    width: 64px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #900b09;
+    background-color: transparent;
+    margin: 25px 15px 0 0;
+    border-radius: 4px;
+    text-align: center;
+}
+.create-btn:hover {
+    border: 1px solid #ae4141;
+    background-color: #ae4141;
+    color: #fff;
+}
+/* headerå·²ç™»å½•æ ·å¼  */
+#header_notification_bar,#dropdown-user{
+    display: inline-block;
+    position: relative;
+}
+.dropdown-toggle-list {
+    display: inline-block;
+    color: #333;
+}
+.dropdown-toggle-list img {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    vertical-align: middle;
+}
+.dropdown-list li {
+    height: 26px;
+    line-height: 26px;
+}
+.dropdown-list a {
+    display: block;
+    color: #333;
+    padding-left: 10px;
+}
+.dropdown-list a:hover {
+    color: #900b09;
+}
+.dropdown-list .sns-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-position: 0px 2px;
+    background-repeat: no-repeat;
+}
+.icon-user1 {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-user1.png");
+}
+.home-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-home1.png");
+}
+.cog-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-cog1.png");
+}
+.key-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-key1.png");
+}
+.dropdown-list a:hover .icon-user1 {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-user2.png");
+}
+.dropdown-list a:hover .home-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-home2.png");
+}
+.dropdown-list a:hover .cog-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-cog2.png");
+}
+.dropdown-list a:hover .key-icon {
+    background-image: url("//statics.w3cschool.cn/yimages/icon-key2.png");
+}
+.dropdown-list .divider{
+    background-color: #e5e5e5;
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+}
+/* æ¶ˆæ¯é€šçŸ¥  */
+#header_notification_bar {
+    margin-right: 15px;
+}
+#header_notification_bar .notice-icon {
+    background: url("//statics.w3cschool.cn/images/w3c/notice-icon.png") no-repeat scroll 0px 0px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+#header_notification_bar .badge {
+    display: inline-block;
+    line-height: 1;
+    background-color: #999;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+}
+#header_notification_bar .badge-danger{
+    background-color: #ed4e2a;
+}
+.dropdown-content.extended {
+    width: 160px;
+    padding: 0;
+    left: -60px;
+}
+.dropdown-content.extended li {
+    height: auto;
+    line-height: 25px;
+    position: relative;
+    padding: 0;
+}
+.dropdown-content.extended li p {
+    padding: 10px;
+    margin: 0px;
+    font-size: 14px;
+    color: #333;
+}
+.dropdown-content.extended li a {
+    display: block;
+    width: auto;
+    padding: 10px;
+    border-top: 1px solid #f4f4f4;
+    line-height: 20px;
+    font-size: 14px;
+    color: #333;
+}
+.dropdown-content.extended li a:hover {
+    background-color: #f5f5f5;
+    color: #900b09;
+}
+.dropdown-content.extended li span {
+    float: right;
+}
+.dropdown-content.extended li span.badge-danger {
+    background-color: #57b5e3 !important;
+}
+
+/* ----------------------------------- footer ----------------------------------- */
+#footer_item {
+    width: 100%;
+    min-width: 1129px;
+    background: #efefef;
+    border-top: 1px solid #ccc;
+    padding: 20px 0;
+}
+#footer {
+    clear: both;
+    position: relative;
+    margin: 0 auto;
+    width: 1129px;
+    height: auto;
+    overflow: hidden;
+}
+.footer-box {
+    float: left;
+    width: 19%;
+    margin-left: 1%;
+    text-align: left;
+}
+.footer-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    line-height: 30px;
+}
+.footer-items a,.footer-items p {
+    display: block;
+    line-height: 26px;
+    font-size: 14px;
+    color: #333;
+}
+.footer-items p {
+    margin: 0;
+}
+.footer-box .tcode {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+}
+.footer-box .tcode-txt {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    margin: 0 10px;
+}
+.footer-bottom {
+    margin: 0px auto;
+    width: 1129px;
+    padding: 10px 0 0;
+    text-align: center;
+    line-height: 30px;
+}
+.footer-bottom p {
+    font-size: 14px;
+    line-height: 30px;
+}
+#footer a:hover,.footer-bottom a:hover {
+    text-decoration: underline;
+    color: #ff0000;
+}
+
+/* ----------------------------------- search form ----------------------------------- */
+#header_index .searchbox {
+    float: left;
+    position: relative;
+    width: 462px;
+    height: 36px;
+    line-height: 36px;
+    margin: 24px 0 0 90px;
+    background: #FFF;
+    border-radius: 2px;
+    text-align: left;
+    border: 2px solid #AE4141;
+}
+#header_index .searchbox input.box {
+    width: 386px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    background: #fff;
+    color: #666;
+    border: none;
+    padding: 0 8px;
+    margin: 0;
+}
+#header_index .searchbox .button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 36px;
+    border: none;
+    background: #AE4141 url("//statics.w3cschool.cn/images/w3c/search-icon.png") no-repeat scroll center center;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.search-sort-item {
+    position: absolute;
+    width: 62px;
+    height: 36px;
+    cursor: pointer;
+    border-right: 1px solid #DDD;
+}
+.search-set {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 10px;
+    font-size: 14px;
+    color: #333;
+}
+.search-set i {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border-width: 5px;
+    border-style: solid dashed dashed;
+    border-color: #666 transparent transparent;
+}
+.search-sort-list {
+    position: absolute;
+    width: 61px;
+    height: auto;
+    background: #fff;
+    z-index: 100;
+    border: 1px solid #DDD;
+    border-top: none;
+    display: none;
+}
+.search-sort-list li {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 10px;
+    font-size: 14px;
+}
+.search-set:hover,.search-sort-list li:hover {
+    color: #900b09;
+}
+.search-set:hover i {
+    border-color: #AE4141 transparent transparent;
+}
+
+/* ç¬¬ä¸‰æ–¹ç™»å½•æ ·å¼   */
+.pop-sns {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+    vertical-align: middle;
+    content: none !important;
+    background-image: url("//statics.w3cschool.cn/images/w3c/sns-sprite.png");
+    background-repeat: no-repeat;
+}
+.quicklogin a {
+    display: inline-block;
+    line-height: 35px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #666;
+}
+.quicklogin a:hover,.pop-login-sns a:hover {
+    color: #333;
+}
+.icons-qq {
+    background-position: 0px 0px;
+}
+.icons-weixin {
+    background-position: -30px 0px;
+}
+.icons-weibo {
+    background-position: -60px 0px;
+}
+.icons-right {
+    background-position: -90px 0px;
+}
+.weixinlogin {
+    display: none;
+    position: absolute;
+    top: -210px;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #ccc;
+}
+.pop-login-sns a:hover .icons-qq {
+    background-position: 0px -30px;
+}
+.pop-login-sns a:hover .icons-weixin {
+    background-position: -30px -30px;
+}
+.pop-login-sns a:hover .icons-weibo {
+    background-position: -60px -30px;
+}
+.pop-login-sns a:hover .icons-right {
+    background-position: -90px -30px;
+}
+
+/* é¦–é¡µè½®æ’­banner */
+.slide-main {
+    width: 100%;
+    min-width: 1129px;
+}
+.nav-menu-banner {
+    width: 914px;
+    height: 48px;
+    margin: 0 auto;
+    position: relative;
+    left: 110px;
+}
+.nav-menu-list {
+    margin-left: 11px;
+}
+.nav-menu-list li {
+    float: left;
+    vertical-align: middle;
+    position: relative;
+    padding: 12px 15px 10px;
+}
+.nav-menu-list li a {
+    font-size: 16px;
+    color: #333;
+}
+.nav-menu-list li a:hover {
+    color: #900b09;
+}
+.nav-menu-list .dropdown-content {
+    display: none;
+    top: 42px;
+    left: -25px;
+    width: 235px;
+}
+.nav-menu-list .dropdown:hover .dropdown-content {
+    display: block;
+}
+.nav-menu-list .dropdown-content a {
+    width: 100px;
+    padding: 0 0 0 10px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    font-size: 15px;
+    color: #333;
+    text-align: center;
+}
+.nav-menu-list .dropdown-content a:first-child::before {
+    border-bottom: 8px solid #fff;
+    border-left: 8px solid rgba(255, 255, 255, 0);
+    border-right: 8px solid rgba(255, 255, 255, 0);
+    top: -8px;
+    content: "";
+    width: 0;
+    height: 0;
+    left: 45%;
+    margin-left: -50px;
+    position: absolute;
+}
+.slide-box {
+    position:relative;
+    height:300px;
+    overflow:visible;
+    /*  background: #f5f5f5;*/
+}
+.slide-btn {
+    position:relative;
+    width: 1129px;
+    margin: 0 auto;
+}
+.menu-wrapper {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    z-index: 1000;
+}
+.menu-content {
+    width: 215px;
+}
+.menu-title {
+    width: 215px;
+    height: 50px;
+    background-color: #AE4141;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.menu-title a {
+    display: inline-block;
+    width: 185px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px 15px;
+    font-size: 16px;
+    color: #FFF;
+}
+.menu-title .icon-menu {
+    display: inline-block;
+    vertical-align: 4px;
+    width: 18px;
+    height: 2px;
+    margin-right: 10px;
+    position: relative;
+    background: #fff;
+}
+.menu-title .icon-menu:before,.menu-title .icon-menu:after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    top: -7px;
+    left: 0;
+    background: #fff;
+}
+.menu-title .icon-menu:after {
+    top: 7px;
+}
+.menu-title h2 {
+    display: inline;
+    font-size: 16px;
+    font-weight: 400;
+}
+.menu-sort-list {
+    background-color: #FFF;
+    border: 1px solid #eee;
+    border-top: none;
+}
+.menu-sort-list li {
+    position: relative;
+    width: 213px;
+    height: 70px;
+    border-bottom: 1px solid #E6E6E6;
+    cursor: pointer;
+}
+.menu-sort-list li.active {
+    background-color: #F5F5F5;
+}
+.menu-sort-list li:last-child {
+    border-bottom: none;
+}
+.menu-item-first h3 {
+    display: inline-block;
+    vertical-align: middle;
+    height: 24px;
+    line-height: 24px;
+    padding: 11px 15px 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+.menu-item-first a,.menu-item-second a {
+    color: #900b09;
+}
+.hd-arr {
+    background: url("//statics.w3cschool.cn/yimages/hd_arr.gif") no-repeat scroll 0 0;
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 11px;
+    left: 190px;
+    top: 20px;
+}
+.menu-item-hot {
+    padding: 3px 0 10px 15px;
+    height: 16px;
+    overflow: hidden;
+}
+.menu-item-hot a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    font-size: 14px;
+    color: #333;
+}
+.menu-item-box {
+    background-color: #FFF;
+    position: absolute;
+    top: 50px;
+    left: 214px;
+    width: 880px;
+    min-height: 422px;
+    border: 2px solid #eee;
+    padding-left: 30px;
+    z-index: 1000;
+    display: none;
+}
+.focus-sider {
+    display: inline;
+    float: right;
+    padding: 12px 15px 7px 15px;
+    width: 192px;
+}
+.focus-sider a {
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    float: left;
+    margin: 0 5px 15px 0;
+    overflow: hidden;
+}
+.focus-sider img {
+    width: 192px;
+    height: 90px;
+}
+.menu-item-list {
+    width: 650px;
+}
+.menu-item-list li {
+    padding: 15px 0 12px;
+    border-bottom: 1px solid #E6E6E6;
+    font-size: 14px;
+}
+.menu-item-second {
+    display: inline-block;
+    font-weight: 600;
+    text-align: left;
+    vertical-align: top;
+    width: 110px;
+}
+.menu-item-thrid {
+    display: inline-block;
+    vertical-align: top;
+    width: 530px;
+}
+.menu-item-thrid a {
+    display: inline-block;
+    margin: 0 20px 10px 0;
+    text-align: left;
+    vertical-align: top;
+    color: #333;
+}
+.menu-item-first a:hover,.menu-item-second a:hover {
+    color: #ff0000;
+}
+.menu-item-hot a:hover,.menu-item-thrid a:hover {
+    color: #900b09;
+}
+
+/* è½®æ’­å¿«é€Ÿç™»å½•æ¨¡å—  */
+.quick-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 240px;
+    height: 298px;
+    background: #FFF;
+    border: 1px solid #eee;
+}
+/* è½®æ’­æœªç™»å½•æ˜¾ç¤º */
+.quick-item {
+    padding: 10px 15px;
+}
+.quick-content .quick-title {
+    font-size: 18px;
+    color: #000;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.input-wrap {
+    margin-bottom: 12px;
+}
+.pass-label {
+    display: block;
+    position: absolute;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    z-index: 20;
+    background-image: url("//statics.w3cschool.cn/yimages/pass.png");
+    background-repeat: no-repeat;
+}
+.pass-user {
+    background-position: 0px 5px;
+}
+.pass-pwd {
+    background-position: 0px -21px;
+}
+.input-box {
+    padding: 7px 8px 7px 10px;
+    width: 78px;
+    line-height: 18px;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #333;
+    border-radius: 3px;
+}
+.input-box:focus {
+    border-color: #aaa;
+    box-shadow: 2px 0 5px 0 #fff;
+}
+.input-user,.input-pwd {
+    padding: 7px 8px 7px 40px;
+    width: 160px;
+}
+.input-img {
+    padding-left: 10px;
+    width: 92px;
+    height: 35px;
+    vertical-align: middle;
+}
+.form-checkbox {
+    display: inline-block;
+    font-size: 13px;
+    color: #333;
+}
+.check-text {
+    padding-left: 2px;
+    vertical-align: 2px;
+}
+.find-pwd {
+    float: right;
+    font-size: 13px;
+}
+.btn-wrap {
+    padding: 10px 0;
+}
+.form-button {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    display: inline-block;
+    background-color: #AE4141;
+    border: 0px none;
+    font-size: 15px;
+    color: #FFF;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.form-button:hover {
+    background-color: #900b09;
+}
+.pop-login-sns {
+    height: 76px;
+}
+.pop-login-sns a {
+    float: left;
+    width: 95px;
+    padding: 0 0 10px 10px;
+    color: #666;
+}
+
+/* è½®æ’­å·²ç™»å½•æ˜¾ç¤º  */
+.personino-item {
+    padding: 15px;
+}
+.personino-item .avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    vertical-align: top;
+}
+.personino-item .user-info {
+    display: inline-block;
+    margin-left: 10px;
+}
+.personino-item .user-info .nickname {
+    display: inline-block;
+}
+.personino-item .user-info .vip-sicon {
+    margin-left: 5px;
+}
+.personino-item .user-info span {
+    display: block;
+    margin-top: 6px;
+}
+.personino-item .user-box,.personino-item .user-desc {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.personino-item .user-desc span {
+    margin-right: 10px;
+    color: #333;
+}
+.quick-box a {
+    display: block;
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    margin: 0 0 10px;
+    text-align: center;
+}
+.icons-user {
+    background: url("//statics.w3cschool.cn/images/w3c/icon-user.png") no-repeat scroll 0% 0%;
+}
+.quicklogin a:hover .icons-user {
+    background: url("//statics.w3cschool.cn/images/w3c/icon-user2.png") no-repeat scroll 0% 0%;
+}
+.record-box h3 {
+    font-size: 14px;
+    color: #333;
+}
+.record-box ul {
+    margin: 5px 0 0;
+}
+.record-box li {
+    line-height: 24px;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.vipclub-btn {
+    float: right;
+    line-height: 30px;
+    background-color: #d9534f;
+    color: #fff;
+    padding: 0 10px;
+    border-radius: 6px 0 0 6px;
+    margin-right: -16px;
+}
+.vipclub-btn:hover {
+    background-color: #d2322d;
+    color: #fff;
+}
+/* å›¾ç‰‡æŽ¨å¹¿æ¨¡å—  */
+.focus-wrapper {
+    width: 1129px;
+    height: 126px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-bottom: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+}
+.focus-item {
+    float: left;
+    width: 913px;
+    padding-left: 215px;
+    padding-top: 18px;
+}
+.focus-item a {
+    float: left;
+    margin: 0 6px 0 10px;
+}
+.focus-item img {
+    width: 211px;
+    height: 90px;
+    border-radius: 4px;
+}
+
+/* é€šç”¨æ ·å¼ */
+.item-content {
+    width: 100%;
+    background: #ffffff;
+    min-width: 1129px;
+}
+.graybg {
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.index-wrapper {
+    width: 1129px;
+    margin: 0 auto;
+    padding: 30px 0;
+    overflow: hidden;
+}
+.first-wrapper {
+    padding: 40px 0;
+}
+#maincontent {
+    float: left;
+    width: 869px;
+}
+.sidebar-title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin: 0 0 12px 0;
+    overflow: hidden;
+}
+.sidebar-title h2 {
+    float: left;
+    font-size: 18px;
+    color: #333;
+}
+.sidebar-title h2::before,.quick-title::before {
+    content: "";
+    background: #AE4141;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
+.item-list {
+    width: 100%;
+    overflow: hidden;
+}
+.item-title {
+    margin-bottom: 20px;
+}
+.item-title2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.item-title h2 {
+    display: inline-block;
+    font-size: 20px;
+    color: #333;
+}
+.item-title2 h2 {
+    border-bottom: 2px solid #AE4141;
+    padding-bottom: 10px;
+}
+.module-title {
+    width: 200px;
+    text-align: center;
+}
+.more-btn {
+    float: right;
+    font-size: 14px;
+    color: #666;
+    line-height: 26px;
+}
+.more-btn:hover {
+    color: #900b09;
+}
+.item-title .more-btn {
+    line-height: 28px;
+    margin-right: 12px;
+}
+.item-line {
+    padding: 0px 0 25px;
+}
+.sidebarimg,.sidebarimg2 {
+    margin-bottom: 25px;
+}
+.sidebarimg img,.sidebarimg2 img {
+    display: block;
+    width: 280px;
+    height: 90px;
+    border-radius: 4px;
+}
+/* ä¸»æ ç›® */
+.feed-list {
+    float: left;
+    margin-right: 30px;
+}
+/* å®˜æ–¹æŽ¨è */
+.recommend-list {
+    width: 459px;
+}
+.recommend-item li {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.recommend-img {
+    float: left;
+    width: 133px;
+    height: 89px;
+    margin-top: 5px;
+}
+.recommend-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+.recommend-intro {
+    margin-left: 0;
+}
+.have-img .recommend-intro {
+    margin-left: 153px;
+}
+.recommend-intro h4 {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.recommend-intro h4 a {
+    font-size: 15px;
+    color: #333;
+    line-height: 26px;
+}
+.recommend-intro h4 a:hover {
+    color: #900b09;
+}
+.recommend-intro p {
+    font-size: 14px;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.recommend-meta {
+    margin-top: 10px;
+}
+.recommend-meta a,.recommend-meta span {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    /* margin-right: 2px; */
+}
+.recommend-meta a {
+    color: #900b09;
+}
+.recommend-meta img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+.v-line::before {
+    content: "| ";
+    /* padding-right: 2px; */
+}
+/* w3cschoolå¤´æ¡ */
+.news-list {
+    width: 350px;
+}
+.news-item li {
+    height: 26px;
+    line-height: 26px;
+    margin-bottom: 8px;
+}
+.news-item li a {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    width: 80%;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.news-item li a:hover {
+    color: #900b09;
+}
+.news-item li a::before {
+    content: "";
+    background: #AE4141;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 8px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+.news-item li span {
+    float: right;
+    font-size: 13px;
+    color: #666;
+}
+.news-item li.istop a {
+    font-size: 15px;
+    font-weight: 600;
+}
+.news-item li.istop a::before {
+    display: none;
+}
+
+/* ä¾§è¾¹æ  */
+#sidebar {
+    float: right;
+    width: 260px;
+}
+/* æŽ’è¡Œæ¦œ  */
+.top-item li {
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+.top-item li img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+.top-item li .top-uname {
+    width: auto;
+    max-width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #333;
+}
+.top-item li .top-uname:hover {
+    color: #900b09;
+}
+.top-item li .top-numbers {
+    float: right;
+    color: #666;
+}
+
+/* è¯¾ç¨‹é€šç”¨æ ·å¼ */
+/* å·¦ä¾§ */
+.course-sidebar {
+    position: relative;
+    float: left;
+    width: 200px;
+    margin-bottom: 25px;
+}
+.course-sidebar-bg {
+    display: block;
+    width: 200px;
+    height: 421px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.course-sidebar-bg:hover {
+    color: #fff;
+    box-shadow: 0 3px 5px rgba(0,0,0,.3);
+}
+.course-project-bg {
+    background: url("//statics.w3cschool.cn/images/w3c/course-project-bg.png") no-repeat center center;
+}
+.course-minicourse-bg {
+    background: url("//statics.w3cschool.cn/images/w3c/course-minicourse-bg.png") no-repeat center center;
+}
+.course-codecamp-bg {
+    background: url("//statics.w3cschool.cn/images/w3c/course-codecamp-bg.png") no-repeat center center;
+}
+.course-sidebar-title {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+}
+.course-sidebar-intro {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    padding: 0 5px;
+}
+.icon-course-down {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+    width: 48px;
+    height: 48px;
+    background: url("//statics.w3cschool.cn/images/w3c/icon-course-down.png") no-repeat center center;
+    margin: 0 auto;
+}
+/* å³ä¾§ */
+.course-main {
+    float: left;
+    width: 929px;
+}
+.course-item li {
+    float: left;
+    width: 22.3%;
+    margin: 0 0 25px 25px;
+}
+.course-box {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.course-box:hover {
+    box-shadow: 0 3px 5px rgba(0,0,0,.3);
+}
+.course-box a {
+    color: #333;
+}
+.course-img {
+    position: relative;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    background-color: #ddd;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.course-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.course-desc {
+    text-align: center;
+}
+.course-desc h3 {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 10px 0;
+}
+.course-meta {
+    height: 21px;
+    font-size: 13px;
+    color: #666;
+    padding: 10px 10px 15px;
+}
+.course-meta .vip-tag,.course-meta .cur-price {
+    font-size: 14px;
+    color: #d2322d;
+}
+.course-tag {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px 5px;
+    color: #fff;
+    line-height: 20px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.vip-course-tag {
+    background-color: #ff5900;
+}
+.new-course-tag {
+    background-color: #ffa01a;
+}
+
+/* æ•™ç¨‹æ‰‹å†Œæµå¼å¸ƒå±€æ˜¾ç¤º */
+.index-wrapper .project-item {
+    float: left;
+    width: 24.1%;
+    padding: 0 5px;
+}
+.project-menu #menu {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.project-menu ul#menu li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 10px;
+}
+.project-menu ul#menu li a {
+    display: inline-block;
+    font-size: 15px;
+    color: #333;
+}
+.project-menu ul#menu li a:hover {
+    color: #900b09;
+}
+.index-wrapper .project-box {
+    position: relative;
+    background: #fff;
+    border-right: 1px solid #ececec;
+    border-bottom: 1px solid #dfdfdf;
+    border-left: 1px solid #ececec;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.04);
+    margin: 20px auto 0;
+    height: 1550px;
+    min-height: 1000px;
+    text-align: center;
+    z-index: 1;
+}
+.index-wrapper .project-box h4 {
+    position: relative;
+    background: #cdcdcd;
+    text-align: center;
+    top: -7px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 14px;
+    color: #000;
+    line-height: 30px;
+    margin-top: 5px;
+}
+.index-wrapper .project-box ul.menu {
+    padding: 0 15px;
+    margin: 5px 0 15px;
+    list-style: none;
+}
+.index-wrapper .project-box ul.menu li {
+    margin: 0;
+    line-height: 24px;
+}
+.index-wrapper .project-box ul.menu li a {
+    text-align: left;
+    display: block;
+    padding: 5px 0;
+    border-bottom: 1px dotted #bbb;
+    color: #333;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.index-wrapper .project-box ul.menu li a:hover {
+    background-color: #f5f5f5;
+    border-left: 1px dotted #bbb;
+    border-right: 1px dotted #bbb;
+    color: #000;
+}
+/* æ‰‹å†Œå›¾æ ‡ */
+.icon-img {
+    background-image: url("//statics.w3cschool.cn/images/w3c/platform-sprite.png");
+    background-repeat: no-repeat;
+}
+.icon-question {
+    background: url("//statics.w3cschool.cn/yimages/question-icon.png") no-repeat scroll 0% 0%;
+}
+.icon-hb {
+    background: url("//statics.w3cschool.cn/images/w3c/icon-book.png") no-repeat scroll 0% 0%;
+}
+.icon-artile {
+    background: url("//statics.w3cschool.cn/images/w3c/icon-article.png") no-repeat scroll 0% 0%;
+}
+.icon-news {
+    width: 18px;
+    height: 18px;
+    background: url("//statics.w3cschool.cn/images/w3c/icon-news.png") no-repeat scroll 0% 0%;
+}
+.platform-default {
+    background-position: 0 0;
+}
+.platform-Google {
+    background-position: -41px 0;
+}
+.platform-Mac,.platform-ios {
+    background-position: -82px 0;
+}
+.platform-Other {
+    background-position: -123px 0;
+}
+.platform-SproutCore {
+    background-position: -164px 0;
+}
+.platform-StackOverflow {
+    background-position: -205px 0;
+}
+.platform-actionscript,.platform-7-17 {
+    background-position: -246px 0;
+}
+.platform-akka {
+    background-position: -287px 0;
+}
+.platform-android,.platform-android_sdk {
+    background-position: -328px 0;
+}
+.platform-angulardart {
+    background-position: -369px 0;
+}
+.platform-angularjs,.platform-angular2 {
+    background-position: -410px 0;
+}
+.platform-angularts {
+    background-position: -451px 0;
+}
+.platform-ansible {
+    background-position: -492px 0;
+}
+.platform-apache,.platform-16-17 {
+    background-position: -533px 0;
+}
+.platform-apple {
+    background-position: -574px 0;
+}
+.platform-applescript {
+    background-position: -615px 0;
+}
+.platform-arduino {
+    background-position: -656px 0;
+}
+.platform-awesome {
+    background-position: -697px 0;
+}
+.platform-awsjs {
+    background-position: -738px 0;
+}
+.platform-backbone {
+    background-position: -779px 0;
+}
+.platform-bash {
+    background-position: -820px 0;
+}
+.platform-boost {
+    background-position: -861px 0;
+}
+.platform-bootstrap,.platform-codecamp-2 {
+    background-position: -902px 0;
+}
+.platform-bourbon {
+    background-position: -943px 0;
+}
+.platform-c,.platform-23-17 {
+    background-position: -984px 0;
+}
+.platform-cakephp {
+    background-position: -1025px 0;
+}
+.platform-cappuccino {
+    background-position: -1066px 0;
+}
+.platform-cf {
+    background-position: -1107px 0;
+}
+.platform-chai {
+    background-position: -1148px 0;
+}
+.platform-cheatsheet {
+    background-position: -1189px 0;
+}
+.platform-chef {
+    background-position: -1230px 0;
+}
+.platform-clojure {
+    background-position: -1271px 0;
+}
+.platform-cmake {
+    background-position: -1312px 0;
+}
+.platform-cocoadocs_platform {
+    background-position: -1353px 0;
+}
+.platform-cocoapods {
+    background-position: -1394px 0;
+}
+.platform-cocos2d {
+    background-position: -1435px 0;
+}
+.platform-cocos2dx {
+    background-position: -1476px 0;
+}
+.platform-codeigniter {
+    background-position: -1517px 0;
+}
+.platform-coffee {
+    background-position: -1558px 0;
+}
+.platform-compass {
+    background-position: -1599px 0;
+}
+.platform-cordova {
+    background-position: -1640px 0;
+}
+.platform-corona {
+    background-position: -1681px 0;
+}
+.platform-couchdb {
+    background-position: -1722px 0;
+}
+.platform-cpp,.platform-18-17 {
+    background-position: -1763px 0;
+}
+.platform-craft {
+    background-position: -1804px 0;
+}
+.platform-css3 {
+    background-position: -1845px 0;
+}
+.platform-cvc {
+    background-position: -1886px 0;
+}
+.platform-cvcpp {
+    background-position: -1927px 0;
+}
+.platform-cvj {
+    background-position: -1968px 0;
+}
+.platform-cvp {
+    background-position: -2009px 0;
+}
+.platform-d3 {
+    background-position: -2050px 0;
+}
+.platform-dartdocs {
+    background-position: -2091px 0;
+}
+.platform-dartlang {
+    background-position: -2132px 0;
+}
+.platform-django,.platform-25-17 {
+    background-position: -2173px 0;
+}
+.platform-docker,.platform-reqsgr,.platform-24-17 {
+    background-position: -2214px 0;
+}
+.platform-doctrine {
+    background-position: -2255px 0;
+}
+.platform-dojo {
+    background-position: -2296px 0;
+}
+.platform-dom {
+    background-position: -2337px 0;
+}
+.platform-drupal {
+    background-position: -2378px 0;
+}
+.platform-ee {
+    background-position: -2419px 0;
+}
+.platform-elasticsearch {
+    background-position: -2460px 0;
+}
+.platform-elisp {
+    background-position: -2501px 0;
+}
+.platform-elixir {
+    background-position: -2542px 0;
+}
+.platform-ember {
+    background-position: -2583px 0;
+}
+.platform-emmet {
+    background-position: -2624px 0;
+}
+.platform-erlang,.platform-32-17 {
+    background-position: -2665px 0;
+}
+.platform-express {
+    background-position: -2706px 0;
+}
+.platform-extjs {
+    background-position: -2747px 0;
+}
+.platform-flask {
+    background-position: -2788px 0;
+}
+.platform-foundation {
+    background-position: -2829px 0;
+}
+.platform-git,.platform-9-17 {
+    background-position: -2870px 0;
+}
+.platform-github {
+    background-position: -2911px 0;
+}
+.platform-gl2 {
+    background-position: -2952px 0;
+}
+.platform-gl3 {
+    background-position: -2993px 0;
+}
+.platform-gl4 {
+    background-position: -3034px 0;
+}
+.platform-glib {
+    background-position: -3075px 0;
+}
+.platform-go {
+    background-position: -3116px 0;
+}
+.platform-godoc {
+    background-position: -3157px 0;
+}
+.platform-gradle {
+    background-position: -3198px 0;
+}
+.platform-grails {
+    background-position: -3239px 0;
+}
+.platform-groovy,.platform-34-17 {
+    background-position: -3280px 0;
+}
+.platform-grunt {
+    background-position: -3321px 0;
+}
+.platform-gulp {
+    background-position: -3362px 0;
+}
+.platform-hackage {
+    background-position: -3403px 0;
+}
+.platform-haml {
+    background-position: -3444px 0;
+}
+.platform-handlebars {
+    background-position: -3485px 0;
+}
+.platform-haskell {
+    background-position: -3526px 0;
+}
+.platform-hex {
+    background-position: -3567px 0;
+}
+.platform-html5 {
+    background-position: -3608px 0;
+}
+.platform-ionic {
+    background-position: -3649px 0;
+}
+.platform-iphone {
+    background-position: -3690px 0;
+}
+.platform-jquery,.platform-jqueryeasyui,.platform-codecamp-3,.platform-1-17 {
+    background-position: -3731px 0;
+}
+.platform-jade {
+    background-position: -3772px 0;
+}
+.platform-jasmine {
+    background-position: -3813px 0;
+}
+.platform-java,.platform-swing,.platform-4-17 {
+    background-position: -3854px 0;
+}
+.platform-javadoc {
+    background-position: -3895px 0;
+}
+.platform-javafx {
+    background-position: -3936px 0;
+}
+.platform-javascript,.platform-codecamp-1,.platform-6-17 {
+    background-position: -3977px 0;
+}
+.platform-jee6 {
+    background-position: -4018px 0;
+}
+.platform-jee7 {
+    background-position: -4059px 0;
+}
+.platform-jekyll {
+    background-position: -4100px 0;
+}
+.platform-jinja {
+    background-position: -4141px 0;
+}
+.platform-joomla {
+    background-position: -4182px 0;
+}
+.platform-jquerym,.platform-jquerymobile {
+    background-position: -4223px 0;
+}
+.platform-jqueryui {
+    background-position: -4264px 0;
+}
+.platform-julia {
+    background-position: -4305px 0;
+}
+.platform-knockout {
+    background-position: -4346px 0;
+}
+.platform-kobold2d {
+    background-position: -4387px 0;
+}
+.platform-laravel {
+    background-position: -4428px 0;
+}
+.platform-latex {
+    background-position: -4469px 0;
+}
+.platform-less,.platform-36-17 {
+    background-position: -4510px 0;
+}
+.platform-linux,.platform-13-17 {
+    background-position: -4551px 0;
+}
+.platform-lisp {
+    background-position: -4592px 0;
+}
+.platform-lodash {
+    background-position: -4633px 0;
+}
+.platform-lua,.platform-20-17 {
+    background-position: -4674px 0;
+}
+.platform-manPages {
+    background-position: -4715px 0;
+}
+.platform-marionette {
+    background-position: -4756px 0;
+}
+.platform-markdown,.platform-markdownyfsm,.platform-53-17 {
+    background-position: -4797px 0;
+}
+.platform-matlab {
+    background-position: -4838px 0;
+}
+.platform-matplotlib {
+    background-position: -4879px 0;
+}
+.platform-meteor,.platform-discovermeteor {
+    background-position: -4920px 0;
+}
+.platform-mocha {
+    background-position: -4961px 0;
+}
+.platform-moment {
+    background-position: -5002px 0;
+}
+.platform-mongodb {
+    background-position: -5043px 0;
+}
+.platform-mongoose {
+    background-position: -5084px 0;
+}
+.platform-mono {
+    background-position: -5125px 0;
+}
+.platform-moo {
+    background-position: -5166px 0;
+}
+.platform-mysql,.platform-11-17 {
+    background-position: -5207px 0;
+}
+.platform-neat {
+    background-position: -5248px 0;
+}
+.platform-net {
+    background-position: -5289px 0;
+}
+.platform-nginx,.platform-nginxsysc {
+    background-position: -5330px 0;
+}
+.platform-nodejs,.platform-2-17 {
+    background-position: -5371px 0;
+}
+.platform-numpy {
+    background-position: -5412px 0;
+}
+.platform-ocaml {
+    background-position: -5453px 0;
+}
+.platform-pandas {
+    background-position: -5494px 0;
+}
+.platform-perl,.platform-41-17 {
+    background-position: -5535px 0;
+}
+.platform-phalcon {
+    background-position: -5576px 0;
+}
+.platform-phonegap {
+    background-position: -5617px 0;
+}
+.platform-php,.platform-phpkfbmgf,.platform-3-17 {
+    background-position: -5658px 0;
+}
+.platform-phpp {
+    background-position: -5699px 0;
+}
+.platform-phpunit {
+    background-position: -5740px 0;
+}
+.platform-playjava {
+    background-position: -5781px 0;
+}
+.platform-playscala {
+    background-position: -5822px 0;
+}
+.platform-polymerdart {
+    background-position: -5863px 0;
+}
+.platform-processing {
+    background-position: -5904px 0;
+}
+.platform-prototype {
+    background-position: -5945px 0;
+}
+.platform-psql {
+    background-position: -5986px 0;
+}
+.platform-puppet {
+    background-position: -6027px 0;
+}
+.platform-python,.platform-python3,.platform-0-17 {
+    background-position: -6068px 0;
+}
+.platform-qt {
+    background-position: -6109px 0;
+}
+.platform-r,.platform-42-17 {
+    background-position: -6150px 0;
+}
+.platform-racket {
+    background-position: -6191px 0;
+}
+.platform-rails {
+    background-position: -6232px 0;
+}
+.platform-react {
+    background-position: -6273px 0;
+}
+.platform-redis {
+    background-position: -6314px 0;
+}
+.platform-require {
+    background-position: -6355px 0;
+}
+.platform-ruby,.platform-5-17 {
+    background-position: -6396px 0;
+}
+.platform-rubyGems {
+    background-position: -6437px 0;
+}
+.platform-rubymotion {
+    background-position: -6478px 0;
+}
+.platform-rust {
+    background-position: -6519px 0;
+}
+.platform-sails {
+    background-position: -6560px 0;
+}
+.platform-salt {
+    background-position: -6601px 0;
+}
+.platform-sass {
+    background-position: -6642px 0;
+}
+.platform-scala,.platform-scaladevelopmentguide,.platform-43-17 {
+    background-position: -6683px 0;
+}
+.platform-scaladoc {
+    background-position: -6724px 0;
+}
+.platform-scipy {
+    background-position: -6765px 0;
+}
+.platform-semantic {
+    background-position: -6806px 0;
+}
+.platform-sencha {
+    background-position: -6847px 0;
+}
+.platform-sinon {
+    background-position: -6888px 0;
+}
+.platform-smarty {
+    background-position: -6929px 0;
+}
+.platform-sooffline {
+    background-position: -6970px 0;
+}
+.platform-soonline {
+    background-position: -7011px 0;
+}
+.platform-sparrow {
+    background-position: -7052px 0;
+}
+.platform-spring,.platform-wkspring,.platform-29-17 {
+    background-position: -7093px 0;
+}
+.platform-sqlalchemy {
+    background-position: -7134px 0;
+}
+.platform-sqlite,.platform-45-17 {
+    background-position: -7175px 0;
+}
+.platform-statamic {
+    background-position: -7216px 0;
+}
+.platform-stylus {
+    background-position: -7257px 0;
+}
+.platform-susy {
+    background-position: -7298px 0;
+}
+.platform-svg,.platform-46-17 {
+    background-position: -7339px 0;
+}
+.platform-swift {
+    background-position: -7380px 0;
+}
+.platform-symfony {
+    background-position: -7421px 0;
+}
+.platform-tcl {
+    background-position: -7462px 0;
+}
+.platform-titanium {
+    background-position: -7503px 0;
+}
+.platform-tornado {
+    background-position: -7544px 0;
+}
+.platform-tvos {
+    background-position: -7585px 0;
+}
+.platform-twig {
+    background-position: -7626px 0;
+}
+.platform-twisted {
+    background-position: -7667px 0;
+}
+.platform-typescript {
+    background-position: -7708px 0;
+}
+.platform-typo3 {
+    background-position: -7749px 0;
+}
+.platform-underscore {
+    background-position: -7790px 0;
+}
+.platform-unity3d {
+    background-position: -7831px 0;
+}
+.platform-vagrant {
+    background-position: -7872px 0;
+}
+.platform-vim,.platform-31-17 {
+    background-position: -7913px 0;
+}
+.platform-vsphere {
+    background-position: -7954px 0;
+}
+.platform-vue,.platform-aekdgs {
+    background-position: -7995px 0;
+}
+.platform-watchos {
+    background-position: -8036px 0;
+}
+.platform-wordpress,.platform-49-17 {
+    background-position: -8077px 0;
+}
+.platform-xamarin,.platform-xhtml,.platform-52-17 {
+    background-position: -8118px 0;
+}
+.platform-xojo {
+    background-position: -8159px 0;
+}
+.platform-xslt {
+    background-position: -8200px 0;
+}
+.platform-xul {
+    background-position: -8241px 0;
+}
+.platform-yii,.platform-yii2manual {
+    background-position: -8282px 0;
+}
+.platform-yui {
+    background-position: -8323px 0;
+}
+.platform-zend {
+    background-position: -8364px 0;
+}
+.platform-zepto {
+    background-position: -8405px 0;
+}
+.platform-shellbook{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat 0px 0px;}
+.platform-slickguide{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -16px 0px;}
+.platform-servlet{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -32px 0px;}
+.platform-rss{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -48px 0px;}
+.platform-selfbuild{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -64px 0px;}
+.platform-ssdb{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -80px 0px;}
+.platform-storm{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -96px 0px;}
+.platform-sql,.platform-28-17,.platform-44-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -112px 0px;}
+.platform-soap{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -128px 0px;}
+.platform-spark{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -144px 0px;}
+.platform-mip{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -160px 0px;}
+.platform-mybatis{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -176px 0px;}
+.platform-memcached{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -192px 0px;}
+.platform-llq{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -208px 0px;}
+.platform-maven,.platform-37-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -224px 0px;}
+.platform-plk2fi{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -240px 0px;}
+.platform-revel{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -256px 0px;}
+.platform-photoshopgjjc,.platform-40-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -272px 0px;}
+.platform-oauth2{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -288px 0px;}
+.platform-officejq1000l{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -304px 0px;}
+.platform-xml,.platform-50-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -320px 0px;}
+.platform-xmldom{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -336px 0px;}
+.platform-wzzjjc{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -352px 0px;}
+.platform-wzjszn{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -368px 0px;}
+.platform-wzpz{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -384px 0px;}
+.platform-xuexiw3c{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -400px 0px;}
+.platform-zhengzebiaodashi,.platform-12-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -416px 0px;}
+.platform-xslfo{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -432px 0px;}
+.platform-xpath,.platform-51-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -448px 0px;}
+.platform-xquery{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -464px 0px;}
+.platform-tcpip,.platform-54-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -480px 0px;}
+.platform-thinkphp323{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -496px 0px;}
+.platform-swoole{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -512px 0px;}
+.platform-sublimetext{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -528px 0px;}
+.platform-svn,.platform-10-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -544px 0px;}
+.platform-weixinapp,.platform-miniappbook,.platform-xiaochengxu,.platform-weixinkaifawendang{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -560px 0px;}
+.platform-wxxcx{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -576px 0px;}
+.platform-webservices{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -592px 0px;}
+.platform-unix,.platform-48-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -608px 0px;}
+.platform-vbscript{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -624px 0px;}
+.platform-composer{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -640px 0px;}
+.platform-crossapp{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -656px 0px;}
+.platform-coffeescript{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -672px 0px;}
+.platform-codecamp-1{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -688px 0px;}
+.platform-codesmith{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -704px 0px;}
+.platform-cssref{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -720px 0px;}
+.platform-dartstyleguide{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -736px 0px;}
+.platform-cssdom{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -752px 0px;}
+.platform-csharp,.platform-30-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -768px 0px;}
+.platform-css,.platform-8-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -784px 0px;}
+.platform-ant{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -800px 0px;}
+.platform-appcan{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -816px 0px;}
+.platform-ajax,.platform-22-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -832px 0px;}
+.platform-junit,.platform-35-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -848px 0px;}
+.platform-ado{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -864px 0px;}
+.platform-axurezwjc{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -880px 0px;}
+.platform-bhz24q{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -896px 0px;}
+.platform-atom,.platform-21-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -912px 0px;}
+.platform-asp,.platform-19-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -928px 0px;}
+.platform-aspnet{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -944px 0px;}
+.platform-htmldom,.platform-htmltags,.platform-15-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -960px 0px;}
+.platform-http{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -976px 0px;}
+.platform-html,.platform-codecamp-0,.platform-14-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -992px 0px;}
+.platform-gwi22k{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1008px 0px;}
+.platform-hibernate,.platform-33-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1024px 0px;}
+.platform-jsp,.platform-27-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1040px 0px;}
+.platform-jsref{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1056px 0px;}
+.platform-json{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1072px 0px;}
+.platform-jfinal{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1088px 0px;}
+.platform-jfryse{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1104px 0px;}
+.platform-dtd{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1120px 0px;}
+.platform-eclipse,.platform-55-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1136px 0px;}
+.platform-dreamweaverjc{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1152px 0px;}
+.platform-discovermeteor{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1168px 0px;}
+.platform-dosmlxxsc1{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1184px 0px;}
+.platform-firebug{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1200px 0px;}
+.platform-freejquery{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1216px 0px;}
+.platform-fastjson{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1232px 0px;}
+.platform-ecmascript16{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1248px 0px;}
+.platform-exceljc{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite1.png") no-repeat -1264px 0px;}
+.platform-struts_2{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat 0px 0px;}
+.platform-tableau{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -16px 0px;}
+.platform-sas{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -32px 0px;}
+.platform-mariadb{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -48px 0px;}
+.platform-ms_access{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -64px 0px;}
+.platform-wml{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -80px 0px;}
+.platform-zookeeper{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -96px 0px;}
+.platform-webdevelopment{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -112px 0px;}
+.platform-vb_net{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -128px 0px;}
+.platform-web-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -144px 0px;}
+.platform-impala{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -160px 0px;}
+.platform-apex{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -176px 0px;}
+.platform-cassandra{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -192px 0px;}
+.platform-apache_storm{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -208px 0px;}
+.platform-apache_kafka{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -224px 0px;}
+.platform-apache_pig{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -240px 0px;}
+.platform-flex{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -256px 0px;}
+.platform-hadoop,.platform-26-17{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -272px 0px;}
+.platform-emberjs_guide{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -288px 0px;}
+.platform-cssreference{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -304px 0px;}
+.platform-ecmascript{background:url("//statics.w3cschool.cn/images/w3c/platform-sprite2.png") no-repeat -320px 0px;}
+
+/* å¼€æºæœºæž„  */
+.org-box {
+    margin: 10px 0 20px;
+    overflow: hidden;
+}
+.org-box a {
+    display: inline-block;
+    width: 14.7%;
+    height: 120px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-align: center;
+    margin: 10px 8px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.org-box a:hover {
+    border: 1px solid #ccc;
+}
+.org-box .org-img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+}
+/* --- å‹æƒ…é“¾æŽ¥ã€æœ€è¿‘æ›´æ–° --- */
+.archives-list {
+    margin-top: 20px;
+}
+.archives-title {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 2px solid #DDD;
+}
+.archives-title h2 {
+    float: left;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 2px solid #AE4141;
+}
+.archives-title .more-link {
+    float: right;
+    font-size: 14px;
+    color: #666;
+}
+.links-box,.archives-box {
+    margin-top: 10px;
+    overflow: hidden;
+}
+.links-box a,.archives-box a {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    margin: 3px 15px 10px 5px;
+}
+.links-list a:hover,.archives-list a:hover {
+    color: #900b09;
+}
+
+/* åº•éƒ¨æµ®åŠ¨æ¡ */
+.widget-main {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.7);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000,endColorstr=#BF000000); /*IE6-8*/
+}
+.widget-box {
+    position: relative;
+    width: 1129px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    color: #eee;
+}
+.widget-box * {
+    float: left;
+}
+.widget-box a {
+    color: #eee;
+}
+.widget-box a:hover {
+    color: #fff;
+}
+.widget-box .slogn {
+    font-size: 18px;
+}
+.widget-box .quicklogin {
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+}
+.widget-box .quick-box a {
+    display: inline-block;
+    border: 1px solid transparent;
+    margin: 24px 10px 0 10px;
+    color: #fff;
+}
+.widget-box .reg-btn {
+    background: #f0ad4e;
+}
+.widget-box .reg-btn:hover {
+    background: #ed9c28;
+}
+.widget-box .qq-btn {
+    background: #56abe4;
+}
+.widget-box .qq-btn:hover {
+    background: #1d9ad6;
+}
+.widget-box .weixina {
+    background: #3bae56;
+}
+.widget-box .weixina:hover {
+    background: #47a447;
+}
+.widget-box .weibo-btn {
+    background: #eb4f38;
+}
+.widget-box .weibo-btn:hover {
+    background: #ff5222;
+}
+.widget-box .icons-qq-widget {
+    background-position: 0px -60px;
+}
+.widget-box .icons-weixin-widget {
+    background-position: -30px -60px;
+}
+.widget-box .icons-weibo-widget {
+    background-position: -60px -60px;
+}
+.widget-box .pop-sns {
+    margin-top: 3px;
+}
+.widget-box-close {
+    position: absolute;
+    top: 9px;
+    right: 60px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    font-size: 15px;
+    color: #eee;
+    text-align: center;
+    cursor: pointer;
+}
+.widget-box-close:hover {
+    text-decoration: none;
+}
+.sig-group a {
+    font-size: 14px;
+}
+
+/* vipæµ®åŠ¨æ¡†æ ·å¼  */
+.vip-area {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+}
+.vip-area .vip-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    background: #000;
+    opacity: 0.75 ;
+    filter: alpha(opacity=75);
+}
+.vip-area .vip-main {
+    width: 575px;
+    height: 505px;
+    position: fixed;
+    z-index: 999999;
+    left: 50%;
+    top: 50%;
+    margin: -250px 0 0 -310px;
+}
+.vip-main .close-btn {
+    position: absolute;
+    right: 30px;
+    top: 50px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url("//statics.w3cschool.cn/images/w3c/close-btn.png") no-repeat center center;
+    cursor: pointer;
+}
+.vip-main .vip-dialog {
+    width: 575px;
+    height: 505px;
+    background: transparent;
+}
+
+/* ----------------------------------- é¡µé¢è‡ªé€‚åº” ----------------------------------- */
+@media (min-width:1200px) {
+    .nav-menu-banner {
+        width: 914px;
+    }
+    #header_index,.slide-btn,.focus-wrapper,.index-wrapper,#footer,.footer-bottom {
+        width: 1129px;
+    }
+    .menu-item-box {
+        width: 880px;
+    }
+    .menu-item-list {
+        width: 650px;
+    }
+    .menu-item-thrid {
+        width: 530px;
+    }
+    .focus-item {
+        width: 913px;
+    }
+    .focus-item img {
+        width: 211px;
+    }
+    #header_index .searchbox {
+        width: 462px;
+    }
+    #header_index .searchbox input.box {
+        width: 386px;
+    }
+    #maincontent {
+        width: 869px;
+    }
+    .course-main {
+        width: 929px;
+    }
+    .recommend-list {
+        width: 459px;
+    }
+}
+@media (min-width:1300px) {
+    .nav-menu-banner {
+        width: 1014px;
+    }
+    #header_index,.slide-btn,.focus-wrapper,.index-wrapper,#footer,.footer-bottom {
+        width: 100%;
+    }
+    .menu-item-box {
+        width: 980px;
+    }
+    .menu-item-list {
+        width: 750px;
+    }
+    .menu-item-thrid {
+        width: 630px;
+    }
+    .focus-item {
+        width: 1013px;
+    }
+    .focus-item img {
+        width: 236px;
+    }
+    #header_index .searchbox {
+        width: 530px;
+    }
+    #header_index .searchbox input.box {
+        width: 454px;
+    }
+    #maincontent {
+        width: 969px;
+    }
+    .course-main {
+        width: 1029px;
+    }
+    .recommend-list {
+        width: 559px;
+    }
+}
+
+/* ----------------------------------- éšè—ç«™é•¿ç»Ÿè®¡ ----------------------------------- */
+#cnzz_stat_icon_1258207405 {
+    display: none;
+}
+
+/** åé¦ˆæ ·å¼  å¼€å§‹  **/
+.report-Box,.feedback-Box,.register-Box{
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background-color: rgba(000,000,000,0.8);
+    z-index: 1200;
+}
+.report-Box-content,.feedback-Box-content,.register-Box-content{
+    z-index:1200;
+    top:10%;
+    width: 500px;
+    margin:0px auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+}
+.report-Box-top,.feedback-Box-top,.register-Box-top{
+    padding: 10px 20px;
+    background-color: #F3F3F3;
+    border-bottom: 1px solid #E5E5E5;
+}
+.report-Box-title,.feedback-Box-title,.register-Box-title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.report-Box-close,.feedback-Box-close,.register-Box-close{
+    cursor:pointer;
+    float: right;
+    width:20px;
+    height:20px;
+    font-weight:700;
+    text-align: center;
+    color: #9e9e9e;
+    text-shadow: 0px 1px 0px #FFF;
+}
+#reportSubmit,#feedbackSubmit,#registerSubmit{
+    cursor: pointer;
+    float: right;
+    margin: 20px;
+    text-align: center;
+    width: 90px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #ae4141;
+    border: 1px solid #ae4141;
+    color: #FFF;
+    border-radius: 3px;
+}
+.report-Box-content ul,.feedback-Box-content ul,.register-Box-content ul {
+    margin: 10px 0;
+    padding: 0 30px;
+}
+.radio-box,.feedback-box,.register-box{
+    cursor:pointer;
+    display: block;
+}
+.feedback-box #feedbackRadio,.feedback-box p {
+    margin: 12px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+.radio-text,.feedback-text,.register-text{
+    width: 340px;
+    height: 21px;
+    padding: 6px 8px;
+    border: 1px solid #CCC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    -moz-border-radius: 4px;      /* Gecko browsers */
+    -webkit-border-radius: 4px;   /* Webkit browsers */
+    border-radius:4px;            /* W3C syntax */
+}
+.radio-text,.feedback-text,.register-text{
+    width: 430px;
+    height: 63px;
+}
+.feedback-text {
+    width: 600px;
+    height:200px;
+    overflow:auto;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    resize: none;
+    line-height: 22px;
+}
+.register-Box-info{
+    background: url("//statics.w3cschool.cn/yimages/register_bg.png") no-repeat scroll 0px 0px;
+    height: auto;
+    overflow: hidden;
+    width: 100%;
+}
+.usertype-ico-1{
+    background: url("//statics.w3cschool.cn/yimages/vip_ico.png") no-repeat scroll 0px 0px;
+    padding: 9px 15px;
+}
+.register-Box-left,.register-Box-right{
+    float: left;
+    margin: 10px;
+}
+.register-Box-right{
+    width: 325px;
+}
+.register-Box-left img{
+    width: 130px;
+    height: 130px;
+}
+.register-userinfo{
+    clear: both;
+    margin: 0 5px 10px;
+}
+.register-userinfo-title{
+    font-size: 16px;
+}
+.register-userinfo-info{
+    font-size: 20px;
+    color: #bd2d30;
+    margin-left: 35px;
+}
+.register-Box-info #reportSubmit{
+
+    margin: 0 0 0 220px;
+}
+.register-userinfo span{
+    width: 100px;
+    word-break:break-all;
+    overflow: hidden;
+}
+/** åé¦ˆæ ·å¼  ç»“æŸ  **/
+
+/* toast */
+.toast-title{font-weight:bold}
+.toast-message{-ms-word-wrap:break-word;word-wrap:break-word}
+.toast-message a,.toast-message label{color:#fff}
+.toast-message a:hover{color:#ccc;text-decoration:none}
+.toast-close-button{position:relative;right:-.3em;top:-.3em;float:right;font-size:20px;font-weight:bold;color:#fff;-webkit-text-shadow:0 1px 0 #fff;text-shadow:0 1px 0 #fff;opacity:.8;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);filter:alpha(opacity=80)}
+.toast-close-button:hover,.toast-close-button:focus{color:#000;text-decoration:none;cursor:pointer;opacity:.4;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40);filter:alpha(opacity=40)}
+button.toast-close-button{padding:0;cursor:pointer;background:transparent;border:0;-webkit-appearance:none}
+.toast-top-full-width{top:0;right:0;width:100%}
+.toast-bottom-full-width{bottom:0;right:0;width:100%}
+.toast-top-left{top:12px;left:12px}
+.toast-top-right{top:12px;right:12px}
+.toast-bottom-right{right:12px;bottom:12px}
+.toast-bottom-left{bottom:12px;left:12px}
+.toast-top-center {top: 12px;margin: 0 auto;left: 50%;margin-left: -150px;}
+.toast-bottom-center {bottom: 12px;margin: 0 auto;left: 50%;margin-left: -150px;}
+#toast-container{position:fixed;z-index:999999}
+#toast-container *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+#toast-container>div{margin:0 0 6px;padding:15px 15px 15px 50px;width:300px;-moz-border-radius:3px 3px 3px 3px;-webkit-border-radius:3px 3px 3px 3px;border-radius:3px 3px 3px 3px;background-position:15px center;background-repeat:no-repeat;-moz-box-shadow:0 0 12px #999;-webkit-box-shadow:0 0 12px #999;box-shadow:0 0 12px #999;color:#fff;opacity:.8;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);filter:alpha(opacity=80)}
+#toast-container>:hover{-moz-box-shadow:0 0 12px #000;-webkit-box-shadow:0 0 12px #000;box-shadow:0 0 12px #000;opacity:1;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);filter:alpha(opacity=100);cursor:pointer}
+#toast-container>.toast-info{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=")!important}
+#toast-container>.toast-error{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=")!important}
+#toast-container>.toast-success{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==")!important}
+#toast-container>.toast-warning{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=")!important}
+#toast-container.toast-top-full-width>div,#toast-container.toast-bottom-full-width>div{width:96%;margin:auto}
+.toast{background-color:#030303}
+.toast-success{background-color:#51a351}
+.toast-error{background-color:#bd362f}
+.toast-info{background-color:#2f96b4}
+.toast-warning{background-color:#f89406}
+@media all and (max-width:240px){
+    #toast-container>div{padding:8px 8px 8px 50px;width:11em}
+    #toast-container .toast-close-button{right:-.2em;top:-.2em}
+}
+@media all and (min-width:241px)and (max-width:480px){
+    #toast-container>div{padding:8px 8px 8px 50px;width:18em}
+    #toast-container .toast-close-button{right:-.2em;top:-.2em}
+}
+@media all and (min-width:481px)and (max-width:768px){
+    #toast-container>div{padding:15px 15px 15px 50px;width:25em}
+}
+/* end */
+
+/*è¿”å›žé¡¶éƒ¨ start */
+.bottom-tools {
+    position: fixed;
+    z-index: 1070;
+    right: 0px;
+    box-shadow: 1px 1px 17px #ccc;
+    background: #efefef none repeat scroll 0 0;
+}
+.bottom-tools>* {
+    font: 0/0 a;
+    display: block;
+    margin-top: 5px;
+    color: transparent;
+    border: 0;
+    background-color: transparent;
+    text-shadow: none;
+}
+.qr-img {
+    background-image: url("//statics.w3cschool.cn/yimages/qr-img.png");
+    display: none;
+    height: 176px;
+    left: -183px;
+    max-width: none;
+    padding-top: 57px;
+    position: absolute;
+    text-align: center;
+    top: -150px;
+    width: 173px;
+}
+.qr-img img {
+    height: 100px;
+    width: 100px;
+}
+#scrollUp {
+    width: 45px;
+    height: 45px;
+    background-image: url("//statics.w3cschool.cn/yimages/backgrounds.32.png");
+    background-position: -54px -53px;
+    display: none;
+}
+#scrollUp:hover {
+    background-image: url("//statics.w3cschool.cn/yimages/backgrounds.32.png");
+    background-position: -100px -53px
+}
+.webjy {
+    width: 45px;
+    height: 45px;
+    background-image: url("//statics.w3cschool.cn/yimages/jyfk.jpg");
+}
+.webjy:hover {
+    background-image: url("//statics.w3cschool.cn/yimages/jyfk_hv.jpg");
+}
+#webkf {
+    width: 45px;
+    height: 45px;
+    background-image: url("//statics.w3cschool.cn/yimages/qqkf.jpg");
+}
+#webkf:hover {
+    background-image: url("//statics.w3cschool.cn/yimages/qqkf_hv.jpg");
+}
+.qr-tool {
+    width: 45px;
+    height: 45px;
+    background-image: url("//statics.w3cschool.cn/yimages/backgrounds.32.png");
+    background-position: -148px 0;
+    cursor: pointer;
+}
+.qr-tool:hover {
+    width: 45px;
+    height: 45px;
+    background-image: url("//statics.w3cschool.cn/yimages/backgrounds.32.png");
+    background-position: -192px -46px;
+}
+
+/*** dialog é®ç½©å±‚æ ·å¼ begin ****/
+.dialogBackground {
+    background: #555 none repeat scroll 0 0;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #000 none repeat scroll 0 0;
+    opacity: 0.5;
+}
+/*** dialog é®ç½©å±‚æ ·å¼ end ****/

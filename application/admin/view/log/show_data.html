@@ -1,0 +1,39 @@
+
+<style>
+    pre {outline: 1px solid #ccc; padding: 5px; margin: 5px;font-size:17px; }
+    .string { color: green; }
+    .number { color: darkorange; }
+    .boolean { color: blue; }
+    .null { color: magenta; }
+    .key { color: red; }
+</style>
+<pre id="songReqJson">{$result}</pre>
+<script>
+    function syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    var str = document.getElementById('songReqJson').innerHTML;
+    str = str.replace(/,"/g, ',\r\n    "').replace(/\{"/,'{\r\n    "').replace(/"}/,'"\r\n}')
+    document.getElementById('songReqJson').innerHTML = syntaxHighlight(str);
+
+
+</script>

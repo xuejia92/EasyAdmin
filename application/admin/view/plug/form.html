@@ -1,0 +1,83 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">插件名称</label>
+        <div class="layui-input-block">
+            <input name="title" value='{$vo.title|default=""}' required="required" pattern="^.{2,}$" title="请输入名称" placeholder="请输入2位及以上字符用户名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">后台标识</label>
+        <div class="layui-input-block">
+            <input name="name" value='{$vo.name|default=""}' required="required" pattern="^[a-z]{2,}$" title="请输入英文插件名" placeholder="请输入2位及以上字符" class="layui-input">
+            <p class="help-block">必填，插件标识，通控制器。</p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">前台标识</label>
+        <div class="layui-input-block">
+            <input name="name_home" value='{$vo.name_home|default=""}' pattern="^[a-z]{2,}$" title="请输入英文插件名" placeholder="请输入2位及以上字符" class="layui-input">
+            <p class="help-block">必填，插件标识，通控制器。</p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">当前版本</label>
+        <div class="layui-input-block">
+            <input name="version" value='{$vo.version|default="1.0.0"}' pattern="^.{4,}$" title="请输入合法版本号" placeholder="请输入合法版本号" class="layui-input">
+            <p class="help-block">必填，版本号</p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <?php $model = isset($vo['model'])?$vo['model']:0;?>
+            <select class='layui-select full-width' readonly="readonly" lay-ignore name="model">
+                <option value="1" {if $model=="1"}selected{/if}>单应用</option>
+                <option value="0" {if $model=="0"}selected{/if}>完整应用</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">插件包</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="zip"value="{$vo.zip|default=''}" class="layui-input">-->
+            <!--<input type="hidden" name="zip1" onchange="$(this).prev('input').attr('src', this.value)"  class="layui-input">-->
+            <!--<a class="btn btn-link" data-file="one" data-uptype="local" data-type="zip" data-field="zip">上传插件包</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">作者</label>
+        <div class="layui-input-block">
+            <input name="author" value='{$vo.author|default=""}' required="required" pattern="^.{2,}$" title="请输入作者" placeholder="请输入2位及以上字符用户名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-block">
+            <input name="price" value='{$vo.price|default=""}'  title="请输入价格" placeholder="请输入价格，默认0" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入描述" title="请输入描述" class="layui-textarea" name="desc">{$vo.desc|default=""}</textarea>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        {if isset($vo['id'])}<input type='hidden' value='{$vo.id}' name='id'>{/if}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+    <script>window.form.render();</script>
+</form>

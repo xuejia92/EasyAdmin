@@ -1,0 +1,227 @@
+{extend name='admin@public/content'}
+
+{block name="button"}
+<!--{if auth("$classuri/add")}-->
+<button data-modal='{:url("$classuri/add")}' data-title="添加插件" class='layui-btn layui-btn-sm layui-btn-primary'>添加插件</button>
+<!--{/if}-->
+
+<button data-href='{:url("$classuri/getPlugConfig")}' data-title="插件配置" class='layui-btn layui-btn-sm layui-btn-primary'>更新插件配置</button>
+{/block}
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">插件名称</label>
+        <div class="layui-input-inline">
+            <input name="username" value="{$Think.get.title|default=''}" placeholder="请输入插件名" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">插件类别</label>
+        <div class="layui-input-inline">
+            <select name='model' class='layui-select show' lay-search="">
+                <?php $_GET['model']=isset($_GET['model']) && $_GET['model']!=''?$_GET['model']:'';?>
+                <option {if $_GET['model']==''}selected="selected"{/if} value=''> - 所有类别 -</option>
+                <option {if $_GET['model']==='0'}selected="selected"{/if} value='0'>完整应用</option>
+                <option {if $_GET['model']==1}selected="selected"{/if} value='1'>单应用</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='text-left nowrap'>插件名</th>
+            <th class='text-left nowrap'>后台标识</th>
+            <th class='text-left nowrap'>前端标识</th>
+            <th class='text-left nowrap'>类型</th>
+            <th class='text-left nowrap'>作者</th>
+            <!--<th class='text-left nowrap'>价格</th>-->
+            <th class='text-left nowrap'>安装状态</th>
+            <th class='text-left nowrap'>来源</th>
+            <th class='text-left nowrap'>最新版本</th>
+            <th class='text-left nowrap'>本地版本</th>
+            <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='text-left nowrap'>
+                {if $vo.name_home!='' && $vo['model_exist']==1}
+                <a href="/home/{$vo.name_home}" target="_blank">[{$vo.title}]</a>
+                {else/}
+                {$vo.title}
+                {/if}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.name_home}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.model_name|default="<span class='color-desc'>还没有设置</span>"|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.author|default="<span class='color-desc'>还没有设置作者</span>"|raw}
+            </td>
+            <!--<td class='text-left nowrap'>{$vo.price|default=0}</td>-->
+            <td class='text-left nowrap'>
+                {if $vo['model']==1}
+                {if $vo['name_exist'] eq 0}<span class="color-red">未安装</span>{elseif $vo['name_exist'] eq 1}<span class="color-green">已安装</span>{/if}
+                {/if}
+                {if $vo['model']==0}
+                {if $vo['model_exist'] eq 0}<span class="color-red">未安装</span>{elseif $vo['model_exist'] eq 1}<span class="color-green">已安装</span>{/if}
+                {/if}
+            </td>
+            <td>
+                {if $vo['publish']==1}线上{else/}本地{/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo['publish']==1}
+                {$vo.version_remote}
+                {/if}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.version}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo.status eq 0}<span class="color-red">已禁用</span>{elseif $vo.status eq 1}<span class="color-green">启用</span>{/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo.model==1}
+                {switch name='vo.version_set'}
+                {case value='1'}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs" style="background-color: #a888c2" data-tips='正在升级，请稍候...' data-confirm='确定要升级吗?' data-load='{:url("$classuri/upgrade")}?name={$vo.name}'>升级</a>
+                {/case}
+                {case value='-1'}
+                {if $vo['name_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packon")}?name={$vo.name}'>打包</a>
+                {/if}
+                {if $vo['model_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packonModule")}?name={$vo.name}'>打包</a>
+                {/if}
+                {/case}
+                {case value='0'}
+                {if $vo['name_exist']==1 and $vo['publish']!=1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packon")}?name={$vo.name}'>打包</a>
+                {/if}
+                {if $vo['model_exist']==1 and $vo['publish']!=1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packonModule")}?name={$vo.name}'>打包</a>
+                {/if}
+                {/case}
+                {/switch}
+
+                {if $vo['name_exist']==0 and $vo['publish']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs" data-tips='正在安装，请稍候...' data-confirm='确定要安装吗?' data-load='{:url("$classuri/install")}?name={$vo.name}'>安装</a>
+                {/if}
+                {if $vo['name_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" data-tips='正在卸载，请稍候...' data-confirm='确定要卸载吗?' data-load='{:url("$classuri/uninstall")}?name={$vo.name}'>卸载</a>
+                {/if}
+
+                {else/}
+
+                {switch name='vo.version_set'}
+                {case value='1'}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs" style="background-color: #a888c2" data-tips='正在升级，请稍候...' data-confirm='确定要升级吗?' data-load='{:url("$classuri/upgradeModule")}?name={$vo.name}'>升级</a>
+                {/case}
+                {case value='-1'}
+                {if $vo['name_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packon")}?name={$vo.name}'>打包</a>
+                {/if}
+                {if $vo['model_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packonModule")}?name={$vo.name}'>打包</a>
+                {/if}
+                {/case}
+                {case value='0'}
+                {if $vo['name_exist']==1 and $vo['publish']!=1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packon")}?name={$vo.name}'>打包</a>
+                {/if}
+                {if $vo['model_exist']==1 and $vo['publish']!=1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-cyan" style="background-color:darkred" data-tips='正在打包，请稍候...' data-confirm='确定要打包吗?' data-href='{:url("$classuri/packonModule")}?name={$vo.name}'>打包</a>
+                {/if}
+                {/case}
+                {/switch}
+
+                {if $vo['model_exist']==0 and $vo['publish']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs" data-tips='正在安装，请稍候...' data-confirm='确定要安装吗?' data-load='{:url("$classuri/installModule")}?name={$vo.name}'>安装</a>
+                {/if}
+                {if $vo['model_exist']==1 and $vo['publish']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" data-tips='正在卸载，请稍候...' data-confirm='确定要卸载吗?' data-load='{:url("$classuri/uninstallModule")}?name={$vo.name}'>卸载</a>
+                {/if}
+
+                {/if}
+
+                {if $vo['name_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" data-title="配置"  data-modal='/plug/{$vo.name}/index'>配置</a>
+                {/if}
+
+                {if $vo.method_exist eq 1 and $vo['name_exist']==1}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-primary" data-title="测试" data-modal='/plug/{$vo.name}/test'>测试</a>
+                {/if}
+
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="编辑" data-modal='{:url("$classuri/edit")}?id={$vo.id}'>编辑</a>
+                {/if}
+
+                {if $vo.status eq 1 and auth("$classuri/forbid")}
+                <span   class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" data-update="{$vo.id}" data-field='status' data-value='0' data-action='{:url("$classuri/forbid")}'>禁用</a>
+                {elseif auth("$classuri/resume")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-blue" data-update="{$vo.id}" data-field='status' data-value='1' data-action='{:url("$classuri/resume")}'>启用</a>
+                {/if}
+
+                {if $vo.publish==0}
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" style="background-color:black" data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'>删除</a>
+                {/if}
+                {/if}
+
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}
