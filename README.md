@@ -1,11 +1,15 @@
+Environment
+PHP 版本不低于 PHP5.6，推荐使用 PHP7 以达到最优效果；
+需开启 PATHINFO，不再支持 ThinkPHP 的 URL 兼容模式运行（源于如何优雅的展示）。
+Apache
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks -Multiviews
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
-</IfModule> 
- 
+</IfModule>
+Nginx
 server {
 	listen 80;
 	server_name wealth.demo.cuci.cc;
@@ -35,5 +39,17 @@ server {
 		fastcgi_param   PHP_VALUE               open_basedir=$document_root:/tmp/:/proc/;
 		access_log      /home/wwwlog/domain_access.log    access;
 		error_log       /home/wwwlog/domain_error.log     error;
-	} 
-} 
+	}
+	
+	location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
+		access_log  off;
+		error_log   off;
+		expires     30d;
+	}
+	
+	location ~ .*\.(js|css)?$ {
+		access_log   off;
+		error_log    off;
+		expires      12h;
+	}
+}
