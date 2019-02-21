@@ -1,12 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-### Composer template
-composer.phar
-/vendor/
-.idea
-dev.env
-produce.env
-composer.lock
-easyswoole.install
+### Composer template 
+.idea 
 /Log
-/Temp
-/easyswoole
+/Temp 

@@ -7,16 +7,7 @@
 /runtime
 /nbproject
 !composer.json
-/composer.lock
-/static/upload
+/composer.lock 
 .user.ini
 /extend/vendor/Alipay/log.txt
-=======
-# ---> Yii
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-themes/classic/views/
 
