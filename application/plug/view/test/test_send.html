@@ -1,0 +1,52 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">发送手机号</label>
+        <div class="layui-input-block">
+            <input name="to" value='' required="required" title="请输入发送手机号" placeholder="发送手机号" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">验证码</label>
+        <div class="layui-input-block">
+            <input   autofocus name="code"  value=''  title="请输入发送验证码" placeholder="发送验证码" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="display: none;" id="log">
+        <label class="layui-form-label">发送记录</label>
+        <div class="layui-input-block">
+            <textarea name="log" cols="30" rows="10">
+
+            </textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>测试发送</button>
+        <!--<button class="layui-btn" onclick="get_logs()">获取发送记录</button>-->
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消发送吗？" data-close>取消</button>
+    </div>
+    <script>window.form.render();</script>
+</form>
+{block name='script'}
+<script>
+    function get_logs() {
+        var phone = $('input[name=to]').val();
+        if($.trim(phone)==''){
+            $.msg.error('手机号不能为空');
+            return false;
+        }
+        $.post('',{type:'log',to:phone},function (response) {
+            if(response.code==1){
+                $('#log').show();
+                $('textarea[name=log]').val(response.data);
+            }else{
+                $.msg.error('记录获取失败');
+            }
+        },'json');
+        return false;
+    }
+</script>
+{/block}

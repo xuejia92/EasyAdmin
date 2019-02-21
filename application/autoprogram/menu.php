@@ -1,0 +1,65 @@
+<?php return array (
+  'id' => 465,
+  'pid' => 0,
+  'title' => '自动程序',
+  'node' => '',
+  'icon' => '',
+  'url' => '#',
+  'params' => '',
+  'target' => '_self',
+  'sort' => 220,
+  'status' => 1,
+  'create_by' => 0,
+  'create_at' => '2019-02-05 00:10:01',
+  'sub' => 
+  array (
+    0 => 
+    array (
+      'id' => 466,
+      'pid' => 465,
+      'title' => '项目管理',
+      'node' => '',
+      'icon' => '',
+      'url' => '#',
+      'params' => '',
+      'target' => '_self',
+      'sort' => 0,
+      'status' => 1,
+      'create_by' => 0,
+      'create_at' => '2019-02-05 00:10:27',
+      'sub' => 
+      array (
+        0 => 
+        array (
+          'id' => 467,
+          'pid' => 466,
+          'title' => '项目列表',
+          'node' => '',
+          'icon' => 'fa fa-credit-card-alt',
+          'url' => 'autoprogram/index/index',
+          'params' => '',
+          'target' => '_self',
+          'sort' => 0,
+          'status' => 1,
+          'create_by' => 0,
+          'create_at' => '2019-02-05 00:11:03',
+        ),
+        1 => 
+        array (
+          'id' => 468,
+          'pid' => 466,
+          'title' => '子项目类别-模型',
+          'node' => '',
+          'icon' => 'fa fa-venus-mars',
+          'url' => 'autoprogram/category/index',
+          'params' => '',
+          'target' => '_self',
+          'sort' => 0,
+          'status' => 1,
+          'create_by' => 0,
+          'create_at' => '2019-02-05 18:34:17',
+        ),
+      ),
+    ),
+  ),
+);

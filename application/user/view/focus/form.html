@@ -1,0 +1,41 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">焦点图名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" value='{$vo.title|default=""}' required="required" title="请输入焦点图名称" placeholder="请输入焦点图名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">焦点图</label>
+        <div class="layui-input-block">
+            <img data-tips-image style="height:auto;max-height:32px;min-width:32px" src='{$vo.thumb|default=""}'/>
+            <input type="hidden" name="thumb" onchange="$(this).prev('img').attr('src', this.value)" value='{$vo.thumb|default=""}' class="layui-input">
+            <a class="btn btn-link" data-file="one" data-uptype="local" data-type="ico,png,jpg,gif" data-field="thumb">上传图片</a>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">跳转url</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" value='{$vo.url|default="#"}' required="required" title="请输入跳转url" placeholder="请输入跳转url" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">焦点图描述</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入焦点图描述" required="required" title="请输入焦点图描述" class="layui-textarea" name="description">{$vo.description|default=""}</textarea>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        {if isset($vo['id'])}<input type='hidden' value='{$vo.id}' name='id'>{/if}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+
+</form>

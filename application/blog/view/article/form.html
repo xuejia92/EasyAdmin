@@ -1,0 +1,388 @@
+<div id="NewsEditor" style="overflow-y: scroll; overflow-x: hidden;">
+    <!--右侧编辑区 开始-->
+    <div class="panel panel-default news-right">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" style="float:left;" name="news" onsubmit="return false;">
+                <input type="hidden" value="{$vo.id|default=''}" name="id">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">文章标题</span>
+                            <input maxlength="64" value="{$vo.title|default=''}" required title="文章的标题不能为空哦" placeholder="请在这里输入标题" name='title' class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">文章作者</span>
+                            <input maxlength="8" value="{$vo.ori_author|default=''}"  placeholder="请输入作者" name='ori_author' class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">文章分类</span>
+                            <select name='category' class='layui-select full-width' lay-ignore>
+                                <!--{foreach $category as $vp}-->
+                                <!--{eq name='vp.id' value='$vo.category|default=0'}-->
+                                <option selected value='{$vp.id}'>{$vp.name}</option>
+                                <!--{else}-->
+                                <option value='{$vp.id}'>{$vp.name}</option>
+                                <!--{/eq}-->
+                                <!--{/foreach}-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <label>是否立即发布：</label>
+                    </label>
+                    <?php $isfabu = isset($vo['isfabu'])?$vo['isfabu']:0 ?>
+                    <label class="radio-inline">
+                        <input    type="radio" name="isfabu" value="1" title="发布" {eq name='isfabu' value='1'}checked{/eq}>发布
+                    </label>
+                    <label class="radio-inline">
+                        <input    type="radio" name="isfabu" value="0" title="不发布" {eq name='isfabu' value='0'}checked{/eq}>不发布
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="form-control border-radius-none" style="height:auto">
+                            <label class="color-desc font-s12 margin-bottom-5">图文封面大图片设置</label>
+                            <div class="row nowrap">
+                                <div class="col-xs-3" style="Nwidth:160px">
+                                    <div class="upload-image-box transition">
+                                        <img data-tips-image style="max-height:86px;min-width:128px"
+                                             src="{:isset($vo.thumb)?$vo.thumb:'__STATIC__/plugs/uploader/theme/image.png'}">
+                                        <input onchange="$(this).prev('img').attr('src', this.value)" value="{:isset($vo.thumb)?$vo.thumb:'__STATIC__/plugs/uploader/theme/image.png'}" value="__STATIC__/plugs/uploader/theme/image.png" type="hidden" name="thumb">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 padding-top-10">
+                                    <button type="button" data-title="上传封面" data-file="one" data-type="jpg,png,jpeg" data-field="thumb" class="layui-btn layui-btn-sm layui-btn-primary">上传图片</button>
+                                    <br>
+                                </div>
+                            </div>
+                            <p class="help-block margin-top-5 color-desc">封面大图片建议尺寸：900像素 * 500像素</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12"><textarea con="{$vo.content|default=''|htmlspecialchars_decode}"  name='content'></textarea></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="color-desc">文章来源<b>选填</b>，留空表示原创</label>
+                        <input value="{$vo.laiyuan|default=''}" maxlength="300" name='laiyuan' class="layui-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12" style="margin-left:-55px;">
+                        <div class="tpt_item">
+                            <input type="hidden" name="tags" value="{$vo.tags|default=''}">
+                            <div id="tpt_sel" class="tpt_sels tpt-none-750" style="margin-top: 20px;">
+                                <span style="margin: 0 0 5px 110px;float: left;">
+                                    {if !empty($vo['tags_arr'])}
+                                    {foreach $vo['tags_arr'] as $vb}
+                                    <a href="javascript:;">{$vb}<em></em></a>
+                                    {/foreach}
+                                    {/if}
+                                </span>
+                                <div class="layui-form-item" style="margin-bottom: 10px;">
+                                    <label class="layui-form-label">标签</label>
+                                    <div class="layui-input-block">
+                                        <input id="tpt_input" type="text" value="" autocomplete="off" class="layui-input" style="width: 400px;float: left;margin-right: 20px;">
+                                        <button class="layui-btn" id="tpt_btn" type="button" style="background: #FF5722;margin-bottom: 10px;">添加标签</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tpt_pre" class="tpt_pres cl tpt-none-750" style="margin: 0 0 15px 110px;">
+                                {foreach $vo.strTitle as $vb}
+                                <a href="javascript:;" class="">{$vb}</a>
+                                {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-9">
+                            <button ng-click="submit()" type="button" class="layui-btn">保存文章</button>
+                            <button class="layui-btn layui-btn-danger" type='button' onclick="window.history.back()">取消编辑</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--右侧编辑区 结束-->
+</div>
+<script>
+    $(function() {
+        $('#tpt_input').keydown(function(e) {
+            if (e.which === 13) {
+                $("#tpt_btn").click();
+                e.preventDefault();
+                return false;
+            }
+        });
+        $("#tpt_sel").on('click', 'a>em', function() {
+            var name = "tags";
+            var tag = $(this).parent().text();
+            $(this).parent().remove();
+            var tags = new Array();
+            $("#tpt_sel").find('a').each(function() {
+                tags.push($(this).text());
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_pre a:contains('" + tag + "')").removeClass("selected");
+        });
+        $("#tpt_btn").click(function() {
+            var name = "tags";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($("#tpt_input").val());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+                $("#tpt_pre a:contains('" + tag + "')").addClass("selected");
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_input").val('');
+        });
+        $("#tpt_pre").on('click', 'a:not(.selected)', function() {
+            var name = "tags";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($(this).text());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $(this).addClass('selected');
+        });
+    });
+
+    require(['angular', 'ckeditor'], function () {
+
+        var $form = $('form[name="news"]');
+        var editor = window.createEditor('[name="content"]');
+        editor.setData($('textarea[name="content"]').attr('con'));
+        var app = angular.module("NewsEditor", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            $rootScope.list = [];
+            $rootScope.item = {};
+
+            $rootScope.submit = function () {
+                $form.vali();
+                if ($form.find('.validate-error').size() > 0) {
+                    return $.msg.tips('表单验证不成功，请输入需要的内容！');
+                }
+                var content = editor.getData();
+                $.form.load('{:request()->url()}', {
+                    id: $('input[name=id]').val(),
+                    title: $('input[name=title]').val(),
+                    author: $('input[name=author]').val(),
+                    isfabu: $('input[name=isfabu]:checked').val(),
+                    content: content,
+                    tags: $('input[name=tags]').val(),
+                    category: $('select[name=category]').val(),
+                    thumb: $('input[name=thumb]').val(),
+                    laiyuan: $('input[name=laiyuan]').val(),
+                }, "post",function () {
+                    window.history.back();
+                });
+            };
+        }
+    });
+</script>
+<style>
+    .news-right .layui-input {
+        border-radius: 0;
+        border: 1px solid #e5e6e7;
+    }
+
+    .news-right .layui-input:hover, .news-right .layui-input:focus {
+        border-color: #e5e6e7 !important;
+    }
+
+    .news-right .input-group-addon {
+        background: #fff;
+        border-radius: 0;
+        border-color: #e5e6e7;
+    }
+
+    .news-right .upload-image-box {
+        width: 130px;
+        height: 90px;
+        background-size: cover;
+        background-position: center center;
+        border: 1px solid rgba(125, 125, 125, 0.1);
+    }
+
+
+    #news_box {
+        position: relative;
+    }
+
+    #news_box .news_item {
+        top: 0;
+        left: 0;
+        padding: 5px;
+        margin: 10px;
+        width: 300px;
+        position: relative;
+        border: 1px solid #ccc;
+        box-sizing: content-box;
+    }
+
+    #news_box .news_item .news_articel_item {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        position: relative;
+        background-size: 100%;
+        background-position: center center;
+    }
+
+    #news_box .news_item .news_articel_item p {
+        bottom: 0;
+        width: 100%;
+        color: #fff;
+        padding: 5px;
+        max-height: 5em;
+        font-size: 12px;
+        overflow: hidden;
+        position: absolute;
+        text-overflow: ellipsis;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    #news_box .news_item .news_articel_item.other {
+        height: 50px;
+        padding: 5px 0;
+    }
+
+    #news_box .news_item .news_articel_item .left-image {
+        width: 50px;
+        height: 50px;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        background-size: 100%;
+        background-position: center center;
+    }
+
+    #news_box .news_item .news_articel_item .right-text {
+        float: left;
+        width: 250px;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #news_box .news_item .hr-line-dashed:last-child {
+        display: none
+    }
+
+    #news_box .hr-line-dashed {
+        margin: 6px 0 1px 0
+    }
+
+    #news_box .news_tools {
+        top: 0;
+        z-index: 80;
+        color: #fff;
+        width: 312px;
+        padding: 0 5px;
+        margin-left: -6px;
+        line-height: 38px;
+        text-align: right;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    #news_box .news_tools a {
+        color: #fff;
+        margin-left: 10px
+    }
+
+    .tpt_sels a {
+        padding: 0 20px 0 8px;
+        color: #3B6268;
+        background: #FFFFBA;
+        border: 1px #F8E06E solid;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        height: 26px;
+        line-height: 26px;
+        display: block;
+        float: left;
+        position: relative;
+    }
+    .tpt_sels a em {
+        width: 12px;
+        height: 12px;
+        font-style: normal;
+        display: block;
+        position: absolute;
+        top: 7px;
+        right: 4px;
+        z-index: 2;
+        background: url(/static/theme/img/sx.png) no-repeat 0 0;
+    }
+    .tpt_pres a.selected {
+        padding: 0 8px;
+        color: #3B6268;
+        background: #FFFFBA;
+        border: 1px #F8E06E solid;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        height: 26px;
+        line-height: 26px;
+        display: block;
+        float: left;
+    }
+    .tpt_pres a {
+        padding: 0 8px;
+        color: #fff;
+        background: #5AC7A9;
+        border: 1px #5AC7A9 solid;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        height: 26px;
+        line-height: 26px;
+        display: block;
+        float: left;
+    }
+</style>

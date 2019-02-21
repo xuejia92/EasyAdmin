@@ -1,0 +1,68 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+    {if isset($_GET['id']) ||isset($_GET['userid'])}
+    <ul class="layui-nav layui-bg-green">
+        <li style="margin-left: 14px;" class="layui-nav-item {if $classuri=='user/user'}layui-this{/if}">
+            <a data-load='{:url("user/user/user")}?id={$Think.get.id}'>用户信息</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/money'}layui-this{/if}">
+            <a data-load='{:url("user/money/index")}?id={$Think.get.id}'>盈亏</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/recharge'}layui-this{/if}">
+            <a data-load='{:url("user/recharge/index")}?id={$Think.get.id}'>充值</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/withdrawl'}layui-this{/if}">
+            <a data-load='{:url("user/withdrawl/index")}?id={$Think.get.id}'>提现</a>
+        </li>
+    </ul>
+    {/if} <br><br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户id</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="id" value='{$vo.id|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="account" value='{$vo.account|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="nickname" value='{$vo.nickname|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">当前余额(元)</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="money" value='{$vo.money|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">保险箱余额(元)</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="dongjiemoney" value='{$vo.dongjiemoney|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">积分</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="point" value='{$vo.point|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">等级</label>
+            <div class="layui-input-block">
+                <input readonly="readonly" disabled="disabled" name="levelName" value='{$vo.levelName|default=""}'class="layui-input layui-bg-gray">
+            </div>
+        </div>
+        </tbody>
+</form>

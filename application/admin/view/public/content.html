@@ -7,7 +7,20 @@
         <div class="pull-right margin-right-15 nowrap">{block name="button"}{/block}</div>
     </div>
     <!--{/notempty}-->
-    <div class="layui-card-body">{block name='content'}{/block}</div>
+    <div class="layui-card-body">
+        <div class="ibox-content">
+            {if isset($alert)}
+            <div class="alert alert-{$alert.type} alert-dismissible" role="alert" style="border-radius:0">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {if isset($alert['title'])}<p style="font-size:18px;padding-bottom:10px">{$alert.title}</p>{/if}
+                {if isset($alert['content'])}<p style="font-size:14px">{$alert.content}</p>{/if}
+            </div>
+            {/if}
+        </div>
+        {block name='content'}{/block}
+    </div>
 </div>
 {block name='script'}{/block}
 <!-- 右则内容区域 结束 -->

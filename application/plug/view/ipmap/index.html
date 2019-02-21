@@ -1,0 +1,85 @@
+<form style="margin-left: 20px;" onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='layui-form layui-box modal-form-box'>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">Mode<br><span class="nowrap color-desc">接口模式</span></label>
+        <div class="layui-input-block">
+            {php}
+            $sms_type=sysconf('sms_type')?sysconf('sms_type'):'alidayu';
+            {/php}
+            {foreach ['alidayu'=>'阿里大于短信接口','other'=>'其他'] as $k=>$v}
+            <label class="think-radio">
+                <!--{if $sms_type eq $k}-->
+                <input checked="checked" type="radio" value="{$k}" name="sms_type">
+                <!--{else}-->
+                <input type="radio" value="{$k}" name="sms_type">
+                <!--{/if}-->
+                {$v}
+            </label>
+            {/foreach}
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div data-api-type="alidayu" class="hide">
+        <div class="layui-form-item">
+            <label class="layui-form-label">AccessKeyId<br><span class="nowrap color-desc">AccessKeyId</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_ali_AccessKeyId" required="required" title="请输入接口sms_ali_AccessKeyId" placeholder="sms_ali_AccessKeyId" value="{:sysconf('sms_ali_AccessKeyId')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">AccessKeySecret<br><span class="nowrap color-desc">AccessKeySecret</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_ali_AccessKeySecret" title="sms_ali_AccessKeySecret" placeholder="sms_ali_AccessKeySecret"   required="required" value="{:sysconf('sms_ali_AccessKeySecret')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">sms_ali_signname<br><span class="nowrap color-desc">签名名称</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_ali_signname" required="required" title="sms_ali_signname" placeholder="sms_ali_signname" value="{:sysconf('sms_ali_signname')}" maxlength="32"  class="layui-input">
+                <p class="help-block">设置签名名称，应严格按"签名名称"填写。</p>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">sms_ali_templatecode<br><span class="nowrap color-desc">模板CODE</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_ali_templatecode" title="sms_ali_templatecode"  required="required" placeholder="sms_ali_templatecode" value="{:sysconf('sms_ali_templatecode')}"   class="layui-input">
+                <p class="help-block">必填，设置模板CODE，应严格按"模板CODE"填写。</p>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+
+    <div data-api-type="other" class="hide">
+        <div class="layui-form-item">
+            <label class="layui-form-label">等待开发接入<br>
+                <span class="nowrap color-desc">消息推送接口</span>
+            </label>
+            <div class='layui-input-block'>
+                <input type="text" name="" required value="" title="L" placeholder="其他" class="layui-input layui-bg-gray">
+                <p class="help-block">其他短信接口</p>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type="submit">保存配置</button>
+    </div>
+
+</form>
+
+<script>
+    $(function () {
+        updateViwe();
+        $('[name="sms_type"]').on('click', updateViwe);
+
+        function updateViwe() {
+            var type = $('[name="sms_type"]:checked').val();
+            $('[data-api-type]').not($('[data-api-type="' + type + '"]').removeClass('hide')).addClass('hide');
+        }
+    });
+</script>
+

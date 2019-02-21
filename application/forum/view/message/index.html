@@ -1,0 +1,110 @@
+{extend name='admin@public/content'}
+
+{block name="button"}
+<!--{if auth("$classuri/add")}-->
+<button data-modal='{:url("$classuri/add")}' data-title="添加系统消息" class='layui-btn layui-btn-sm layui-btn-primary'>添加系统消息</button>
+<!--{/if}-->
+
+<!--{if auth("$classuri/del")}-->
+<button data-update data-field='delete' data-action='{:url("$classuri/del")}' class='layui-btn layui-btn-sm layui-btn-primary'>删除</button>
+<!--{/if}-->
+{/block}
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">时间</label>
+        <div class="layui-input-inline">
+            <input name="date" id='range-date' value="{$Think.get.date|default=''}" placeholder="请选择时间" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">消息类型</label>
+        <div class="layui-input-inline">
+            <select name="type" class="layui-select  layui-show">
+                <option value="">请选择类型</option>
+                <option value="1" {if $Think.get.type=='1'}selected='selected'{/if}>系统消息</option>
+                <option value="2" {if $Think.get.type=='2'}selected='selected'{/if}>帖子动态</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='list-table-check-td think-checkbox'>
+                <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
+            </th>
+            <th class='text-left nowrap'>ID</th>
+            <th class='text-left nowrap'>时间</th>
+            <th class='text-left nowrap'>发送者</th>
+            <th class='text-left nowrap'>发送对象</th>
+            <th class='text-left nowrap'>类型</th>
+            <th class='text-left nowrap'>内容</th>
+            <th class='text-left nowrap'>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'>
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.id}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.uid_name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.touid_name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.type==1?'系统消息':'帖子动态'}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo['type']==1}{$vo.content}{/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo['type']==1}
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="编辑帖子" data-modal='{:url("$classuri/edit")}?id={$vo.id}'>编辑</a>
+                {/if}
+                {/if}
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" style="background-color:black" data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'>删除</a>
+                {/if}
+
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}

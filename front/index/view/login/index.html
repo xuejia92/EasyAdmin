@@ -1,0 +1,64 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+
+<main class="content">
+    <div id="content-container" class="container">
+        <div class="user-section login-section">
+            <div class="logon-tab clearfix"> <a class="active">登 录</a> <a href="/index/register.html">注 册</a> </div>
+            <div class="login-main">
+                <p class="text-center text-danger">测试账号：admin 密码：admin</p>
+                <form name="form" id="login-form" class="form-vertical" onsubmit="return false;" method="POST" action="">
+                    <input type="hidden" name="url" value="" />
+                    <input type="hidden" name="__token__" value="25d49659cb3069c3f3a19484146dd6eb" />                <div class="form-group">
+                    <label class="control-label" for="account">账号</label>
+                    <div class="controls">
+                        <input class="form-control input-lg" id="account" type="text" name="account" value="" data-rule="required" placeholder="邮箱/手机/用户名" autocomplete="off">
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="control-label" for="password">密码</label>
+                        <div class="controls">
+                            <input class="form-control input-lg" id="password" type="password" name="password" data-rule="required;password" placeholder="密码" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="controls">
+                            <input type="checkbox" name="keeplogin" checked="checked" value="1"> 保持会话
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="login" class="btn btn-primary btn-lg btn-block">登 录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{include file='public/footer'/}
+<script>
+    $(function () {
+        $('#login').click(function () {
+            var account = $.trim($('input[name=account]').val());
+            var password = $.trim($('input[name=password]').val());
+
+            if(account=='' || password==''  ){
+                layer.msg('请输入账号或密码!');
+                return false;
+            }
+            $.post('/index/login/login',{
+                account:account,
+                password:password,
+            },function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    return false;
+                }else{
+                    layer.msg(data.msg);
+                    window.location.href = '/index/user';
+                }
+            },'json');
+        });
+    });
+</script>

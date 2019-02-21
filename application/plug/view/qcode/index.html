@@ -1,0 +1,178 @@
+<div class="container" style="width: 100%;height: 100%;">
+    <h2>二维码生成</h2>
+    <hr>
+    <div class="well">
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">文本内容</label>
+                        <input type="text" name="text" class="form-control" placeholder="" value="http://www.dusy110.top">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">标签</label>
+                        <input type="text" name="label" placeholder="" class="form-control" value="esAdmin">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Logo</label>
+                        <div class="form-inline">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="logo" id="logono" value="0" checked="">
+                                    不显示
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="logo" id="logoyes" value="1" >
+                                    显示
+                                </label>
+                            </div>
+                        </div>
+                        <div id="show_logo" style="display: none;">
+                            <img data-tips-image style="height:auto;max-height:32px;min-width:32px" src=""/>
+                            <input type="hidden" name="logoImag" onchange="$(this).prev('img').attr('src', this.value)" value="" class="layui-input">
+                            <a class="btn btn-link" data-file="one" data-uptype="local" data-type="jpg,png" data-field="logoImag">上传图片</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-info" />
+                        <input type="reset" class="btn btn-default" />
+                    </div>
+                    <img src="" alt="" id='qrcodeimg'  style="width: 74%"/>
+                </div>
+
+                <div class="col-md-2">
+                    <div id="toastTypeGroup">
+                        <label>标签水平位置</label>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="0" checked="">居中</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="1">左</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="2">左边框</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="3">左图片</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="4">右</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="5">右边框</label>
+                        </div>
+                        <div class="form-group radio">
+                            <label><input type="radio" name="labelhalign" value="6">右图片</label>
+                        </div>
+                    </div>
+                    <div id="positionGroup">
+                        <label>标签垂直位置</label>
+                        <div class="form-group radio">
+                            <label>
+                                <input type="radio" name="labelvalign" value="1">上
+                            </label>
+                        </div>
+                        <div class="form-group radio">
+                            <label>
+                                <input type="radio" name="labelvalign" value="2">上边框
+                            </label>
+                        </div>
+                        <div class="form-group radio">
+                            <label>
+                                <input type="radio" name="labelvalign" value="3" checked="">中
+                            </label>
+                        </div>
+                        <div class="form-group radio">
+                            <label>
+                                <input type="radio" name="labelvalign" value="4">下
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="control-label">前景色</label>
+                            <input type="text" name="foreground" placeholder="" class="form-control" value="#ffffff">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">背景色</label>
+                            <input type="text" name="background" placeholder="" class="form-control" value="#000000">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">大小</label>
+                            <input type="number" name="size" placeholder="" class="form-control" value="300">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">内边距</label>
+                            <input type="number" name="padding" placeholder="" class="form-control" value="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">Logo大小</label>
+                        <input type="number" name="logosize" placeholder="" class="form-control" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">标签大小</label>
+                        <input type="number" name="labelfontsize" placeholder="" class="form-control" value="14">
+                    </div>
+                    <div class="form-group">
+                        <div id="positionGroup">
+                            <label>容错级别</label>
+                            <div class="form-group radio">
+                                <label>
+                                    <input type="radio" name="errorcorrection" value="low">低
+                                </label>
+                            </div>
+                            <div class="form-group radio">
+                                <label>
+                                    <input type="radio" name="errorcorrection" value="medium" checked="">中等
+                                </label>
+                            </div>
+                            <div class="form-group radio">
+                                <label>
+                                    <input type="radio" name="errorcorrection" value="quartile">高
+                                </label>
+                            </div>
+                            <div class="form-group radio">
+                                <label>
+                                    <input type="radio" name="errorcorrection" value="high">超高
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <input type="text" class="form-control" id='qrcodeurl' /><br>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("form").submit(function () {
+            if($('input[name="logo"]:checked').val()==1){
+                if($('input[name=logoImag]').val()==''){
+                    $.msg.error('请上传图片');
+                    return false;
+                }
+            }
+            $("#qrcodeimg").prop("src", "/admin.php/plug/qcode/build?" + $(this).serialize());
+            var domain = window.location.host;
+            $("#qrcodeurl").val(domain+"/admin.php/plug/qcode/build?" + $(this).serialize());
+            return false;
+        });
+        // $("form").trigger('submit');
+        $('#logoyes').click(function () {
+            $('#show_logo').show();
+        });
+        $('#logono').click(function () {
+            $('#show_logo').hide();
+        });
+    });
+</script>

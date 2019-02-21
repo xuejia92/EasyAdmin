@@ -1,0 +1,98 @@
+<div class="code">
+    <div id="captcha"></div>
+</div>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script>
+    var handler = function (captchaObj) {
+        // 将验证码加到id为captcha的元素里
+        captchaObj.appendTo("#captcha");
+    };
+    // 获取验证码
+    $.get("{:url('/plug/geetest/geetest_show_verify')}", function(data) {
+        // 使用initGeetest接口
+        // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+        // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+        initGeetest({
+            gt: data.gt,
+            challenge: data.challenge,
+            product: "float", // 产品形式
+            offline: !data.success
+        }, handler);
+    },'json');
+    // 检测验证码
+    function check_verify(){
+        // 组合验证需要用的数据
+        var test=$('.geetest_challenge').val();
+        var postData={
+            geetest_challenge: $('.geetest_challenge').val(),
+            geetest_validate: $('.geetest_validate').val(),
+            geetest_seccode: $('.geetest_seccode').val()
+        }
+        // 验证是否通过
+        $.post("{:url('/plug/geetest/geetest_ajax_check')}", postData, function(data) {
+            if (data==1) {
+                alert('验证成功');
+            }else{
+                alert('验证失败');
+            }
+        });
+    }
+</script>
+
+<div class="code">
+    <pre class="layui-code" lay-title="HTML代码">
+    <div class="code">
+        <div id="captcha"></div>
+    </div>
+    </pre>
+    <pre class="layui-code" lay-title="Js代码">
+        <script src="http://static.geetest.com/static/tools/gt.js"></script>
+        var handler = function (captchaObj) {
+            // 将验证码加到id为captcha的元素里
+            captchaObj.appendTo("#captcha");
+        };
+        // 获取验证码
+        $.get("{:url('/plug/geetest/geetest_show_verify')}", function(data) {
+            // 使用initGeetest接口
+            // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+            initGeetest({
+                gt: data.gt,
+                challenge: data.challenge,
+                product: "float", // 产品形式
+                offline: !data.success
+            }, handler);
+        },'json');
+        // 检测验证码
+        function check_verify(){
+            // 组合验证需要用的数据
+            var test=$('.geetest_challenge').val();
+            var postData={
+                geetest_challenge: $('.geetest_challenge').val(),
+                geetest_validate: $('.geetest_validate').val(),
+                geetest_seccode: $('.geetest_seccode').val()
+            }
+            // 验证是否通过
+            $.post("{:url('/plug/geetest/geetest_ajax_check')}", postData, function(data) {
+                if (data==1) {
+                    alert('验证成功');
+                }else{
+                    alert('验证失败');
+                }
+            });
+        }
+    </pre>
+    <pre class="layui-code" lay-title="php代码">
+        if (GeetestService::geetest_chcek_verify($this->request->post(''))) {
+            echo '验证成功';
+        }else{
+            echo '验证失败';
+        }
+    </pre>
+</div>
+
+<script>
+    layui.use('code', function () {
+        layui.code({encode: true});
+    });
+</script>

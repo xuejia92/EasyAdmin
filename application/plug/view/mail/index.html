@@ -1,0 +1,96 @@
+<form autocomplete="off" onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='form-horizontal layui-form padding-top-20'>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP Server<br><span class="nowrap color-desc">SMTP服务器</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_host" required="required" title="请输入SMTP服务器" placeholder="SMTP服务器" value="{:sysconf('mail_smtp_host')}" class="layui-input">
+            <p class="help-block">SMTP服务器(例如：smtp.163.com)</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP Port<br><span class="nowrap color-desc">SMTP服务器端口</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_port" required="required" title="请输入SMTP服务器端口" placeholder="SMTP服务器端口" value="{:sysconf('mail_smtp_port')}" class="layui-input">
+            <p class="help-block">SMTP服务器端口(端口为465才需要使用ssl协议，如果是25 就不需要加)</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP UserName<br><span class="nowrap color-desc">SMTP服务器用户名</span>
+        </label>
+        <div class='col-sm-8'>
+            <input required="required" title="请输入SMTP服务器用户名" placeholder="SMTP服务器用户名" value="{:sysconf('mail_smtp_username')}" class="layui-input">
+            <p class="help-block">SMTP服务器用户名</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP UserPass<br><span class="nowrap color-desc">SMTP服务器密码</span>
+        </label>
+        <div class='col-sm-8'>
+            <input  type="text" name="mail_smtp_userpass" required="required" title="请输入SMTP服务器密码" placeholder="SMTP服务器密码" value="{:sysconf('mail_smtp_userpass')}" class="layui-input">
+            <p class="help-block">SMTP服务器密码</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP FROM_EMAIL<br><span class="nowrap color-desc">发件人EMAIL</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_fromemail" required="required" title="请输入发件人EMAIL" placeholder="发件人EMAIL" value="{:sysconf('mail_smtp_fromemail')}" class="layui-input">
+            <p class="help-block">发件人EMAIL地址</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP FROM_NAME<br><span class="nowrap color-desc">发件人名称</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_fromname" required="required" title="请输入发件人名称" placeholder="发件人名称" value="{:sysconf('mail_smtp_fromname')}" class="layui-input">
+            <p class="help-block">发件人名称</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP REPLY_MAIL<br><span class="nowrap color-desc">回复EMAIL地址</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_replymail"   title="请输入回复EMAIL" placeholder="回复EMAIL" value="{:sysconf('mail_smtp_replymail')}" class="layui-input">
+            <p class="help-block">回复EMAIL（留空则为发件人EMAIL）</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            SMTP REPLY_NAME<br><span class="nowrap color-desc">回复名称</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="mail_smtp_replyname"   title="请输入回复名称" placeholder="回复名称" value="{:sysconf('mail_smtp_replyname')}" class="layui-input">
+            <p class="help-block">回复名称（留空则为发件人名称）</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="col-sm-4 col-sm-offset-2">
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">保存配置</button>
+        </div>
+    </div>
+
+</form>

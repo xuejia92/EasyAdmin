@@ -1,0 +1,157 @@
+{extend name='admin@public/content'}
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">用户Id</label>
+        <div class="layui-input-inline">
+            <input name="id" value="{$Think.get.id|default=''}" placeholder="请输入用户Id" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">用户账号</label>
+        <div class="layui-input-inline">
+            <input name="username" value="{$Think.get.username|default=''}" placeholder="请输入用户名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <select name='status' class='layui-select show' lay-search="">
+                <?php $_GET['status']=isset($_GET['status']) && $_GET['status']!=''?$_GET['status']:'';?>
+                <option {if $_GET['status']==''}selected="selected"{/if} value=''> - 所有状态 -</option>
+                <option {if $_GET['status']==='0'}selected="selected"{/if} value='0'>提交申请</option>
+                <option {if $_GET['status']==1}selected="selected"{/if} value='1'>提现成功</option>
+                <option {if $_GET['status']==2}selected="selected"{/if} value='2'>失败，返回余额</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">提现时间</label>
+        <div class="layui-input-inline">
+            <input name="create_time" id='range-date' value="{$Think.get.create_time|default=''}" placeholder="请选择时间" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    {if isset($_GET['id']) ||isset($_GET['userid'])}
+    <ul class="layui-nav layui-bg-green">
+        <li class="layui-nav-item {if $classuri=='user/user'}layui-this{/if}">
+            <a data-load='{:url("user/user/user")}?id={$Think.get.id}'>用户信息</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/money'}layui-this{/if}">
+            <a data-load='{:url("user/money/index")}?id={$Think.get.id}'>盈亏</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/recharge'}layui-this{/if}">
+            <a data-load='{:url("user/recharge/index")}?id={$Think.get.id}'>充值</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/withdrawl'}layui-this{/if}">
+            <a data-load='{:url("user/withdrawl/index")}?id={$Think.get.id}'>提现</a>
+        </li>
+    </ul>
+    {/if}
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='list-table-check-td think-checkbox'>
+                <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
+            </th>
+            <th class='text-left nowrap'>提现id</th>
+            <th class='text-left nowrap'>用户id</th>
+            <th class='text-left nowrap'>用户名</th>
+            <th class='text-left nowrap'>提现金额(元)</th>
+            <th class='text-left nowrap'>提现时间</th>
+            <th class='text-left nowrap'>支付宝姓名</th>
+            <th class='text-left nowrap'>支付宝账号</th>
+            <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'>处理时间</th>
+            <th class='text-left nowrap'>处理者</th>
+            <th class='text-left nowrap'>备注</th>
+            <th class='text-left nowrap'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'>
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.id}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.userid}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.username}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.amount|default="0"|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.create_time|date='Y-m-d H:i:s'|default=""|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.zfbhao}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.zfbname}
+            </td>
+            <td class='text-left nowrap'>
+                {if condition="$vo['status']==0"}
+                    <font color="green">提交申请</font>
+                {elseif condition="$vo['status']==1"/}
+                    <font color="red">申请通过</font>
+                {else/}
+                    <font color="blue">申请失败，退回余额</font>
+                {/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo.opt_time!=""}
+                {$vo.opt_time|default=""|date='Y-m-d H:i:s'}
+                {else/}
+                {/if}
+            </td>
+            <td class='text-left nowrap'>{$vo.opt_admin|default=''}</td>
+            <td class='text-left nowrap'>
+                {if condition="$vo.remark"}
+                <a class="layui-btn layui-btn-xs layui-btn-green" href="javascript:void(0)" class="show" onclick="$.msg.tips('{$vo.remark}')">查看</a>
+                {/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo.status==0}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-blue" data-title="通过" data-tips='正在操作，请稍候...' data-load='{:url("/plug/pay/tixian")}?id={$vo.id}'>同意</a>
+
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" data-title="不通过" data-tips='正在操作，请稍候...' data-load='{:url("$classuri/refuse")}?id={$vo.id}'>不同意</a>
+                {/if}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}

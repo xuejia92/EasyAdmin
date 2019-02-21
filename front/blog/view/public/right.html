@@ -1,0 +1,73 @@
+
+<aside class="sidebar right">
+
+    <article class="sidebar-widget" id="shangxi">
+        <h3><i class="fa fa-asterisk" aria-hidden="true"></i>赏析</h3>
+        <div class="shangxi">
+            <b>《咸阳城东楼·许浑》</b>
+            <p>一上高城万里愁，蒹葭杨柳似汀洲。</p>
+            <p>溪云初起日沉阁，山雨欲来风满楼。</p>
+            <p>鸟下绿芜秦苑夕，蝉鸣黄叶汉宫秋。</p>
+            <p>行人莫问当年事，故国东来渭水流。</p>
+        </div>
+    </article>
+
+    <article class="sidebar-widget wow fadeInDown" id="widget_img" style=" animation-name: none;">
+        <span class="icon"><i class="fa fa-reorder"></i></span>
+        <h3>热门文章</h3>
+        <ul class="widget_img">
+            {foreach name="maxview" item="v"}
+                <li><a href="/blog/article/blog?id={$v['id']}" title="{$v['title']}">
+                    <img src="{$v['thumb']}" alt="{$v['title']}" style="display: block;">
+                    <span>{$v['title']}</span>
+                </a>{:formatTime($v['pub_time'])}
+                </li>
+            {/foreach}
+        </ul>
+    </article>
+
+    <article class="sidebar-widget wow fadeInDown" id="divHottags" style=" animation-name: none;">
+        <span class="icon"><i class="fa fa-reorder"></i></span>
+        <h3>标签</h3>
+        <ul class="divHottags">
+            {foreach name="labellist" item="v"}
+                <li><a href="/blog" title="{$v['label_name']}">{$v['label_name']}</a></li>
+            {/foreach}
+        </ul>
+    </article>
+
+    <article class="sidebar-widget wow fadeInDown" id="divComments" style=" animation-name: none;">
+        <span class="icon"><i class="fa fa-reorder"></i></span>
+        <h3>最新留言</h3>
+        <div class="divComments">
+            {foreach name="newcommits" item="vb"}
+            <dl>
+                <dt class="comm-img">
+                    <img src="{$vb['user']['avator']|default=''}" alt="{$vb['user']['nickname']|default=''}">
+                </dt>
+                <dd class="comm-info">
+                    <a href="/blog" title="{$vb['user']['nickname']|default=''}在《{$vb['title']}》发表评论">
+                <p>{$vb['user']['nickname']|default=''}<span class="comm-time">{:formatTime($vb['addtime'])}</span>
+                </p>
+                        <p><i>{:mb_substr($vb['content'],0,18,'utf-8')}</i></p>
+                    </a>
+                </dd>
+            </dl>
+            {/foreach}
+        </div>
+    </article>
+
+    <article class="sidebar-widget wow fadeInDown" id="Readers-ul" style=" animation-name: none;">
+        <span class="icon"><i class="fa fa-reorder"></i></span>
+        <h3>读者墙</h3>
+        <ul class="Readers-ul">
+            {foreach name="readers" item="v"}
+                <li>
+                    <a title="{$v['nickname']}">
+                        <img src="{$v['avator']}" alt="{$v['nickname']}">{$v['nickname']}
+                    </a>
+                </li>
+            {/foreach}
+        </ul>
+    </article>
+</aside>

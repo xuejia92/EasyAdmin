@@ -1,0 +1,138 @@
+{include file='public/header'/}
+<link href="https://cdn.demo.fastadmin.net/assets/css/frontend.min.css?v=20181119" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="https://cdn.demo.fastadmin.net/assets/js/html5shiv.js"></script>
+<script src="https://cdn.demo.fastadmin.net/assets/js/respond.min.js"></script>
+<![endif]-->
+<link href="https://cdn.demo.fastadmin.net/assets/css/user.css?v=20181119" rel="stylesheet">
+{include file='public/nav'/}
+
+<main class="content">
+    <div id="content-container" class="container">
+        <div class="user-section login-section">
+            <div class="logon-tab clearfix"> <a href="/login.html">登 录</a> <a class="active">注 册</a> </div>
+            <div class="login-main">
+                <form name="form1" id="register-form" class="form-vertical" method="POST" onsubmit="return false;" action="/register/register">
+                    <input type="hidden" name="invite_user_id" value="0" />
+                    <input type="hidden" name="url" value="" />
+                    <input type="hidden" name="__token__" value="974bd15cab2a491ef39db25d902cb773" />
+                    <div class="form-group">
+                        <label class="control-label">账号</label>
+                        <div class="controls">
+                            <input type="text" id="account" name="account" data-rule="required;account" class="form-control input-lg" placeholder="用户名必须4-30个字符">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">密码</label>
+                        <div class="controls">
+                            <input type="password" id="password" name="password" data-rule="required;password" class="form-control input-lg" placeholder="密码必须6-30个字符">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">确认密码</label>
+                        <div class="controls">
+                            <input type="password" id="repassword" name="repassword" data-rule="required;repassword" class="form-control input-lg" placeholder="密码必须6-30个字符">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">昵称</label>-->
+                        <!--<div class="controls">-->
+                            <!--<input type="text" id="nickname" name="nickname" data-rule="nickname" class="form-control input-lg" placeholder="用户名必须3-30个字符">-->
+                            <!--<p class="help-block"></p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">手机号</label>-->
+                        <!--<div class="controls">-->
+                            <!--<input type="text" id="mobile" name="mobile" data-rule="mobile" class="form-control input-lg" placeholder="手机号">-->
+                            <!--<p class="help-block"></p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="control-label required">邮箱<span class="text-success"></span></label>
+                        <div class="controls">
+                            <input type="text" name="email" id="email" data-rule="required;email" class="form-control input-lg" placeholder="邮箱">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">验证码</label>
+                        <div class="controls">
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="captcha" class="form-control" placeholder="验证码" data-rule="required;length(4)" style="border-radius: 0;" />
+                                <span class="input-group-addon" style="padding:0;border:none;">
+                                <img src="/captcha.html" width="140" height="42" id="capture" onclick="this.src = '/captcha.html?r=' + Math.random();"/>
+                                </span>
+                            </div>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="register" class="btn btn-primary btn-lg btn-block">注 册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{include file='public/footer'/}
+<script>
+    $(function () {
+        $('#register').click(function () {
+            var account = $.trim($('input[name=account]').val());
+            var password = $.trim($('input[name=password]').val());
+            var repassword = $.trim($('input[name=repassword]').val());
+            var email = $.trim($('input[name=email]').val());
+            var captcha = $.trim($('input[name=captcha]').val());
+
+            if(account=='' || password=='' || repassword=='' || email=='' ){
+                layer.msg('请完善注册资料!');
+                return false;
+            }
+
+            if(captcha==''){
+                layer.msg('验证码不能为空!');
+                return false;
+            }
+
+            if(account.length<4){
+                layer.msg('账号长度不得小于4位！');
+                return false;
+            }
+
+            if(password!=repassword){
+                layer.msg('两次密码输入不一致！');
+                return false;
+            }
+
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+
+            if(!reg.test(email)){ //正则验证不通过，格式不对
+                layer.msg('邮件格式不正确!');
+                return false;
+            }
+
+            $.post('/home/register/register',{
+                account:account,
+                password:password,
+                repassword:repassword,
+                email:email,
+                captcha:captcha
+            },function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    $('#capture').click();
+                    $('input[name=captcha]').val('');
+                    return false;
+                }else{
+                    layer.msg(data.msg);
+                    window.location.href = '/home/login';
+                }
+            },'json');
+        });
+    });
+</script>

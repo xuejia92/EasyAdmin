@@ -1,0 +1,130 @@
+{extend name='admin@public/content'}
+
+{block name="content"}
+<form autocomplete="off" action="{:request()->url()}" onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="tpt_item">
+                <input type="hidden" name="title" value="{$strTitle}">
+                <div id="tpt_sel" class="tpt_sels" style="margin-top: 20px;">
+                    <span style="margin-bottom: 5px;float: left;">
+                    {foreach $list as $vp}
+                    <a href="javascript:;">{$vp.title}<em></em></a>
+                    {/foreach}
+                    </span>
+                    <div class="layui-form-item" style="margin-bottom: 20px;margin-left:-55px;">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-block">
+                            <input id="tpt_input" type="text" value="" autocomplete="off" class="layui-input" style="width: 400px;float: left;margin-right: 20px;">
+                            <button class="layui-btn" id="tpt_btn" type="button" style="background: #FF5722;">添加标签</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item text-left">
+                <button class="layui-btn" type='submit'>保存标签</button>
+            </div>
+
+        </div>
+    </div>
+    <!--{/empty}-->
+</form>
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        $('#tpt_input').keydown(function(e) {
+            if (e.which === 13) {
+                $("#tpt_btn").click();
+                e.preventDefault();
+                return false;
+            }
+        });
+        $("#tpt_sel").on('click', 'a>em', function() {
+            var name = "title";
+            var tag = $(this).parent().text();
+            $(this).parent().remove();
+            var tags = new Array();
+            $("#tpt_sel").find('a').each(function() {
+                tags.push($(this).text());
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_pre a:contains('" + tag + "')").removeClass("selected");
+        });
+        $("#tpt_btn").click(function() {
+            var name = "title";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($("#tpt_input").val());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+                $("#tpt_pre a:contains('" + tag + "')").addClass("selected");
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_input").val('');
+        });
+        $("#tpt_pre").on('click', 'a:not(.selected)', function() {
+            var name = "title";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($(this).text());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $(this).addClass('selected');
+        });
+    });
+</script>
+{/block}
+{block name="style"}
+<style>
+    .tpt_sels a {
+        padding: 0 20px 0 8px;
+        color: #3B6268;
+        background: #FFFFBA;
+        border: 1px #F8E06E solid;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        height: 26px;
+        line-height: 26px;
+        display: block;
+        float: left;
+        position: relative;
+    }
+    .tpt_sels a em {
+        width: 12px;
+        height: 12px;
+        font-style: normal;
+        display: block;
+        position: absolute;
+        top: 7px;
+        right: 4px;
+        z-index: 2;
+        background: url(/static/theme/img/sx.png) no-repeat 0 0;
+    }
+</style>
+{/block}
+
+

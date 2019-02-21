@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="container container-home">
+        <div class="content-wrap left">
+            <div class="slide-main">
+                <div class="swiper-container swiper-home swiper-container-horizontal">
+                    <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1650px, 0px, 0px);">
+                        {foreach name="focuspic" item="v"}
+                            <article class="swiper-slide slide-single swiper-slide-prev" data-swiper-slide-index="0" style=" width: 825px;">
+                                <div class="swiper-image">
+                                <a>
+                                    <img style="height:400px;" src="{$v['thumb']|default=''}">
+                                </a>
+                                </div>
+                                <div class="swiper-post">
+                                    <h3>
+                                        <a href="#"   title="{$v['title']}">{$v['title']}</a>
+                                    </h3><div class="clearfix"></div></div>
+                            </article>
+                        {/foreach}
+                    </div>
+                    <div class="swiper-pagination swiper-home-pagination swiper-pagination-clickable"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span></div>
+                    <div class="swiper-button swiper-home-button-next swiper-button-next"><i class="fa fa-chevron-right"></i></div>
+                    <div class="swiper-button swiper-home-button-prev swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
+                </div>
+            </div>

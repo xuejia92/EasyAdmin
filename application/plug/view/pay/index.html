@@ -1,0 +1,93 @@
+
+<form onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='form-horizontal  padding-top-20'>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label label-required">Mode<br><span class="nowrap color-desc">接口模式</span></label>
+        <div class="col-sm-8">
+            {foreach ['alipay'=>'支付宝支付','wepay'=>'微信支付'] as $k=>$v}
+            <label class="think-radio">
+                <!--{if 'alipay' eq $k}-->
+                <input checked="checked" type="radio" value="{$k}" name="pay_type">
+                <!--{else}-->
+                <input type="radio" value="{$k}" name="pay_type">
+                <!--{/if}-->
+                {$v}
+            </label>
+            {/foreach}
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div data-api-type="alipay" class="hide">
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">应用ID,您的APPID<br><span class="nowrap color-desc">app_id</span></label>
+            <div class="col-sm-8">
+                <input type="text" name="alipay_app_id" required="required" title="请输入接口app_id" placeholder="app_id" value="{:sysconf('alipay_app_id')}" class="layui-input">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">商户私钥<br><span class="nowrap color-desc">merchant_private_key</span></label>
+            <div class="col-sm-8">
+                <textarea  name="alipay_merchant_private_key" cols="30" rows="4" required="required" title="请输入商户私钥" placeholder="merchant_private_key" class="layui-textarea">{:sysconf('alipay_merchant_private_key')}
+                </textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">支付宝网关<br><span class="nowrap color-desc">gatewayUrl</span></label>
+            <div class="col-sm-8">
+                <input type="text" name="alipay_gatewayUrl" required="required" title="请输入支付宝网关" placeholder="gatewayUrl" value="{:sysconf('alipay_gatewayUrl')}" class="layui-input">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">异步通知地址<br><span class="nowrap color-desc">notify_url</span></label>
+            <div class="col-sm-8">
+                <input type="text" name="alipay_notify_url" required="required" title="请输入异步通知地址" placeholder="notify_url" value="{:sysconf('alipay_notify_url')}" class="layui-input">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">同步跳转地址<br><span class="nowrap color-desc">return_url</span></label>
+            <div class="col-sm-8">
+                <input type="text" name="alipay_return_url" required="required" title="请输入异步通知地址" placeholder="return_url" value="{:sysconf('alipay_return_url')}" class="layui-input">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">支付宝公钥<br><span class="nowrap color-desc">alipay_public_key</span></label>
+            <div class="col-sm-8">
+                <textarea name="alipay_public_key" required="required" cols="30" rows="4" class="layui-textarea">{:sysconf('alipay_public_key')}</textarea>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+
+    <div data-api-type="wepay" class="hide">
+        <div class="row form-group">
+            <label class="col-sm-2 control-label">AccessKeyId<br><span class="nowrap color-desc">AccessKeyId</span></label>
+            <div class="col-sm-8">
+                <input type="text" name="" required="required" title="" placeholder="" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-2">
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">保存配置</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    $(function () {
+        updateViwe();
+        $('[name="pay_type"]').on('click', updateViwe);
+
+        function updateViwe() {
+            var type = $('[name="pay_type"]:checked').val();
+            $('[data-api-type]').not($('[data-api-type="' + type + '"]').removeClass('hide')).addClass('hide');
+        }
+    });
+</script>
+

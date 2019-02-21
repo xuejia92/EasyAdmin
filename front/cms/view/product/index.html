@@ -1,0 +1,45 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+<link rel="stylesheet" href="__STATIC__/public/css/wangEditor.min.css">
+<style type="text/css">
+    body {background: #fff;}
+    .tpt-menu {background-image: linear-gradient(312deg, rgb(132, 236, 185) 0%, rgb(18, 185, 201) 100%);}
+    .tpt-menu .a {background-color: #2CA2EB;}
+</style>
+<div class="tpt-menu" style="height:344px;">
+    <div class="tpt-wp cl">
+        <h2>{$title}</h2>
+        <p>感谢您使用本套网站内容管理系统，致力于提供安全稳定高效简洁的企业版网站管理系统</p>
+    </div>
+</div>
+<div class="tpt-view">
+    <div class="tpt-wp cl">
+        <div class="tpt-msg">
+            <i class="layui-icon">&#xe715;</i>您现在的位置：
+            <a href="/cms/cms">网站首页</a>
+            <i class="layui-icon i">>></i>
+            <a href="#">{$title}</a>
+        </div>
+        <div class="tpt-art-1 cl">
+             <ul>
+                 {foreach $result as $vo}
+                 <li class="tpt-md-4">
+                     <div class="tpt-pro-0">
+                         <div class="tpt-pro-1">
+                             <a href="/cms/product/a?id={$vo.id}">
+                                 <img src="{$vo.thumb}" alt="{$vo.title}">
+                             </a>
+                         </div>
+                         <div class="tpt-pro-2">
+                             <h3><a href="/cms/product/a?id={$vo.id}">{$vo.title}</a></h3>
+                             <p>{$vo.description}</p>
+                             <h4>{$vo.price}<span>元</span></h4>
+                         </div>
+                     </div>
+                 </li>
+                 {/foreach}
+             </ul>
+        </div>
+    </div>
+</div>
+{include file='public/footer'/}

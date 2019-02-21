@@ -1,0 +1,46 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">等级名称</label>
+        <div class="layui-input-block">
+            <input name="name" value='{$vo.name|default=""}' required="required" pattern="^.{1,}$" title="请输入等级名称" placeholder="请输入1位及以上字符名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">头衔</label>
+        <div class="layui-input-block">
+            <input name="touxian" value='{$vo.touxian|default=""}' required="required" pattern="^.{1,}$" title="请输入头衔" placeholder="请输入1位及以上字符" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">成长积分</label>
+        <div class="layui-input-block">
+            <input type="text" autofocus name="jifen" value='{$vo.jifen|default=0}'  title="请输入成长积分" placeholder="请输入成长积分" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">晋级奖励(元)</label>
+        <div class="layui-input-block">
+            <input type="text" autofocus name="jiang" value='{$vo.jiang|default=0}'  title="请输入晋级奖励" placeholder="请输入晋级奖励" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">跳级奖励(元)</label>
+        <div class="layui-input-block">
+            <input type="text" autofocus name="tiaojiang" value='{$vo.tiaojiang|default=0}'  title="请输入跳级奖励" placeholder="请输入跳级奖励" class="layui-input">
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        {if isset($vo['id'])}<input type='hidden' value='{$vo.id}' name='id'>{/if}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+    <script>window.form.render();</script>
+</form>

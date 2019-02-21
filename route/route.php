@@ -25,11 +25,4 @@ foreach (scandir(env('app_path')) as $dir) {
 }
 
 
-//前台路由
-foreach (scandir(env('app_path').'/home/') as $dir) {
-    if ($dir[0] !== '.') {
-        $filename = realpath(env('app_path') . "home/{$dir}/init.php");
-        $filename && file_exists($filename) && include($filename);
-    }
-}
 return [];

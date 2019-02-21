@@ -58,13 +58,16 @@ $backColor=  $background_type=='normal'?sysconf('background_login_normal_color')
                 <div id="right-hander" class="initial_right_hand transition"></div>
             </div>
             <ul>
-                <li class="username">
+                <li class="username" style="margin-bottom: 15px;">
                     <i></i>
                     <input required pattern="^\S{4,}$" name="username" value="admin" type="text" autofocus="autofocus" autocomplete="off" title="请输入4位及以上的字符" placeholder="请输入用户名/手机号码">
                 </li>
-                <li class="password">
+                <li class="password" style="margin-bottom: 15px;">
                     <i></i>
                     <input required pattern="^\S{4,}$" name="password" value="admin" type="password" autocomplete="off" title="请输入4位及以上的字符" placeholder="请输入密码">
+                </li>
+                <li class="captcha">
+                    <div id="captcha"></div>
                 </li>
                 <li class="text-center">
                     <button type="submit" class="layui-btn layui-disabled" data-form-loaded="立 即 登 入">正 在 载 入</button>
@@ -100,5 +103,42 @@ $backColor=  $background_type=='normal'?sysconf('background_login_normal_color')
             $('#right-hander').addClass('initial_right_hand').removeClass('right_hand')
         });
     });
+</script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script>
+    var handler = function (captchaObj) {
+        // 将验证码加到id为captcha的元素里
+        captchaObj.appendTo("#captcha");
+    };
+    // 获取验证码
+    $.get("/admin.php/plug/geetest/geetest_show_verify.html", function(data) {
+        // 使用initGeetest接口
+        // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+        // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+        initGeetest({
+            gt: data.gt,
+            challenge: data.challenge,
+            product: "float", // 产品形式
+            offline: !data.success
+        }, handler);
+    },'json');
+    // 检测验证码
+    function check_verify(){
+        // 组合验证需要用的数据
+        var test=$('.geetest_challenge').val();
+        var postData={
+            geetest_challenge: $('.geetest_challenge').val(),
+            geetest_validate: $('.geetest_validate').val(),
+            geetest_seccode: $('.geetest_seccode').val()
+        }
+        // 验证是否通过
+        $.post("/admin.php/plug/geetest/geetest_ajax_check.html", postData, function(data) {
+            if (data==1) {
+                alert('验证成功');
+            }else{
+                alert('验证失败');
+            }
+        });
+    }
 </script>
 {/block}

@@ -1,0 +1,37 @@
+<div class="content-wrap left">
+    <div class="navcates">
+        <i class="fa fa-home"></i>当前位置：
+        <a href="/">夜神博客</a> »
+        <a href="#" title="查看 {$catename} 中的全部文章">{$catename}</a>
+    </div>
+    <div class="stylelist">
+        <h3 class="post_box_title"><span class="ttcolor"><i class="fa fa-twitch"></i>{$catename}</span></h3>
+
+        <article class="post wow fadeInDown" style="visibility: visible; animation-name: none;">
+            {foreach name="todayTop" item="v"}
+                <div class="post-thumb left">
+                    <a href="/blog/article/blog?id={$v['id']}">
+                        <img src="{$v['thumb']|default=''}">
+                    </a>
+                </div>
+                <header class="post-head">
+                    <h2><a href="/blog/article/blog?id={$v['id']}" title="{$v['title']}">{$v['title']}</a></h2>
+                </header>
+                <div class="excerpt">
+                    {:htmlspecialchars_decode($v['content'])}
+                </div>
+                <div class="info">
+                    <span class="category"><i class="fa fa-list-alt"></i><a href="/blog/category/index?id={$v['id']}">{$v['catename']}</a></span>
+                    <span class="date"><i class="fa fa-clock-o"></i>{$v['peraddtime']}</span>
+                    <span class="view"><i class="fa fa-eye"></i>{$v['view_count']}</span>
+                <span class="comment">
+                    <a href="/blog/article/blog?id={$v['id']}#comments">
+                        <i class="fa fa-comment"></i>{$v['comments']}
+                    </a>
+                </span>
+                    <a class="read-more right" href="/blog/article/blog?id={$v['id']}" title="{$v['title']}">阅读更多</a>
+                </div>
+            {/foreach}
+        </article>
+    </div>
+</div>

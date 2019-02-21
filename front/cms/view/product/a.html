@@ -1,0 +1,69 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+<link rel="stylesheet" href="__STATIC__/public/css/wangEditor.min.css">
+<style type="text/css">
+    .tpt-header {background-image: linear-gradient(312deg, rgb(58, 231, 243) 0%, rgb(30, 150, 229) 100%);}
+</style>
+<div class="tpt-wp cl">
+    <div class="tpt-msg tpt-msg-1">
+        <i class="layui-icon">&#xe715;</i>您现在的位置：
+        <a href="/home/cms">网站首页</a>
+        <i class="layui-icon i">&#xe65b;</i>
+        <a href="/home/news?id={$result.nid}">{$title}</a>
+        <i class="layui-icon i">&#xe65b;</i>
+        <a href="#">{$result.title}</a>
+    </div>
+
+    <div class="tpt-hot cl">
+        <ul>
+            <li class="tpt-ml-4">
+                <div class="tpt-hot-1">
+                    <img style="width:390px;" src="{$result.thumb}" alt="{$result.title}">
+                </div>
+            </li>
+            <li class="tpt-mr-6">
+                <div class="tpt-hot-2">
+                    <div class="tpt-hot-5">
+                        <h2>{$result.title}</h2>
+                        <?php $arr_tag = explode(',',$result['tags']);$arr_tag=implode(' / ',$arr_tag);?>
+                        <p>
+                        {$arr_tag}
+                        </p>
+                        <h3>¥ {$result.title}</h3>
+                    </div>
+                    <div class="tpt-hot-3">
+                        <ul>
+                            <li>
+                                <div>
+                                    <i>查看人数</i>
+                                    <br>
+                                    <span>{$result.count}</span>
+                                </div>
+                            </li>
+                            <li style="width:300px;">
+                                <div>
+                                    <i>发布时间</i>
+                                    <br>
+                                    <span>{$result.create_time}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="{$result.url}" target="_blank">购买链接</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tpt-tent">
+        <div class="wangEditor-container cl" style="border: 0px solid #e6e6e6;min-height: 200px;">
+            <div class="wangEditor-txt">
+                {:htmlspecialchars_decode($result.content)}
+            </div>
+        </div>
+    </div>
+</div>
+{include file='public/footer'/}

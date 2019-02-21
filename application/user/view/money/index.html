@@ -1,0 +1,94 @@
+{extend name='admin@public/content'}
+
+
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">用户id</label>
+        <div class="layui-input-inline">
+            <input name="id" value="{$Think.get.id|default=''}" placeholder="请输入用户id" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">时间</label>
+        <div class="layui-input-inline">
+            <input name="otime" id='range-date' value="{$Think.get.otime|default=''}" placeholder="请选择交易时间" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    {if isset($_GET['id']) ||isset($_GET['userid'])}
+    <ul class="layui-nav layui-bg-green">
+        <li class="layui-nav-item {if $classuri=='user/user'}layui-this{/if}">
+            <a data-load='{:url("user/user/user")}?id={$Think.get.id}'>用户信息</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/money'}layui-this{/if}">
+            <a data-load='{:url("user/money/index")}?id={$Think.get.id}'>盈亏</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/recharge'}layui-this{/if}">
+            <a data-load='{:url("user/recharge/index")}?id={$Think.get.id}'>充值</a>
+        </li>
+        <li class="layui-nav-item {if $classuri=='user/withdrawl'}layui-this{/if}">
+            <a data-load='{:url("user/withdrawl/index")}?id={$Think.get.id}'>提现</a>
+        </li>
+    </ul>
+    {/if}
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='text-left nowrap'>用户id</th>
+            <th class='text-left nowrap'>时间</th>
+            <th class='text-left nowrap'>摘要</th>
+            <th class='text-left nowrap'>收入/支出金额(元)</th>
+            <th class='text-left nowrap'>可用余额(元)</th>
+            <th class='text-left nowrap'>保险箱(元)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='text-left nowrap'>
+                {$vo.userid}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.otime|date="Y-m-d H:i:s"|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.remark|default=""|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.trade|default=""|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.yue|default=""|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.bxx|default=""|raw}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}

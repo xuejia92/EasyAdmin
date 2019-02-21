@@ -1,0 +1,20 @@
+<h1 class="post-title" style="text-align:center;padding: 36px 0 24px 0;">
+    <a href="#" rel="bookmark">相册</a>
+</h1>
+<div class="htmleaf-content" style="padding:2em 0;">
+    <div id="buttons"></div>
+    <!--图片画廊-->
+    <div id="gallery">
+        <foreach name="piclist" item="v">
+            <img class="djfd" src="{$v.imgurl}" data-tags="{$v.type}" alt="{$v.type}" />
+        </foreach>
+    </div>
+</div>
+<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/filter-tags.js" rel="stylesheet"></script>
+<script src="__PUBLIC__/js/jquery.lazyload.min.js" rel="stylesheet"></script>
+<script>
+    $(function(){
+        $('img').lazyload({effect: "fadeIn"});
+    });
+</script>

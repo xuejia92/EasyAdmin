@@ -10,8 +10,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">后台标识</label>
         <div class="layui-input-block">
-            <input name="name" value='{$vo.name|default=""}' required="required" pattern="^[a-z]{2,}$" title="请输入英文插件名" placeholder="请输入2位及以上字符" class="layui-input">
-            <p class="help-block">必填，插件标识，通控制器。</p>
+            <input name="name" value='{$vo.name|default=""}'  pattern="^[a-z]{2,}$" title="请输入英文插件名" placeholder="请输入2位及以上字符" class="layui-input">
+            <p class="help-block">非必填，插件标识，通控制器。</p>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         <label class="layui-form-label">前台标识</label>
         <div class="layui-input-block">
             <input name="name_home" value='{$vo.name_home|default=""}' pattern="^[a-z]{2,}$" title="请输入英文插件名" placeholder="请输入2位及以上字符" class="layui-input">
-            <p class="help-block">必填，插件标识，通控制器。</p>
+            <p class="help-block">非必填，插件标识，通控制器。</p>
         </div>
     </div>
 

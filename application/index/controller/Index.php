@@ -27,8 +27,8 @@ class Index extends Controller
 
     public function index()
     {
-        hook('testhook');
-//        $this->redirect('@admin/login');
+//        hook('testhook');
+        $this->redirect('@admin/login');
     }
 
 

@@ -1,0 +1,35 @@
+<form autocomplete="off" onsubmit="return false;" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+    <blockquote class="layui-elem-quote layui-text">
+        此页面只会出现一次，请牢记保存账号密码
+    </blockquote>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID</label>
+        <div class="layui-input-block">
+            <input readonly="readonly" name="id" value='{$vo.id|default=""}' required="required" class="layui-input layui-bg-gray">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户账号</label>
+        <div class="layui-input-block">
+            <input readonly="readonly"  name="account" value='{$vo.account|default=""}' required="required" title="请输入用户名称" placeholder="请输入用户名称" class="layui-input layui-bg-gray">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户密码</label>
+        <div class="layui-input-block">
+            <input readonly="readonly" name="password" value='{$vo.password|default=""}' required="required" pattern="^.{6,}$"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">提款密码</label>
+        <div class="layui-input-block">
+            <input readonly="readonly" type="tel" autofocus name="rpassword" value='{$vo.rpassword|default=""}' pattern="^\d{4}$" class="layui-input">
+        </div>
+    </div>
+
+    <script>window.form.render();</script>
+</form>

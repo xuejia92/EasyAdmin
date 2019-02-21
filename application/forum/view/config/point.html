@@ -1,0 +1,65 @@
+{extend name="admin@public/content"}
+
+{block name="content"}
+<form autocomplete="off" onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='form-horizontal layui-form padding-top-20'>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            邮箱验证<br><span class="nowrap color-desc">邮箱验证积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="forum_jifen_email" required="required" title="请输入邮箱验证所得积分" placeholder="请输入邮箱验证所得积分" value="{:sysconf('forum_jifen_email')?sysconf('forum_jifen_email'):0}" class="layui-input">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            注册<br><span class="nowrap color-desc">注册积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="forum_jifen_reg" required="required" title="请输入注册所得积分" placeholder="请输入注册所得积分" value="{:sysconf('forum_jifen_reg')?sysconf('forum_jifen_reg'):0}" class="layui-input">
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            登录<br><span class="nowrap color-desc">登录积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="forum_jifen_login" required="required" title="请输入登录所得积分" placeholder="请输入登录所得积分" value="{:sysconf('forum_jifen_login')?sysconf('forum_jifen_login'):0}" class="layui-input">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            发布帖子<br><span class="nowrap color-desc">发布帖子积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="forum_jifen_add" required="required" title="请输入发布帖子所得积分" placeholder="请输入发布帖子所得积分" value="{:sysconf('forum_jifen_add')?sysconf('forum_jifen_add'):0}" class="layui-input">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            回复帖子<br><span class="nowrap color-desc">回复帖子积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="forum_jifen_comment" required="required" title="请输入回复帖子所得积分" placeholder="请输入回复帖子所得积分" value="{:sysconf('forum_jifen_comment')?sysconf('forum_jifen_comment'):0}" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="col-sm-4 col-sm-offset-2">
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">保存配置</button>
+        </div>
+    </div>
+
+</form>
+
+{/block}

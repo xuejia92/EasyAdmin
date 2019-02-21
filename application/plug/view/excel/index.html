@@ -1,0 +1,30 @@
+<div>
+
+</div>
+<div class="code">
+    <pre class="layui-code" lay-title="php代码">
+$data=[
+        'head'=>Db::name('DusyUser')->getTableFields(),
+        'data'=>Db::name('DusyUser')->select(),
+        'width'=>['avator'=>40,'nickname'=>30]
+    ];
+$res = (new ExcelService())->outExcel('用户表数据',$data);
+    </pre>
+    <pre class="layui-code" lay-title="javascript代码">
+        <a class="layui-btn layui-btn-big layui-btn-black" id="export">导出用户表</a>
+        $('#export').click(function () {
+            $.post("{:url('plug/excel/index')}",{},function(data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                }
+            });
+        });
+    </pre>
+</div>
+
+
+<script>
+    layui.use('code', function () {
+        layui.code({encode: true});
+    });
+</script>

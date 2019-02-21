@@ -1,0 +1,76 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+{include file='public/user_left'/}
+
+<div class="col-md-9">
+    <div class="panel panel-default ">
+        <div class="panel-body">
+            <h2 class="page-header">
+                会员中心
+                <a href="/index/user/index" class="btn btn-success pull-right"><i class="fa fa-pencil"></i>
+                个人资料</a>
+            </h2>
+            <div class="row user-baseinfo">
+                <div class="col-md-3 col-sm-3 col-xs-2 text-center user-center">
+                    <a href="/index/user/index" title="点击编辑">
+                        <span class="avatar-img">
+                            {if session('account')['avator']!=''}
+                            <img src="{:session('account')['avator']}" alt="">
+                            {else/}
+                            <img src="__STATIC__/public/image/index/avatar.png" alt="">
+                            {/if}
+                        </span>
+                    </a>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-10">
+                    <!-- Content -->
+                    <div class="ui-content">
+                        <!-- Heading -->
+                        <h4><a href="/index/user/index">{$user['nickname']}</a></h4>
+                        <!-- Paragraph -->
+                        <p>
+                                EasyAdmin - 极速后台开发框架_通用后台解决方案！
+                        </p>
+                        <!-- Success -->
+                        <div class="basicinfo">
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2">等级</div>
+                                <div class="col-xs-8 col-md-4"><a href="javascript:;" class="viewlv">{$user['levelName']}</a>
+                                </div>
+                                <div class="col-xs-4 col-md-2">积分</div>
+                                <div class="col-xs-8 col-md-4"><a href="javascript:;" class="viewscore">{$user['point']}</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2">连续登录</div>
+                                <div class="col-xs-8 col-md-4">157 天</div>
+                                <div class="col-xs-4 col-md-2">最长连续登录</div>
+                                <div class="col-xs-8 col-md-4">157 天</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2">注册时间</div>
+                                <div class="col-xs-8 col-md-4">{:date('Y-m-d H:i:s',$user['register_time'])}</div>
+                                <div class="col-xs-4 col-md-2">注册ip</div>
+                                <div class="col-xs-8 col-md-4">{$user['register_ip']}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2">个人说明</div>
+                                <div class="col-xs-12 col-md-8">{$user['desc']}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--#####################################################################-->
+        </div>
+    </div>
+</main>
+
+{include file='public/footer'/}

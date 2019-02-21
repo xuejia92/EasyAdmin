@@ -25,10 +25,19 @@
     });
 </script>
 <div class="layui-tab layui-tab-card layui-box">
-    <ul class="layui-tab-title">
+    <ul class="layui-tab-title" id="he">
+        {$index=1}
         <!--{foreach $groups as $key=>$group}-->
         <li>{$group.node.title|default='<span class="color-desc">未配置名称</span>'|raw}（{$key}）</li>
+        {if $index%8==0}<br>{/if}
+        {$index++}
         <!--{/foreach}-->
+        <!--{$in=$index%8}-->
+        <script>
+            $(function () {
+                $('#he').css('height',40*{$in}+'px');
+            });
+        </script>
     </ul>
     <div class="layui-tab-content">
         {foreach $groups as $k=>$group}

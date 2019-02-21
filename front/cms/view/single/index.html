@@ -1,0 +1,31 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+<link rel="stylesheet" href="__STATIC__/public/css/wangEditor.min.css">
+<style type="text/css">
+    .tpt-menu {background-image: linear-gradient(312deg, rgb(255, 162, 84) 0%, rgb(255, 118, 140) 100%);}
+    .tpt-menu .a {background-color: #2CA2EB;}
+</style>
+<div class="tpt-menu" style="height:344px;">
+    <div class="tpt-wp cl">
+        <h2>{$result.title}</h2>
+        <p>{$result.description}</p>
+    </div>
+</div>
+<div class="tpt-view">
+    <div class="tpt-wp cl">
+        <div class="tpt-msg">
+            <i class="layui-icon">&#xe715;</i>您现在的位置：
+            <a href="/cms">网站首页</a>
+            <i class="layui-icon i">>></i>
+            <a href="#">{$result.title}</a>
+        </div>
+        <div class="tpt-view-1">
+            <div class="wangEditor-container cl" style="border: 0px solid #e6e6e6;min-height: 200px;">
+                <div class="wangEditor-txt">
+                    {:htmlspecialchars_decode($result.content)}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file='public/footer'/}

@@ -1,0 +1,417 @@
+{extend name='admin@public/content'}
+{block name="style"}
+{/block}
+
+{block name="button"}
+{if $type!=='single'}
+<!--{if auth("$classuri/add")}-->
+<button data-open='{:url("$classuri/add")}?nid={$Think.get.nid}&type={$Think.get.type}' data-title="添加" class='layui-btn layui-btn-sm layui-btn-primary'>添加</button>
+<!--{/if}-->
+
+{if $type!=='product'}
+<!--{if auth("$classuri/del")}-->
+<button data-update data-field='delete' data-action='{:url("$classuri/del")}' class='layui-btn layui-btn-sm layui-btn-primary'>删除</button>
+<!--{/if}-->
+{/if}
+{/if}
+{/block}
+
+{block name="content"}
+<div class="col-md-3 hidden-xs hidden-sm" style="padding-right:0;width: 16%;">
+    <div class="panel panel-default panel-intro">
+        <div class="panel-heading">
+            <div class="panel-lead">
+                <em>栏目列表</em>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div  class="jstree jstree-1 jstree-default jstree-checkbox-no-clicked jstree-checkbox-selection" role="tree" aria-multiselectable="true" tabindex="0"   aria-busy="false">
+                <ul>
+                    <!--{foreach $channel_list as $vo}-->
+                    <li {if condition="$vo.id eq $Think.get.nid"}style="background: #eee;"{/if}>
+                        <a data-open='{:url("$classuri/index")}?nid={$vo.id}&type={$vo.tflag}'> <span class="color-desc">{$vo.spl|raw}</span>{$vo.title} </a>
+                    </li>
+                    <!--{/foreach}-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{if $type!=='single'}
+<form autocomplete="off" style="margin-left: 17%;" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-inline">
+            <input name="title" value="{$Think.get.title|default=''}" placeholder="请输入标题" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">创建时间</label>
+        <div class="layui-input-inline">
+            <input name="create_time" id='range-date' value="{$Think.get.create_time|default=''}" placeholder="请选择创建时间" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+{/if}
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+{switch name='type'}
+{case value='article'}
+<form onsubmit="return false;" style="margin-left: 17%;"   data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='list-table-check-td think-checkbox'>
+                <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
+            </th>
+            <th class='text-left nowrap'>标题</th>
+            <th class='text-left nowrap'>发布时间</th>
+            <th class='text-left nowrap'>栏目</th>
+            <th class='text-left nowrap'>模型</th>
+            <th class='text-left nowrap'>作者</th>
+            <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'>是否推荐</th>
+            <th class='text-left nowrap'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'>
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.title}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.create_time|format_datetime|default="<span class='color-desc'></span>"|raw}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.channel_name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.tname}
+            </td>
+            <td class='text-left nowrap'>{$vo.author|default='匿名'}</td>
+            <td class='text-left nowrap'>
+                {if $vo.status eq 0}<span class="color-red">已禁用</span>{elseif $vo.status eq 1}<span class="color-green">使用中</span>{/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if $vo.is_recommend eq 0}<span class="color-red">不推荐</span>{elseif $vo.is_recommend eq 1}<span class="color-green">推荐</span>{/if}
+            </td>
+            <td class='text-left nowrap'>
+
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="编辑" data-open='{:url("$classuri/edit")}?id={$vo.id}&type=article'>编辑</a>
+                {/if}
+
+                {if $vo.status eq 1 and auth("$classuri/forbid")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-danger"  data-update="{$vo.id}" data-field='status' data-value='0' data-action='{:url("$classuri/forbid")}'>禁用</a>
+                {elseif auth("$classuri/resume")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-green"  data-update="{$vo.id}" data-field='status' data-value='1' data-action='{:url("$classuri/resume")}'>启用</a>
+                {/if}
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" style="background-color:black" data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'>删除</a>
+                {/if}
+
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/case}
+{case value='single'}
+<div id="NewsEditor">
+    <!--右侧编辑区 开始-->
+    <div class="panel panel-default news-right" style="margin-left: 17%;">
+        <div class="panel-heading">单页内容编辑</div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" style="float:left;" name="news" onsubmit="return false;">
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">文章标题</span>
+                            <input maxlength="64" value="{$single_data.title}" required title="文章的标题不能为空哦" placeholder="请在这里输入标题" name='titlepv' class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">副标题</span>
+                            <input maxlength="64" value="{$single_data.title_sub}" required title="文章的副标题不能为空哦" placeholder="请在这里输入副标题" name='title_sub' class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">文章作者</span>
+                            <input maxlength="8" value="{$single_data.author}"  placeholder="请输入作者" name='author' class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="form-control border-radius-none" style="height:auto">
+                            <label class="color-desc font-s12 margin-bottom-5">图文封面大图片设置</label>
+                            <div class="row nowrap">
+                                <div class="col-xs-3" style="width:160px">
+                                    <div class="upload-image-box transition">
+                                        <img data-tips-image style="height:auto;max-height:86px;min-width:86px"
+                                             src="{:isset($single_data.thumb)?$single_data.thumb:'__STATIC__/plugs/uploader/theme/image.png'}">
+                                        <input onchange="$(this).prev('img').attr('src', this.value)" value="{:isset($single_data.thumb)?$single_data.thumb:'__STATIC__/plugs/uploader/theme/image.png'}" value="__STATIC__/plugs/uploader/theme/image.png" type="hidden" name="thumb">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 padding-top-10">
+                                    <button type="button" data-title="上传封面" data-file="one" data-type="jpg,png,jpeg" data-field="thumb" class="layui-btn layui-btn-sm layui-btn-primary">上传图片</button>
+                                    <br>
+                                </div>
+                            </div>
+                            <p class="help-block margin-top-5 color-desc">封面大图片建议尺寸：900像素 * 500像素</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12"><textarea con="{$single_data.content}"  name='content'></textarea></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="color-desc">摘要选填，如果不填写会默认抓取正文前54个字</label>
+                        <textarea name="description" class="layui-textarea" style="height:80px;line-height:18px;resize:none">{$single_data.description}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="color-desc">原文链接<b>选填</b>，填写之后在图文左下方会出现此链接</label>
+                        <input value="{$single_data.url}" maxlength="200" name='url' class="layui-input">
+                    </div>
+                </div>
+                <input type="hidden" value="{$single_data.id}" name="single_id">
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-9">
+                            <button ng-click="submit()" type="button" class="layui-btn">保存单页</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--右侧编辑区 结束-->
+</div>
+{/case}
+{case value='product'}
+<div id="news_box" style="margin-left: 17%;">
+    {foreach $list as $vo}
+    <div class="news_item" style="float:left;">
+        <div class='news_tools hide'>
+            <a data-title="编辑" data-modal='{:url("$classuri/edit")}?id={$vo.id}&type=product'>编辑</a>
+            <a data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}?type=product'>删除</a>
+        </div>
+        <div data-tips-image='{$vo.thumb}' class='news_articel_item' style='background-image:url("{$vo.thumb}")'>
+            {if $vo.title}
+            <p>{$vo.title}
+            {if $vo.create_time}({$vo.create_time}){/if}
+            </p>
+            {/if}
+
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+    {/foreach}
+    {if empty($list)}
+    <p   class="help-block text-center well">没 有 记 录 哦！</p>
+    {/if}
+    <div style="clear:both;"></div>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+</div>
+{/case}
+{case value='custom'}
+{/case}
+{/switch}
+{/block}
+{block name="script"}
+<script>
+    $('body').on('mouseenter', '.news_item', function () {
+        $(this).find('.news_tools').removeClass('hide');
+    }).on('mouseleave', '.news_item', function () {
+        $(this).find('.news_tools').addClass('hide');
+    });
+
+    require(['angular', 'ckeditor'], function () {
+
+        var $form = $('form[name="news"]');
+        var editor = window.createEditor('[name="content"]');
+        editor.setData($('textarea[name="content"]').attr('con'));
+        var app = angular.module("NewsEditor", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            $rootScope.list = [];
+            $rootScope.item = {};
+
+            $rootScope.submit = function () {
+                $form.vali();
+                if ($form.find('.validate-error').size() > 0) {
+                    return $.msg.tips('表单验证不成功，请输入需要的内容！');
+                }
+                var content = editor.getData();
+                $.form.load('{:request()->url()}', {
+                    id: $('input[name=single_id]').val(),
+                    title: $('input[name="titlepv"]').val(),
+                    title_sub: $('input[name=title_sub]').val(),
+                    author: $('input[name=author]').val(),
+                    description: $('textarea[name=description]').val(),
+                    content: content,
+                    thumb: $('input[name=thumb]').val(),
+                    url: $('input[name=url]').val(),
+                }, "post");
+            };
+        }
+    });
+</script>
+{/block}
+{block name="style"}
+<style>
+    .news-right .layui-input {
+        border-radius: 0;
+        border: 1px solid #e5e6e7;
+    }
+
+    .news-right .layui-input:hover, .news-right .layui-input:focus {
+        border-color: #e5e6e7 !important;
+    }
+
+    .news-right .input-group-addon {
+        background: #fff;
+        border-radius: 0;
+        border-color: #e5e6e7;
+    }
+
+    .news-right .upload-image-box {
+        width: 130px;
+        height: 90px;
+        background-size: cover;
+        background-position: center center;
+        border: 1px solid rgba(125, 125, 125, 0.1);
+    }
+
+
+    #news_box {
+        position: relative;
+    }
+
+    #news_box .news_item {
+        top: 0;
+        left: 0;
+        padding: 5px;
+        margin: 10px;
+        width: 300px;
+        position: relative;
+        border: 1px solid #ccc;
+        box-sizing: content-box;
+    }
+
+    #news_box .news_item .news_articel_item {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        position: relative;
+        background-size: 100%;
+        background-position: center center;
+    }
+
+    #news_box .news_item .news_articel_item p {
+        bottom: 0;
+        width: 100%;
+        color: #fff;
+        padding: 5px;
+        max-height: 5em;
+        font-size: 12px;
+        overflow: hidden;
+        position: absolute;
+        text-overflow: ellipsis;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    #news_box .news_item .news_articel_item.other {
+        height: 50px;
+        padding: 5px 0;
+    }
+
+    #news_box .news_item .news_articel_item .left-image {
+        width: 50px;
+        height: 50px;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        background-size: 100%;
+        background-position: center center;
+    }
+
+    #news_box .news_item .news_articel_item .right-text {
+        float: left;
+        width: 250px;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #news_box .news_item .hr-line-dashed:last-child {
+        display: none
+    }
+
+    #news_box .hr-line-dashed {
+        margin: 6px 0 1px 0
+    }
+
+    #news_box .news_tools {
+        top: 0;
+        z-index: 80;
+        color: #fff;
+        width: 312px;
+        padding: 0 5px;
+        margin-left: -6px;
+        line-height: 38px;
+        text-align: right;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    #news_box .news_tools a {
+        color: #fff;
+        margin-left: 10px
+    }
+
+
+</style>
+{/block}
+
+

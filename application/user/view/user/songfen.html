@@ -1,0 +1,74 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">当前用户Id</label>
+        <div class="layui-input-block">
+            <input type="tel" readonly style="background: #eaeaea"  name="curid" value='{$vo.id}' class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">操作对象</label>
+        <div class="layui-input-block">
+            <label class="think-radio">
+                <input checked type="radio" name="type" value="1"  lay-ignore>余额
+            </label>
+            <label class="think-radio">
+                <input type="radio" name="type" value="2" lay-ignore>保险箱
+            </label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">送分用户Id/名称</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline" style='width:300px'>
+                <input type="text" name="user"   placeholder="用户Id/名称" class="layui-input">
+            </div>
+            <input type="hidden" name="id" value="id">
+            <button id="search" type='button' url="{:url('user/recharge/search')}" class='layui-btn layui-btn-primary'>搜索</button>
+            <script>
+                $(function () {
+                    $('#search').click(function () {
+                        if($('input[name=curid]').val()==$('input[name=user]').val()){
+                            $.msg.error('不可送给自己')
+                            return false;
+                        }
+                        $.post($(this).attr('url'),{
+                            'nameorid':$('input[name=user]').val()
+                        },function (res) {
+                             if(res.code==1){
+                                 $('input[name=res]').val(res.data.data)
+                                 $('input[name=id]').val(res.data.id)
+                             } else{
+                                 $('input[name=res]').val('')
+                                 $('input[name=id]').val('')
+                                 $.msg.error(res.msg)
+                             }
+                        },'json');
+                    })
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">余额</label>
+        <div class="layui-input-block">
+            <input type="tel" readonly style="background: #eaeaea" placeholder="搜索结果" name="res" value='' class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">送分金额(元)</label>
+        <div class="layui-input-block">
+            <input type="text" autofocus name="price" pattern="^[-]*[0-9]*$" title="请输入正确金额" value='10'  placeholder="请输入调整金额" class="layui-input">
+            <p class="help-block color-desc"><b>备注</b>，送分金额，不可为负数</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>确认送分</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消吗？" data-close>取消</button>
+    </div>
+    <script>window.form.render();</script>
+</form>

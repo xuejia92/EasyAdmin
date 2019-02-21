@@ -1,0 +1,89 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+<link rel="stylesheet" href="__STATIC__/public/css/wangEditor.min.css">
+<style type="text/css">
+    .tpt-menu {height: 320px;background-image: linear-gradient(312deg, rgb(188, 93, 221) 0%, rgb(128, 124, 234) 100%);}
+</style>
+<div id="menu" class="tpt-menu">
+    <div class="tpt-wp cl">
+        <h2>{$title}</h2>
+        <p>感谢您使用本套网站内容管理系统，致力于为您创建一个高效简洁但安全稳定的网站程序。</p>
+    </div>
+</div>
+<div class="tpt-message">
+    <div class="tpt-wp cl">
+        <div class="tpt-msg">
+            <i class="layui-icon">&#xe715;</i>您现在的位置：
+            <a href="">网站首页</a>
+            <i class="layui-icon i">&#xe65b;</i>
+            <a href="#">{$title}</a>
+        </div>
+        <div class="tpt-message-1 cl">
+            <form class="layui-form layui-form-pane" onsubmit="return false;">
+
+                <div class="tpt-message-2">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="phone" required lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱</label>
+                        <div class="layui-input-block" style="margin-right: 0px;">
+                            <input type="text" name="mail" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <button class="layui-btn" lay-submit lay-filter="message_add">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form', 'upload'], function () {
+        var form = layui.form,
+            upload = layui.upload,
+            jq = layui.jquery;
+
+        form.on('submit(message_add)', function (data) {
+            loading = layer.load(2, {
+                shade: [0.2, '#000']
+            });
+            var param = data.field;
+            jq.post('', param, function (data) {
+                if (data.code == 1) {
+                    layer.close(loading);
+                    layer.msg(data.msg, { icon: 1, time: 1000 }, function () {
+                        location.href = location.href;
+                    });
+                } else {
+                    layer.close(loading);
+                    layer.msg(data.msg, { icon: 2, anim: 6, time: 1000 });
+                }
+            });
+            return false;
+        });
+
+    })
+</script>
+{include file='public/footer'/}

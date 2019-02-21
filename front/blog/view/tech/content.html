@@ -1,0 +1,40 @@
+<div class="item-content">
+    <div class="index-wrapper">
+        <div class="item-title item-title2">
+            <h2>免费的在线教程&amp;技术文档</h2>
+        </div>
+        <div class="project-menu">
+            <ul id="menu">
+                {foreach name="tabList" item="v"}
+                    <li><a href="#{$v.title}" title="{$v.title}">{$v.title}</a></li>
+                {/foreach}
+            </ul>
+        </div>
+        <div class="project-body">
+            {foreach name="tabList" item="v"}
+                <div class="project-list" id="{$v.title}">
+                    <div class="project-item">
+                        <div class="project-box" style="min-height: auto;  height: auto;">
+                            <h4 class="block-title" >{$v.title}</h4>
+                            <ul class="menu">
+                                {if $v['subcategory']}
+                                {foreach name="v['subcategory']" item="vp"}
+                                    <li>
+                                        <a target="_blank" href="{$vp['url']}" title="{$vp.title}">
+                                            <i class="icon-img platform-html"></i>学习 {$vp.title}</a>
+                                    </li>
+                                {/foreach}
+                                {/if}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" rev="stylesheet" href="/static/public/blog/css/teach.css" type="text/css" media="all">
+<script>
+    $(function(){
+    });
+</script>

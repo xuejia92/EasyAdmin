@@ -68,12 +68,14 @@ class Plug extends BasicAdmin {
         foreach($menu as &$vo){
             if($vo['tag']==''){continue;}
             $filename = env('app_path').$vo['tag'].'/menu.php';
+            $tag = $vo['tag'];
             unset($vo['tag']);
             $data = '<?php return '.var_export($vo,true).';';
             if(file_exists($filename)){
                 unlink($filename);
             }
             file_put_contents($filename,$data);
+
         }
 
         try{
@@ -130,13 +132,22 @@ class Plug extends BasicAdmin {
                 $v['name_exist'] = 0;
                 $v['method_exist'] = 0;
             }
-            if(file_exists(env('app_path').$v['name'])){
+            if($v['name']!='' && file_exists(env('app_path').$v['name'])){
                 $v['model_exist']=1;
             }else{
-                $v['model_exist']=0;
+                if($v['name_home']!='' && file_exists(FRONT_PATH.$v['name_home'])){
+                    $v['model_exist']=1;
+                }else{
+                    $v['model_exist']=0;
+                }
             }
-
         }
+        $alert = [
+            'type' => 'danger',
+            'title' => '操作安全警告（非开发谨慎操作）',
+            'content' => '卸载插件会删除文件，需要文件目录的写入权限!插件状态为菜单是否可见.'
+        ];
+        $this->assign(['alert' => $alert]);
     }
 
 
@@ -323,16 +334,16 @@ class Plug extends BasicAdmin {
 
     public function upgradeModule(){
         $request = app('request');
-        $name = $request->get('name','');
-        $name = strtolower($name);
-        if(trim($name)==''){
+        $id = $request->get('id','');
+        $res = Db::name($this->table)->where('id',$id)->find();
+        $name = $res['name'];
+        $name_home =$res['name_home'];
+        if(trim($name)=='' && $name_home==''){
             $this->error('该插件标识错误');
         }
-        $plug = Db::name($this->table)->where(['name'=>$name])->find();
-        $name_home =$plug['name_home'];
+        Db::name($this->table)->where('id',$id)->update(['status'=>0]);
         $savefileControllerDir = env('app_path').$name;
-        $savefileContDir = env('app_path').'home/controller/'.$name_home;
-        $savefileViewDir = env('app_path').'home/view/'.$name_home;
+        $savefileContDir = FRONT_PATH.$name_home;
 
         $menu_file = $savefileControllerDir.'/menu.php';
         if(file_exists($menu_file)){
@@ -346,13 +357,23 @@ class Plug extends BasicAdmin {
             }
         }
 
-        rm_dirs($savefileControllerDir);
-        rm_dirs($savefileContDir);
-        rm_dirs($savefileViewDir);
+        $route_file = env('root_path').'/route/'.$name_home.'Route.php';
+        if($name_home!='' && file_exists($route_file)){
+            unlink($route_file);
+        }
+        if($name!=''){
+            rm_dirs($savefileControllerDir);
+        }
+        if($name_home!=''){
+            rm_dirs($savefileContDir);
+        }
 
         //安装
-        if(file_exists(env('app_path').$name) || trim($name)==''){
-            $this->error('该插件已经存在或标识错误');
+        if(trim($name)=='' && $name_home==''){
+            $this->error('该插件标识错误');
+        }
+        if($name!='' && file_exists(env('app_path').$name)){
+            $this->error('该插件已经存在');
         }
 
         $downloadFile = config('addons.remote_plug_url').$name.'.zip';
@@ -360,35 +381,38 @@ class Plug extends BasicAdmin {
         if(count($res)<2){
             $this->error('插件不存在,请确认插件标识');
         }
-        $plug = Db::name($this->table)->where(['name'=>$name])->find();
-        $name_home =$plug['name_home'];
         $file = $res['file'];
-        $savefileControllerDir = env('root_path').'static/';
+        $savefileControllerDir = env('root_path').'/';
         $savefileViewDir = env('root_path').'application/';
+        $savefileHomeDir = FRONT_PATH.$name_home;
 
         $zip_file = (new ZipService)->unzip($file,$savefileControllerDir);
         if($zip_file){
-            $r1=copydir($savefileControllerDir.$name.'/'.$name,$savefileViewDir.$name);
-
-            if(file_exists($savefileControllerDir.$name.'/home/controller/'.$name_home) &&
-                file_exists($savefileControllerDir.$name.'/home/view/'.$name_home)){
-                $r2=copydir($savefileControllerDir.$name.'/home/controller/'.$name_home,$savefileViewDir.'home/controller/'.$name_home);
-                $r3=copydir($savefileControllerDir.$name.'/home/view/'.$name_home,$savefileViewDir.'home/view/'.$name_home);
+            if($name!='' && file_exists($savefileControllerDir.$name)){
+                $r1=copydir($savefileControllerDir.$name.'/'.$name,$savefileViewDir.$name);
             }
+            $name = $name==''?$name_home:$name;
+            if($name_home!='' && file_exists($savefileControllerDir.$name.'/home/'.$name_home)){
+                $r2=copydir($savefileControllerDir.$name.'/home/'.$name_home,$savefileHomeDir);
+            }
+
             $sql = $savefileControllerDir.$name.'/'.$name.'/install.sql';
-            $_sql = file_get_contents($sql);
+            if(file_exists($sql)){
+                $_sql = file_get_contents($sql);
 
-            $_arr = explode(';', $_sql);
-            $_mysqli = new mysqli(config('database.hostname'),config('database.username'),
-                config('database.password'),config('database.database'));
-            if (mysqli_connect_errno()) {
-                exit('连接数据库出错');
+                $_arr = explode(';', $_sql);
+                $_mysqli = new mysqli(config('database.hostname'),config('database.username'),
+                    config('database.password'),config('database.database'));
+                if (mysqli_connect_errno()) {
+                    exit('连接数据库出错');
+                }
+                foreach ($_arr as $_value) {
+                    $_mysqli->query($_value.';');
+                }
+                $_mysqli->close();
+                $_mysqli = null;
             }
-            foreach ($_arr as $_value) {
-                $_mysqli->query($_value.';');
-            }
-            $_mysqli->close();
-            $_mysqli = null;
+
 
             $menu_file = $savefileControllerDir.$name.'/'.$name.'/menu.php';
             if(file_exists($menu_file)){
@@ -413,20 +437,23 @@ class Plug extends BasicAdmin {
                         Db::name('SystemMenu')->insert($vn);
                     }
                 }
-            }else{
-                $getData = Db::name($this->table)->where('name',$name)->find();
-                Db::name($this->table)->where('id',$getData['id'])->update(['version'=>$getData['version_remote']]);
-                rm_dirs($savefileControllerDir.$name);
-                $this->success('升级完成，缺失菜单文件需自己添加！','');
             }
-            $getData = Db::name($this->table)->where('name',$name)->find();
-            Db::name($this->table)->where('id',$getData['id'])->update(['version'=>$getData['version_remote']]);
+
+//            move router文件
+            $route_file = env('root_path').'/route/'.$name_home.'Route.php';
+            if(file_exists($savefileHomeDir.'/route.php')){
+                copy($savefileHomeDir.'/route.php',$route_file);
+            }
+
+            $name = $name==''?$name_home:$name;
             rm_dirs($savefileControllerDir.$name);
-            $this->success('升级成功！','');
+            $this->success('安装成功！','');
         }else{
+            $name = $name==''?$name_home:$name;
             rm_dirs($savefileControllerDir.$name);
             $this->error('插件解压缩文件失败！');
         }
+        $name = $name==''?$name_home:$name;
         rm_dirs($savefileControllerDir.$name);
         $this->error('插件解压缩文件失败！');
     }
@@ -444,13 +471,15 @@ class Plug extends BasicAdmin {
 
     public function installModule(){
         $request = app('request');
-        $name = $request->get('name','');
-        $name = strtolower($name);
+        $id = $request->get('id','');
+        $res = Db::name($this->table)->where('id',$id)->find();
+        $name = $res['name'];
+        $name_home =$res['name_home'];
 
-        if(trim($name)==''){
+        if(trim($name)=='' && $name_home==''){
             $this->error('该插件标识错误');
         }
-        if(file_exists(env('app_path').$name)){
+        if($name!='' && file_exists(env('app_path').$name)){
             $this->error('该插件已经存在');
         }
 
@@ -459,35 +488,38 @@ class Plug extends BasicAdmin {
         if(count($res)<2){
             $this->error('插件不存在,请确认插件标识');
         }
-        $plug = Db::name($this->table)->where(['name'=>$name])->find();
-        $name_home =$plug['name_home'];
         $file = $res['file'];
-        $savefileControllerDir = env('root_path').'static/';
+        $savefileControllerDir = env('root_path').'/';
         $savefileViewDir = env('root_path').'application/';
+        $savefileHomeDir = FRONT_PATH.$name_home;
 
         $zip_file = (new ZipService)->unzip($file,$savefileControllerDir);
         if($zip_file){
-            $r1=copydir($savefileControllerDir.$name.'/'.$name,$savefileViewDir.$name);
-
-            if(file_exists($savefileControllerDir.$name.'/home/controller/'.$name_home) &&
-                file_exists($savefileControllerDir.$name.'/home/view/'.$name_home)){
-                $r2=copydir($savefileControllerDir.$name.'/home/controller/'.$name_home,$savefileViewDir.'home/controller/'.$name_home);
-                $r3=copydir($savefileControllerDir.$name.'/home/view/'.$name_home,$savefileViewDir.'home/view/'.$name_home);
+            if($name!='' && file_exists($savefileControllerDir.$name)){
+                $r1=copydir($savefileControllerDir.$name.'/'.$name,$savefileViewDir.$name);
             }
+            $name = $name==''?$name_home:$name;
+            if($name_home!='' && file_exists($savefileControllerDir.$name.'/home/'.$name_home)){
+                $r2=copydir($savefileControllerDir.$name.'/home/'.$name_home,$savefileHomeDir);
+            }
+
             $sql = $savefileControllerDir.$name.'/'.$name.'/install.sql';
-            $_sql = file_get_contents($sql);
+            if(file_exists($sql)){
+                $_sql = file_get_contents($sql);
 
-            $_arr = explode(';', $_sql);
-            $_mysqli = new mysqli(config('database.hostname'),config('database.username'),
-                config('database.password'),config('database.database'));
-            if (mysqli_connect_errno()) {
-                exit('连接数据库出错');
+                $_arr = explode(';', $_sql);
+                $_mysqli = new mysqli(config('database.hostname'),config('database.username'),
+                    config('database.password'),config('database.database'));
+                if (mysqli_connect_errno()) {
+                    exit('连接数据库出错');
+                }
+                foreach ($_arr as $_value) {
+                    $_mysqli->query($_value.';');
+                }
+                $_mysqli->close();
+                $_mysqli = null;
             }
-            foreach ($_arr as $_value) {
-                $_mysqli->query($_value.';');
-            }
-            $_mysqli->close();
-            $_mysqli = null;
+
 
             $menu_file = $savefileControllerDir.$name.'/'.$name.'/menu.php';
             if(file_exists($menu_file)){
@@ -512,34 +544,39 @@ class Plug extends BasicAdmin {
                         Db::name('SystemMenu')->insert($vn);
                     }
                 }
-            }else{
-                $this->success('安装完成，缺失菜单文件需自己添加！','');
             }
 
+//            move router文件
+            $route_file = env('root_path').'/route/'.$name_home.'Route.php';
+            if(file_exists($savefileHomeDir.'/route.php')){
+                copy($savefileHomeDir.'/route.php',$route_file);
+            }
+
+            $name = $name==''?$name_home:$name;
             rm_dirs($savefileControllerDir.$name);
             $this->success('安装成功！','');
         }else{
+            $name = $name==''?$name_home:$name;
             rm_dirs($savefileControllerDir.$name);
             $this->error('插件解压缩文件失败！');
         }
+        $name = $name==''?$name_home:$name;
         rm_dirs($savefileControllerDir.$name);
         $this->error('插件解压缩文件失败！');
     }
 
     public function uninstallModule(){
         $request = app('request');
-        $name = $request->get('name','');
-        $name = strtolower($name);
-        if(trim($name)==''){
+        $id = $request->get('id','');
+        $res = Db::name($this->table)->where('id',$id)->find();
+        $name = $res['name'];
+        $name_home =$res['name_home'];
+        if(trim($name)=='' && $name_home==''){
             $this->error('该插件标识错误');
         }
-        $plug = Db::name($this->table)->where(['name'=>$name])->find();
-        $name_home =$plug['name_home'];
-        $id = Db::name($this->table)->where('name',$name)->value('id');
         Db::name($this->table)->where('id',$id)->update(['status'=>0]);
         $savefileControllerDir = env('app_path').$name;
-        $savefileContDir = env('app_path').'home/controller/'.$name_home;
-        $savefileViewDir = env('app_path').'home/view/'.$name_home;
+        $savefileContDir = FRONT_PATH.$name_home;
 
         $menu_file = $savefileControllerDir.'/menu.php';
         if(file_exists($menu_file)){
@@ -553,53 +590,64 @@ class Plug extends BasicAdmin {
             }
         }
 
-        rm_dirs($savefileControllerDir);
-        rm_dirs($savefileContDir);
-        rm_dirs($savefileViewDir);
+        $route_file = env('root_path').'/route/'.$name_home.'Route.php';
+        if($name_home!='' && file_exists($route_file)){
+            unlink($route_file);
+        }
+        if($name!=''){
+            rm_dirs($savefileControllerDir);
+        }
+        if($name_home!=''){
+            rm_dirs($savefileContDir);
+        }
         $this->success('卸载成功！,数据文件需自行删除！','');
     }
 
     public function packonModule(){
         $request = app('request');
-        $name = $request->get('name','');
-        $name = strtolower($name);
-        if(trim($name)==''){
+        $id = $request->get('id','');
+        $res = Db::name($this->table)->where('id',$id)->find();
+        $name = $res['name'];
+        $name_home =$res['name_home'];
+        if(trim($name)=='' && $name_home==''){
             echo "<script src=\"/static/plugs/layui/layui.all.js\"></script>
 <script>window.history.go(-1); layer.msg('该插件标识错误',{time:2*1000}) ;</script>";die;
             $this->error('该插件标识错误');
         }
-        $plug = Db::name($this->table)->where(['name'=>$name])->find();
-        $name_home =$plug['name_home'];
-        if(!file_exists(env('app_path').$name)){
+        if($name!='' && !file_exists(env('app_path').$name)){
             echo "<script src=\"/static/plugs/layui/layui.all.js\"></script>
 <script>window.history.go(-1); layer.msg('插件未开发',{time:2*1000}) ;</script>";die;
         }
-        if($name_home!='' && !file_exists(env('app_path').'home/controller/'.$name_home)){
+        if($name_home!='' && !file_exists(FRONT_PATH.$name_home)){
             echo "<script src=\"/static/plugs/layui/layui.all.js\"></script>
 <script>window.history.go(-1); layer.msg('前端插件未开发',{time:2*1000}) ;</script>";die;
         }
 
-        if(!file_exists(env('app_path').$name.'/install.sql')){
+        if($name!='' && !file_exists(env('app_path').$name.'/install.sql')){
             echo "<script src=\"/static/plugs/layui/layui.all.js\"></script>
 <script> layer.msg('缺少install.sql文件',{time:2*1000}) ;window.history.go(-1);</script>";die;
         }
 
         $adminControllerPath = env('app_path').$name;
-        $homeControllerPath = env('app_path').'home/';
-        $savefilePath = env('root_path').'static/'.$name;
+        $homeControllerPath = FRONT_PATH.$name_home;
+        if($name!=''){
+            $savefilePath = env('root_path').'static/'.$name;
+        }else{
+            $savefilePath = env('root_path').'static/'.$name_home;
+        }
 
 
         mk_dirs($savefilePath.'/'.$name);
-        mk_dirs($savefilePath.'/home/controller');
-        mk_dirs($savefilePath.'/home/view');
+        mk_dirs($savefilePath.'/home');
 
-        copydir($adminControllerPath,$savefilePath.'/'.$name);
-        if(file_exists($homeControllerPath.'controller/'.$name_home) &&
-            file_exists($homeControllerPath.'view/'.$name_home)){
-            copydir($homeControllerPath.'controller/'.$name_home,$savefilePath.'/home/controller/'.$name_home);
-            copydir($homeControllerPath.'view/'.$name_home,$savefilePath.'/home/view/'.$name_home);
+        if($name!='' && file_exists($adminControllerPath)){
+            copydir($adminControllerPath,$savefilePath.'/'.$name);
+        }
+        if($name_home!='' && file_exists($homeControllerPath)){
+            copydir($homeControllerPath,$savefilePath.'/home/'.$name_home);
         }
 
+        $name = $name==''?$name_home:$name;
         $zip_file = (new ZipService)->zip(env('root_path').'static/'.$name.'.zip',$savefilePath);
         if($zip_file){
             rm_dirs($savefilePath);

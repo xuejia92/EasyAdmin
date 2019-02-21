@@ -1,0 +1,259 @@
+<div class="content-wrap left">
+    <div class="navcates">
+     <i class="fa fa-home"></i>当前位置：
+        <a href="/">夜神博客</a> »
+        <a href="#" title="查看 互联网 中的全部文章">{$article.categroyname}</a> »
+        <a href="#" rel="bookmark" target="_blank">{$article.title}</a>
+    </div>
+
+    <div class="content single-content">
+        <header class="post-head">
+            <h2>{$article.title}</h2>
+            <div class="info left">
+                <span class="category"><i class="fa fa-list-alt"></i><a href="#">{$article.categroyname}</a></span>
+                <span class="date"><i class="fa fa-clock-o"></i>{:date('Y-m-d',$article['pub_time'])}</span>
+                <span class="view"><i class="fa fa-eye"></i>浏览({$article.view_count})</span>
+                <span class="comment"><i class="fa fa-comment"></i>
+                    <a href="#comments">评论({$countcomment})</a>
+                </span>
+            </div> 
+        </header>
+        <div class="entry">
+            <p style="text-indent: 2em;" id="content">
+                {:htmlspecialchars_decode($article['content'])}
+            </p>
+        </div>
+        <if condition="isset($taglist)">
+            <div class="tags">
+                标签：
+                {foreach name="taglist" item="v"}
+                <a href="javascript:void(0)" class="keytags">{$v.label_name}</a>
+                {/foreach}
+            </div>
+        </if>
+
+        <div id="zan-block" class="animated3 bounceInUp" style="margin: 30px 0;height: 30px;text-align: center;">
+            <span class="zan-dynamic" id="zan48">
+                <i class="fa fa-thumbs-o-up fa-lg" style="padding-left: 5px;"></i>
+                <span class="zan-txt">点赞</span>
+                <span class="zan-num">{$zannum}</span>
+            </span>
+        </div>
+
+        <div id="authorarea">
+            <div class="authorinfo">
+                <div class="author-avater">
+                    <span style="text-align: right;margin:0 auto;">
+                        文章来源:
+                        {if $article['laiyuan']!=''}
+                            转载 &nbsp;作者:{$article.ori_author} 网址:{$article.laiyuan}
+                             <else/>
+                            原创 &nbsp;作者:{$article.ori_author}
+                         {/if}
+                     </span>
+                </div>
+            </div>
+            <div class="bshare-custom icon-medium"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到i贴吧" class="bshare-itieba"></a><a title="分享到有道笔记" class="bshare-youdaonote"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+
+        </div>
+        <div class="pre-next"><!-- 上下篇 -->
+            <div class="left">
+                <if condition="$article_front">
+                    <a href="/blog/article/blog?id={$article_front['id']}" rel="prev">上一篇：{$article_front.title}</a>
+                <else/>
+                    上一篇：没有更多文章了
+                </if>
+            </div>
+            <div class="right">
+                <if condition="$article_after">
+                    <a href="/blog/article/blog?id={$article_after['id']}" rel="prev">下一篇：{$article_after.title}</a>
+                <else/>
+                    下一篇：没有更多文章了
+                </if>
+            </div>
+        </div>
+        <!--<article class="same_cat_posts">&lt;!&ndash; 相关文章 &ndash;&gt;-->
+            <!--<h3><a href="https://www.talklee.com/" title="李洋个人博客">夜神博客</a>推荐相关阅读：</h3>-->
+            <!--<ul>-->
+                <!--<li>-->
+                    <!--<a title="div布局和table布局对SEO的影响" target="_blank" href="https://www.talklee.com/blog/265.html"><img alt="div布局和table布局对SEO的影响" src="https://www.talklee.com/zb_users/upload/2017/08/201708211503295410766163.png"></a>-->
+                    <!--<a title="div布局和table布局对SEO的影响" target="_blank" href="https://www.talklee.com/blog/265.html">div布局和table布局对SEO的影响</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<div class="clearfix"></div>-->
+        <!--</article>-->
+        <section id="comments" class="">
+            <!--评论输出-->
+            <div class="comment-tab"><span class="come-comt"><i class="fa fa-comments"></i> 评论列表 <span id="comment_count">({$countcomment})条评论</span> </span> </div>
+            <label id="AjaxCommentBegin"></label>
+
+            {foreach name="comment" item="item" key="k"}
+                <div class="msg noimg wow fadeInDown">
+                    <div class="msgimg">
+                        <img class="avatar" src="{$item['user']['avator']}" alt="{$item['user']['nickname']}" title="{$item['user']['nickname']}"/>
+                    </div>
+                    <div class="msgtxt">
+                        <div class="msgname">
+                            <if condition="$k==0">
+                                <span class="dot shafa">沙发</span>
+                            <elseif condition="$k==1"/>
+                                <span class="dot bandeng">板凳</span>
+                            <elseif condition="$k==2"/>
+                                <span class="dot diban">地板</span>
+                            <else/>
+                                <span class="dot">{$k}#</span>
+                            </if>
+                            <a href="#comments" rel="nofollow">{$item['user']['nickname']}</a>
+                            <span>{:date('Y-m-d H:i:s',$item['addtime'])} <a href="javascript:rertComment('{$item.id}');">回复</a></span>
+                        </div>
+                        <div class="msgarticle">
+                            {$item.content}
+                        </div>
+                    </div>
+
+                    <if condition="!empty($item['secondcom'])">
+                        {foreach name="item['secondcom']" item="item1" key="k1"}
+                            <div class="msg noimg wow fadeInDown" style="margin-left: 8%">
+                                <div class="msgimg">
+                                    <img class="avatar" src="{$item1['user']['avator']}" alt="{$item1['user']['nickname']}" title="{$item1['user']['nickname']}"/>
+                                </div>
+                                <div class="msgtxt">
+                                    <div class="msgname">
+                                        <a href="#comments" rel="nofollow" >{$item1['user']['nickname']}</a>
+                                        <span>{:date('Y-m-d H:i:s',$item['addtime'])}</span>
+                                    </div>
+                                    <div class="msgarticle">
+                                        {$item1.content}
+                                    </div>
+                                </div>
+                            </div>
+                        {/foreach}
+                    </if>
+                </div>
+            {/foreach}
+            <!--评论翻页条输出-->
+            <label id="AjaxCommentEnd"></label>
+            <!--评论翻页条输出结束-->
+            <!--评论框-->
+            <div class="commentpost wow fadeInDown" id="comment">
+                <h4><i class="fa fa-pencil"></i>发表评论<span><a rel="nofollow" id="cancel-reply" href="#comment" style="display:none;"><small>取消回复</small></a></span></h4>
+                <form id="frmSumbit"  method="post" action="/blog/article/addCommit" >
+                    <input type="hidden" name="articleid"   value="{$article.id}" />
+                    <!--<div class="comt-box">-->
+                        <!--<div class="form-group liuyan form-name" style="width:16%;">-->
+                            <!--当前已经登录：-->
+                        <!--</div>-->
+                        <!--<div class="form-group liuyan form-name">-->
+                            <!--<span >-->
+                                <!--<img  src="/static/public/blog/image/baidu.jpg">-->
+                            <!--</span> -->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="comt-box">-->
+                        <!--<div class="form-group liuyan form-name" style="width:16%;">-->
+                            <!--选择社会化登录：-->
+                        <!--</div>-->
+                        <!--<div class="form-group liuyan form-name">-->
+                            <!--<span >-->
+                                <!--<img  src="/static/public/blog/image/baidu.jpg">-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--verify-->
+                    <div id="comment-tools">
+                        <a href="javascript:addNumber('文章不错,写的很好！')">好</a>
+                        <a href="javascript:addNumber('我顶！！顶顶顶')">顶</a>
+                        <a href="javascript:addNumber('我踩！我踩踩踩')">踩</a>
+                        <!--<a href="javascript:;" class="face-show"><i class="fa fa-smile-o"></i></a>
+                        <div id="ComtoolsFrame" class="ComtoolsFrame" style="display: none;"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/angry.png" alt="angry" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/awkward.png" alt="awkward" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/boom.png" alt="boom" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/bye.png" alt="bye" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/chagrin.png" alt="chagrin" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/confuse.png" alt="confuse" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/cry.png" alt="cry" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/dog.png" alt="dog" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/effort.png" alt="effort" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/exclaim.png" alt="exclaim" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/grimace.png" alt="grimace" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/grin.png" alt="grin" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/kiss.png" alt="kiss" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/laugh.png" alt="laugh" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/left.png" alt="left" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/love.png" alt="love" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/mad.png" alt="mad" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/neutral.png" alt="neutral" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/nose.png" alt="nose" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/right.png" alt="right" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/roll.png" alt="roll" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/shutup.png" alt="shutup" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/surprise.png" alt="surprise" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/torment.png" alt="torment" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/twisted.png" alt="twisted" onclick="InsertText(objActive,'['+this.alt+']',false);"><img src="https://www.talklee.com/zb_users/theme/brieflee/include/emotion/waii.png" alt="waii" onclick="InsertText(objActive,'['+this.alt+']',false);"></div>-->
+                    </div>
+                    <textarea placeholder="请爱护环境，勿发小广告！O(∩_∩)O~~" name="txaArticle" id="txaArticle" class="text input-block-level comt-area" cols="50" rows="4" tabindex="5" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"><?php echo cookie('articlecommit');?></textarea>
+                    <p>
+                        <input name="sumbit" id="sc" type="submit" tabindex="6" value="提交"  class="button" />
+                    </p>
+                </form>
+            </div><!--评论框结束-->
+            <span class="icon icon_comment" title="comment"></span>
+        </section>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(':submit[id=sc]').click(function(e){
+            var textr=$('#txaArticle').val();
+            if(""==="{$isLogin}"){
+                layer.msg("请先登录在发表评论", {time:2000,icon: 2});
+                e.preventDefault();
+                return false;
+            }else{
+                if($.trim(textr)==''){
+                    layer.msg("请先输入评论内容", {time:2000,icon: 2});
+                }else{
+                    $.post("/blog/article/addCommit",{
+                        'content':textr,
+                        articleid:$('input[name=articleid]').val(),
+                        parentid:0
+                    },function(data){
+                        if(data.state==1){
+                            layer.msg(data.msg, {time:2000,icon: 1},function(){
+                                window.history.go(0);
+                                $('#txaArticle').val('')
+                            });
+                        }else{
+                            layer.msg(data.msg, {time:2000,icon: 2});
+                        }
+                    },'json');
+                }
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        $('.zan-dynamic').click(function(){
+            $.post("/blog/article/addZan",{
+                articleid:$('input[name=articleid]').val(),
+            },function(data){
+                if(data.state==1){
+                    layer.msg(data.msg, {time:1000,icon: 1},function(){
+                         $('.zan-num').text("{$zannum+1}");
+                    });
+                }else{
+                    layer.msg(data.msg, {time:2000,icon: 2});
+                }
+            },'json');
+        });
+    });
+    function rertComment(mid){
+        if(""==="{$isLogin}"){
+            layer.msg("请先登录在发表评论", {time:2000,icon: 2});
+            return false;
+        }else{
+            layer.prompt({
+                formType: 2,
+                value: '',
+                title: '请输入回复评论',
+                area: ['400px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                $.post("/blog/article/addCommit",{
+                    'content':value,
+                    articleid:$('input[name=articleid]').val(),
+                    parentid:mid
+                },function(data){
+                    if(data.state==1){
+                        layer.msg(data.msg, {time:2000,icon: 1},function(){
+                            window.history.go(0);
+                            $('#txaArticle').val('')
+                        });
+
+                        layer.close(index);
+                    }else{
+                        layer.close(index);
+                        layer.msg(data.msg, {time:2000,icon: 2});
+                    }
+                },'json');
+            });
+        }
+    }
+</script>
+
+

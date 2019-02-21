@@ -1,0 +1,21 @@
+<div class="tpt-con7">
+    <div class="tpt-wp cl">
+        <div class="tpt-sub">
+            <h2>合作伙伴</h2>
+            <p>我们以网站建设与运营、中小企业网站推广、为主要经营项目的设计公司。 我们的优势客服由有运营经验和技术背景的人员担当，只有对你需求迅速的反馈和多年经验的建议 网站报价是对你需求真实的回应。</p>
+        </div>
+        <div class="tpt-con7-1 cl">
+            <ul>
+                {foreach $link as $vp}
+                <li class="tpt-md-5">
+                    <div class="tpt-con7-2">
+                        <a href="{$vp.url}">
+                            <img style="height:100px;" src="{$vp.thumb}">
+                        </a>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+</div>

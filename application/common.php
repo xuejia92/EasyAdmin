@@ -18,7 +18,6 @@ use think\Container;
 use think\Db;
 use think\facade\Hook;
 use think\facade\Request;
-
 /**
  * 打印输出数据到文件
  * @param mixed $data 输出的数据
@@ -290,5 +289,136 @@ function list_sort_by($list, $field, $sortby = 'asc')
         return $resultSet;
     }
     return false;
+}
+
+/**
+ * array_column 函数兼容
+ */
+if (!function_exists("array_column")) {
+    function array_column(array &$rows, $column_key, $index_key = null)
+    {
+        $data = [];
+        foreach ($rows as $row) {
+            if (empty($index_key)) {
+                $data[] = $row[$column_key];
+            } else {
+                $data[$row[$index_key]] = $row[$column_key];
+            }
+        }
+        return $data;
+    }
+}
+
+/**
+ * 手机号中间4位用****替换
+ * @param string $mobile 原手机号
+ * @return string
+ */
+function mobileTotel($mobile)
+{
+    $new_tel = preg_replace('/(\d{3})\d{4}(\d{4})/', '$1****$2', $mobile);
+    return isset($new_tel) ? $new_tel : '';
+}
+
+/**
+ * 大于1000转k,大于10000转w
+ * @param $num
+ * @return string
+ */
+function num2String($num)
+{
+    if ($num < 1000) {
+        return $num;
+    } else if ($num >= 1000 && $num < 10000) {
+        return round($num / 1000, 1) . 'k';
+    } else if ($num >= 10000) {
+        return round($num / 10000, 2) . 'w';
+    }
+}
+
+/**
+ * 系统非常规MD5加密方法
+ * @param  string $str 要加密的字符串
+ * @param  string $auth_key 要加密的字符串
+ * @return string
+ */
+function user_md5($str, $auth_key = '')
+{
+    if (!$auth_key) {
+        $auth_key = config('api.AUTH_KEY');
+    }
+    return '' === $str ? '' : md5(sha1($str) . $auth_key);
+}
+
+/**
+ * 判断当前是否https
+ * @return bool
+ */
+function is_https()
+{
+    if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+        return true;
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+        return true;
+    } elseif (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 文字超出长度部分转...
+ * @param $str
+ * @param $len
+ * @param string $suffix
+ * @return string
+ */
+function cut_str($str, $len = 8, $suffix = "...")
+{
+    if (function_exists('mb_substr')) {
+        if (mb_strlen($str) > $len) {
+            $str = mb_substr($str, 0, $len) . $suffix;
+        }
+    } else {
+        if (strlen($str) > $len) {
+            $str = substr($str, 0, $len) . $suffix;
+        }
+    }
+    return $str;
+}
+
+/**
+ * 判断是否为合法的身份证号码
+ * @param $vStr
+ * @return bool
+ */
+function isCreditNo($vStr)
+{
+    $vCity = array(
+        '11', '12', '13', '14', '15', '21', '22',
+        '23', '31', '32', '33', '34', '35', '36',
+        '37', '41', '42', '43', '44', '45', '46',
+        '50', '51', '52', '53', '54', '61', '62',
+        '63', '64', '65', '71', '81', '82', '91'
+    );
+    if (!preg_match('/^([\d]{17}[xX\d]|[\d]{15})$/', $vStr)) return false;
+    if (!in_array(substr($vStr, 0, 2), $vCity)) return false;
+    $vStr = preg_replace('/[xX]$/i', 'a', $vStr);
+    $vLength = strlen($vStr);
+    if ($vLength == 18) {
+        $vBirthday = substr($vStr, 6, 4) . '-' . substr($vStr, 10, 2) . '-' . substr($vStr, 12, 2);
+    } else {
+        $vBirthday = '19' . substr($vStr, 6, 2) . '-' . substr($vStr, 8, 2) . '-' . substr($vStr, 10, 2);
+    }
+    if (date('Y-m-d', strtotime($vBirthday)) != $vBirthday) return false;
+    if ($vLength == 18) {
+        $vSum = 0;
+        for ($i = 17; $i >= 0; $i--) {
+            $vSubStr = substr($vStr, 17 - $i, 1);
+            $vSum += (pow(2, $i) % 11) * (($vSubStr == 'a') ? 10 : intval($vSubStr, 11));
+        }
+        if ($vSum % 11 != 1) return false;
+    }
+    return true;
 }
 

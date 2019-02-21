@@ -15,6 +15,7 @@
 namespace app\admin\controller;
 
 use controller\BasicAdmin;
+use service\GeetestService;
 use service\LogService;
 use service\NodeService;
 use think\Db;
@@ -69,6 +70,9 @@ class Login extends BasicAdmin
             'username' => $this->request->post('username', ''),
             'password' => $this->request->post('password', ''),
         ];
+        if (!GeetestService::geetest_chcek_verify($this->request->post(''))) {
+            $this->error('验证失败');
+        }
         $validate->check($data) || $this->error($validate->getError());
         // 用户信息验证
         $user = Db::name('SystemUser')->where(['username' => $data['username'], 'is_deleted' => '0'])->find();

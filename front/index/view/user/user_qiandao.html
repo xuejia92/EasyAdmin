@@ -1,0 +1,103 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+{include file='public/user_left'/}
+
+<div class="col-md-9">
+	<link href="/static/public/css/qiandao_style.css" rel="stylesheet" type="text/css" />
+	<?php
+		$first = strtotime(date("Y-m-01 00:00:00"));
+			$first = date("w", $first);
+			$maxDay = date('t', strtotime("" . date("Y") . "-" . date("m") . ""));
+			for ($j = 0; $j < $first; $j++) {
+				$blankArr[] = $j;
+			}
+			for ($i = 0; $i < $maxDay; $i++) {
+				$z = $first + $i;
+				$days[] = array("key" => $i, "key2" => $z % 7);
+		}
+		$total = $first + count($days);
+		$other=[];
+		for ($x = 0; $x < ceil($maxDay / 7) * 7 - $total; $x++) {
+		$other[] = $x;
+		}
+	?>
+	<div class="container clearfix" style="clear: both;margin-left: -169px;margin-top: 0px;">
+		<div class="member_main">
+			<div class="tishi">
+				<p class="tishi_text">
+					<span class="tishi_span">签到奖励提示</span>
+				</p>
+				<p class="tishi_text">
+					<span class="tishi_span">      1：</span>
+					每天签到，获得 <b>{:sysconf('user_leesign_point')}</b> 积分奖励
+				</p>
+				<p class="tishi_text">
+					<span class="tishi_span">      2：</span>
+					一个月内签到满 <b>20</b> 次，获得签到奖励 <b>{:sysconf('user_leesign_point_20')}</b> 积分（签到满足条件自动获得）
+				</p>
+			</div>
+			<table  class='table_sign'>
+				<thead>
+				<tr>
+					<th>周日</th>
+					<th>周一</th>
+					<th>周二</th>
+					<th>周三</th>
+					<th>周四</th>
+					<th>周五</th>
+					<th>周六</th>
+				</tr>
+				</thead>
+				<tbody id="signrili">
+				{notempty name='blankArr'}
+					<tr>
+						{foreach $blankArr as $row}
+							<td>-</td>
+							{if condition="$row%7  eq $first"}</tr>{/if}
+					{/foreach}
+				{/notempty}
+				{foreach $days as $row}
+					{if condition="$row['key2']  eq 0"}<tr>{/if}
+					<?php $endRes =\service\QiandaoService::getSign($row['key']); ?>
+					{:htmlspecialchars_decode($endRes)}
+					{if condition="$row['key2']  eq 7"}</tr>{/if}
+				{/foreach}
+				{foreach $other as $row}
+					<td>-</td>
+				{/foreach}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script src="/static/public/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+        function signDay(obj) {
+            $.post("/Index/User/signDay", {}, function(data) {
+                if(data == -1){
+                    layer.msg("请登录！");return false;
+                }
+                var num = obj.find("span").text();
+                var td = "<td  style='background-color:navajowhite;navajowhite ;'>\n\
+  <div align='right' valign='top'><span style='position:relative;right:20px;'>" + num + "</span></div>\n\
+  <div align='left'><img width='35px' height='35px' src='/static/public/image/cart_3.gif' alt='已签到' style='position:relative;left:10px;'>\n\
+    已签到</div></td>";
+                obj.before(td);
+                obj.remove();
+                if (data ==1) {
+                    layer.msg("签到成功");
+                } else if(data==0) {
+                    layer.msg("今天您已签到！");
+                }else{
+                    layer.msg('签到失败！');
+				}
+            })
+        }
+	</script>
+</div>
+
+<!--#####################################################################-->
+</div>
+</div>
+</main>
+
+{include file='public/footer'/}

@@ -1,0 +1,81 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+{include file='public/user_left'/}
+
+<div class="col-md-9">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2 class="page-header">修改密码</h2>
+            <form id="changepwd-form" onsubmit="return false;" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                <input type="hidden" name="__token__" value="c87797be044187a81a5174e4a2e00789" />                        <div class="form-group">
+                <label for="oldpassword" class="control-label col-xs-12 col-sm-2">旧密码:</label>
+                <div class="col-xs-12 col-sm-4">
+                    <input type="password" class="form-control" id="oldpassword" name="oldpassword" value="" data-rule="required" placeholder="旧密码">
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="newpassword" class="control-label col-xs-12 col-sm-2">新密码:</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="password" class="form-control" id="newpassword" name="newpassword" value="" data-rule="required" placeholder="新密码" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="renewpassword" class="control-label col-xs-12 col-sm-2">确认新密码:</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="password" class="form-control" id="renewpassword" name="renewpassword" value="" data-rule="required" placeholder="确认新密码" />
+                    </div>
+                </div>
+
+                <div class="form-group normal-footer">
+                    <label class="control-label col-xs-12 col-sm-2"></label>
+                    <div class="col-xs-12 col-sm-8">
+                        <button type="submit" id="makesure" class="btn btn-success btn-embossed">提交</button>
+                        <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--#####################################################################-->
+        </div>
+    </div>
+</main>
+
+{include file='public/footer'/}
+
+<script>
+    $(function () {
+        $('#makesure').click(function () {
+            var oldpassword = $.trim($('input[name=oldpassword]').val());
+            var newpassword = $.trim($('input[name=newpassword]').val());
+            var renewpassword = $.trim($('input[name=renewpassword]').val());
+
+            if(oldpassword=='' ||newpassword=='' ||renewpassword==''  ){
+                layer.msg('所填内容不能为空!');
+                return false;
+            }
+            if(newpassword!=renewpassword){
+                layer.msg('两次新密码输入不一致!');
+                return false;
+            }
+            $.post('/index/user/user_changepwd',{
+                oldpassword:oldpassword,
+                newpassword:newpassword,
+                renewpassword:renewpassword,
+            },function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    return false;
+                }else{
+                    layer.msg(data.msg);
+                    window.location.href = '/index/user';
+                }
+            },'json');
+        });
+    });
+</script>

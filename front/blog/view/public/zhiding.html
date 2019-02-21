@@ -1,0 +1,31 @@
+<div class="stylelist">
+    <h3 class="post_box_title"><span class="ttcolor"><i class="fa fa-twitch"></i>今日头条</span></h3>
+    <!--文章置顶-->
+    <article class="post wow fadeInDown" style="visibility: visible; animation-name: none;">
+        {foreach name="todaytop" item="v"}
+            <div class="post-thumb left">
+                <a href="/blog/article/blog?id={$v['id']}">
+                    <img src="{$v['thumb']|default=''}">
+                </a>
+            </div>
+            <header class="post-head">
+                <h2><a href="/blog/article/blog?id={$v['id']}" title="{$v['title']}">{$v['title']}</a></h2>
+            </header>
+            <div class="excerpt">
+                {:htmlspecialchars_decode($v['content'])}
+                <!--{:mb_substr($v['content'],0,20,'utf-8')}...-->
+            </div>
+            <div class="info">
+                <span class="category"><i class="fa fa-list-alt"></i><a href="/">{$v['catename']}</a></span>
+                <span class="date"><i class="fa fa-clock-o"></i>{$v['pub_time']|formatTime}</span>
+                <span class="view"><i class="fa fa-eye"></i>{$v['view_count']}</span>
+                <span class="comment">
+                    <a href="/">
+                         <i class="fa fa-comment"></i>{$v['comments']}
+                    </a>
+                </span>
+                <a class="read-more right" href="/blog/article/blog?id={$v['id']}" title="{$v['title']}">阅读更多</a>
+            </div>
+        {/foreach}
+    </article>
+</div>

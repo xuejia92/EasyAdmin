@@ -1,0 +1,67 @@
+<div class="header">
+  <div class="main">
+    <a class="logo" href="{:url('/forum')}" title="{$site_config['site_title']}">{$site_config['site_title']}</a>
+    <div class="nav">
+    
+    {volist name="nav" id="vo" }
+    {eq name="vo.pid" value="1"}
+      <a class="nav-this" href="{$vo.link|getnavlink=$vo.sid}" target="{$vo.target}" title="{$vo.alias}">
+        <i class="iconfont icon-{$vo.icon}"></i>{$vo.name}
+      </a>
+      {/eq}
+    {/volist}
+    </div>
+    
+    <div class="nav-user">
+    
+  {if condition="$Think.session.userid neq ''"}
+     <!-- 登入后的状态 -->
+     
+      <a class="avatar" href="{:routerurl('/forum/user/home',array('id'=>$Think.session.userid))}">
+        <img src="{$Think.session.userhead}">
+        <cite>{$Think.session.username}</cite>
+        <i>{$Think.session.grades}</i>
+      </a>
+      <div class="nav">
+        <a href="{:url('/forum/user/set')}"  ><i class="iconfont icon-shezhi"></i>设置</a>
+        <a id="logout"  href="javascript:void(0);"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+
+      </div>
+  
+{else /}
+          <!-- 未登入状态 -->
+      <a class="unlogin"  href="{:url('/forum/index/login')}"><i class="iconfont icon-touxiang"></i></a>
+      <span style="display: inline-block;position: relative;top: -2px;left: auto;right: 0; vertical-align: middle;">
+          <a href="{:url('/forum/index/login')}">登入</a>
+          <a href="{:url('/forum/login/reg')}">注册</a>
+      </span>
+      <p class="out-login" style="display:none">
+        <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+        <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+      </p>   
+       {/if}
+
+    </div>
+  </div>
+</div>
+<script src="/static/public/forum/js/jquery-1.9.1.min.js"></script>
+<script>
+    $('#logout').click(function () {
+        loading = layer.load(2, {
+            shade: [0.2,'#000']
+        });
+        $.get('{:url("/forum/login/logout")}',{},function(data){
+            if(data.code == 200){
+                layer.close(loading);
+                layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                    location.href = '{:url("/forum/index/index")}';
+                });
+            }else{
+                layer.close(loading);
+                layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                return ;
+            }
+        });
+        return false;
+    });
+</script>

@@ -1,0 +1,31 @@
+<div class="tpt-header">
+    <div class="tpt-wp cl">
+        <div class="tpt-logo">
+            <a href="/">
+                <img style="width:239px;" src="{:sysconf('cms_site_logo')}">
+            </a>
+        </div>
+        <input id="nav-btn" type="checkbox">
+        <label class="tpt-nav-btn" for="nav-btn"></label>
+        <ul class="tpt-nav">
+            {foreach $nav as $vp}
+            {if empty($vp.sub)}
+            <li>
+                <a class="tpt-nav-li" href="{$vp.path_url}">{$vp.title}</a>
+                <ul class="tpt-nav-ul"></ul>
+            </li>
+            {else/}
+            <li>
+                <input id="nav-1" type="checkbox">
+                <label class="tpt-nav-li" for="nav-1">{$vp.title}</label>
+                <ul class="tpt-nav-ul">
+                    {foreach $vp.sub as $v}
+                    <li><a href="{$v.path_url}">{$v.title}</a></li>
+                    {/foreach}
+                </ul>
+            </li>
+            {/if}
+            {/foreach}
+        </ul>
+    </div>
+</div>

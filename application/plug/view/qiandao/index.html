@@ -1,0 +1,31 @@
+<form autocomplete="off" onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='form-horizontal layui-form padding-top-20'>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            User Leesign<br><span class="nowrap color-desc">会员签到积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="user_leesign_point" required="required" title="请输入会员签到积分" placeholder="请输入会员签到积分" value="{:sysconf('user_leesign_point')}" class="layui-input">
+            <p class="help-block">当前会员签到积分，签到自动获得</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            User Leesign Extra<br><span class="nowrap color-desc">会员签到20天奖励积分</span>
+        </label>
+        <div class='col-sm-8'>
+            <input name="user_leesign_point_20" required="required" title="请输入会员签到20天奖励积分" placeholder="请输入会员签到20天奖励积分" value="{:sysconf('user_leesign_point_20')}" class="layui-input">
+            <p class="help-block">会员签到20天奖励积分，签到自动获得</p>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="col-sm-4 col-sm-offset-2">
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">保存配置</button>
+        </div>
+    </div>
+
+</form>

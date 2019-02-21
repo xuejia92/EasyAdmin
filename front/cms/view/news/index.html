@@ -1,0 +1,65 @@
+{include file='public/header'/}
+{include file='public/nav'/}
+<link rel="stylesheet" href="__STATIC__/public/css/wangEditor.min.css">
+<style type="text/css">
+    body {background: #fff;}
+    .tpt-menu {background-image: linear-gradient(312deg, rgb(58, 231, 243) 0%, rgb(30, 150, 229) 100%);}
+    .tpt-menu .a {background-color: #ff5c33;}
+</style>
+<div class="tpt-menu" style="height:344px;">
+    <div class="tpt-wp cl">
+        <h2>{$title}</h2>
+        <p>感谢您使用本套网站内容管理系统，致力于提供安全稳定高效简洁的企业版网站管理系统</p>
+    </div>
+</div>
+<div class="tpt-view">
+    <div class="tpt-wp cl">
+        <div class="tpt-msg">
+            <i class="layui-icon">&#xe715;</i>您现在的位置：
+            <a href="/home/cms">网站首页</a>
+            <i class="layui-icon i">>></i>
+            <a href="#">{$title}</a>
+        </div>
+        <div class="tpt-art-1 cl">
+             <ul>
+                 {foreach $result as $vo}
+                 <li class="cl">
+                     <div class="tpt-ml-8">
+                         <div class="tpt-art-2">
+                             <div class="tpt-art-4">
+                                 <i>{$vo.year}</i>
+                                 <br>
+                                 <span>{$vo.month}</span>
+                             </div>
+                             <div class="tpt-art-5">
+                                 <h2>
+                                     <a href="/cms/news/a?id={$vo.id}">{$vo.title}</a>
+                                 </h2>
+                                 <p>
+                                     {$vo.description}
+                                 </p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="tpt-mr-2">
+                         <div class="tpt-art-3">
+                             <div class="tpt-img">
+                                 <a href="/cms/news/a?id={$vo.id}">
+                                     <img class="tpt-img-0" src="{$vo.thumb}" alt="{$vo.title}">
+                                 </a>
+                                 <div class="tpt-img-1 tpt-img-0">
+                                     <div class="tpt-img-2"></div>
+                                     <a href="/cms/news/a?id={$vo.id}" class="tpt-img-3">
+                                         <i class="layui-icon">&#xe609;</i>
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </li>
+                 {/foreach}
+             </ul>
+        </div>
+    </div>
+</div>
+{include file='public/footer'/}

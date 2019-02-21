@@ -1,0 +1,84 @@
+{extend name='admin@public/content'}
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">用户名字</label>
+        <div class="layui-input-inline">
+            <input name="name" value="{$Think.get.name|default=''}" placeholder="请输入用户名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">联系手机</label>
+        <div class="layui-input-inline">
+            <input name="phone" value="{$Think.get.phone|default=''}" placeholder="请输入联系手机" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">电子邮箱</label>
+        <div class="layui-input-inline">
+            <input name="mail" value="{$Think.get.mail|default=''}" placeholder="请输入电子邮箱" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">时间</label>
+        <div class="layui-input-inline">
+            <input name="create_time" id='range-date' value="{$Think.get.create_time|default=''}" placeholder="请选择时间" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>
+    window.laydate.render({range: true, elem: '#range-date'});
+</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='text-left nowrap'>名字</th>
+            <th class='text-left nowrap'>手机</th>
+            <th class='text-left nowrap'>邮箱</th>
+            <th class='text-left nowrap'>内容</th>
+            <th class='text-left nowrap'>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='text-left nowrap'>
+                {$vo.name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.phone}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.mail|default="<span class='color-desc'>还没有设置邮箱</span>"|raw}
+            </td>
+            <td class='text-left left-align'>{$vo.content|default=''}</td>
+            <td class='text-left nowrap'>
+                {$vo.create_time|format_datetime|default="<span class='color-desc'></span>"|raw}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}
