@@ -1,7 +1,11 @@
 Environment
-PHP 版本不低于 PHP5.6，推荐使用 PHP7 以达到最优效果；
-需开启 PATHINFO，不再支持 ThinkPHP 的 URL 兼容模式运行（源于如何优雅的展示）。
-Apache
+---
+>1. PHP 版本不低于 PHP5.6，推荐使用 PHP7 以达到最优效果；
+>2. 需开启 PATHINFO，不再支持 ThinkPHP 的 URL 兼容模式运行（源于如何优雅的展示）。
+
+* Apache
+
+```xml
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks -Multiviews
   RewriteEngine On
@@ -9,7 +13,11 @@ Apache
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </IfModule>
-Nginx
+```
+
+* Nginx
+
+```
 server {
 	listen 80;
 	server_name wealth.demo.cuci.cc;
@@ -53,3 +61,4 @@ server {
 		expires      12h;
 	}
 }
+```
