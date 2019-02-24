@@ -80,7 +80,7 @@ class Tool extends BasicApi
      */
     public function getVcodeByEmail()
     {
-        $email = $this->request->get('email');
+        $email = $this->request->post('email');
         if (empty($email)) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少邮件地址');
         }

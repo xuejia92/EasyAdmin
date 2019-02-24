@@ -32,7 +32,8 @@
         {if $index%8==0}<br>{/if}
         {$index++}
         <!--{/foreach}-->
-        <!--{$in=$index%8}-->
+        <!--{$in=$index/8}-->
+        <?php $in=ceil($index/8);?>
         <script>
             $(function () {
                 $('#he').css('height',40*{$in}+'px');

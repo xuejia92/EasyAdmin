@@ -181,17 +181,17 @@
     },
     {
         "name": "easyswoole/component",
-        "version": "1.5.1",
-        "version_normalized": "1.5.1.0",
+        "version": "1.5.2",
+        "version_normalized": "1.5.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/component.git",
-            "reference": "d1bda0d21410b0c1dbfdf043bfa6189836400cc4"
+            "reference": "6f71f270c0448bed9335804c020eca8e89e234cb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/component/zipball/d1bda0d21410b0c1dbfdf043bfa6189836400cc4",
-            "reference": "d1bda0d21410b0c1dbfdf043bfa6189836400cc4",
+            "url": "https://api.github.com/repos/easy-swoole/component/zipball/6f71f270c0448bed9335804c020eca8e89e234cb",
+            "reference": "6f71f270c0448bed9335804c020eca8e89e234cb",
             "shasum": "",
             "mirrors": [
                 {
@@ -209,7 +209,7 @@
         "require-dev": {
             "easyswoole/phpunit": "^1.0"
         },
-        "time": "2019-02-12T16:23:22+00:00",
+        "time": "2019-02-15T05:41:52+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -244,12 +244,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/easyswoole.git",
-            "reference": "edbea2a58b25cc66c45e26e01a109410011b4ed6"
+            "reference": "1e6e64177197f33668e4dd65d7347cd283cb7dd7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/easyswoole/zipball/edbea2a58b25cc66c45e26e01a109410011b4ed6",
-            "reference": "edbea2a58b25cc66c45e26e01a109410011b4ed6",
+            "url": "https://api.github.com/repos/easy-swoole/easyswoole/zipball/1e6e64177197f33668e4dd65d7347cd283cb7dd7",
+            "reference": "1e6e64177197f33668e4dd65d7347cd283cb7dd7",
             "shasum": "",
             "mirrors": [
                 {
@@ -275,7 +275,7 @@
         "require-dev": {
             "easyswoole/swoole-ide-helper": "^1.2"
         },
-        "time": "2019-02-12T08:17:02+00:00",
+        "time": "2019-02-15T05:13:25+00:00",
         "bin": [
             "bin/easyswoole"
         ],
@@ -307,17 +307,17 @@
     },
     {
         "name": "easyswoole/fast-cache",
-        "version": "1.0.6",
-        "version_normalized": "1.0.6.0",
+        "version": "1.0.7",
+        "version_normalized": "1.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/fast-cache.git",
-            "reference": "b6904a2069e032cfa53fb8cadc012621a7d01ab3"
+            "reference": "aa6102eaa9e7aaa94555c41329d7464f1f5c983d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/fast-cache/zipball/b6904a2069e032cfa53fb8cadc012621a7d01ab3",
-            "reference": "b6904a2069e032cfa53fb8cadc012621a7d01ab3",
+            "url": "https://api.github.com/repos/easy-swoole/fast-cache/zipball/aa6102eaa9e7aaa94555c41329d7464f1f5c983d",
+            "reference": "aa6102eaa9e7aaa94555c41329d7464f1f5c983d",
             "shasum": "",
             "mirrors": [
                 {
@@ -332,7 +332,7 @@
             "easyswoole/swoole-ide-helper": "^1.2",
             "php": ">=7.1.0"
         },
-        "time": "2019-01-20T08:21:07+00:00",
+        "time": "2019-02-24T04:16:15+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -361,17 +361,17 @@
     },
     {
         "name": "easyswoole/http",
-        "version": "1.2.11",
-        "version_normalized": "1.2.11.0",
+        "version": "1.2.12",
+        "version_normalized": "1.2.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/http.git",
-            "reference": "91c554067c8e62ae2daee8866c186d8185b72447"
+            "reference": "d30ecc12f25daa089378d296b2bd92c20d846210"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/http/zipball/91c554067c8e62ae2daee8866c186d8185b72447",
-            "reference": "91c554067c8e62ae2daee8866c186d8185b72447",
+            "url": "https://api.github.com/repos/easy-swoole/http/zipball/d30ecc12f25daa089378d296b2bd92c20d846210",
+            "reference": "d30ecc12f25daa089378d296b2bd92c20d846210",
             "shasum": "",
             "mirrors": [
                 {
@@ -391,7 +391,7 @@
         "require-dev": {
             "easyswoole/swoole-ide-helper": "^1.0"
         },
-        "time": "2019-01-23T09:19:18+00:00",
+        "time": "2019-02-20T12:37:47+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -941,17 +941,17 @@
     },
     {
         "name": "nikic/php-parser",
-        "version": "v4.2.0",
-        "version_normalized": "4.2.0.0",
+        "version": "v4.2.1",
+        "version_normalized": "4.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a"
+            "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
-            "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
+            "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
             "shasum": "",
             "mirrors": [
                 {
@@ -967,7 +967,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.5 || ^7.0"
         },
-        "time": "2019-01-12T16:31:37+00:00",
+        "time": "2019-02-16T20:54:15+00:00",
         "bin": [
             "bin/php-parse"
         ],
