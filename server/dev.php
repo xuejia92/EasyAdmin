@@ -42,11 +42,11 @@ return [
     ],
     'DISPLAY_ERROR' => true,
     'SYSTEM' => [
-        'WS_SERVER_PATH' => 'ws://192.168.31.106:9501',
+        'WS_SERVER_PATH' => 'ws://127.0.0.1:9501',
         'LAST_MESSAGE_MAX' => 10
     ],
     'MYSQL' => [
-        'host'          => '192.168.31.106',
+        'host'          => '127.0.0.1',
         'port'          => '3306',
         'user'          => 'root',
         'timeout'       => '5',
@@ -58,7 +58,7 @@ return [
     ],
     /*################ REDIS CONFIG ##################*/
     'REDIS' => [
-        'host'          => '192.168.31.106',
+        'host'          => '127.0.0.1',
         'port'          => '6379',
         'auth'          => '',
         'POOL_MAX_NUM'  => '20',
