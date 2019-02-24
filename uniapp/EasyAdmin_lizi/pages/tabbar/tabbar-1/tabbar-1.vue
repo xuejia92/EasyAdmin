@@ -1,7 +1,7 @@
 <template>
     <view class="content">
         <view class="uni-list">
-            <view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,index) in news" :key="index" @tap="opennews" :data-postid="item.post_id">
+            <view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,index) in news" :key="index" @tap="opennews" :data-postid="item.post_id"> 
                 <view class="uni-media-list">
                     <image class="uni-media-list-logo" :src="item.author_avatar"></image>
                     <view class="uni-media-list-body">
@@ -32,6 +32,11 @@
                 fail: () => {},
                 complete: () => {}
             });
+			uni.showToast({
+				title: '你好 世界',
+				mask: false,
+				duration: 1500
+			});
         },
         methods:{
             opennews(e){

@@ -21,9 +21,9 @@ export default {
 	},
 };
 uni.showToast({ 
-	title: 'hello world',
+	title: 'hello world', 
 	mask: true, 
-	duration: 1500
+	duration: 1500  
 });
 </script>
 
