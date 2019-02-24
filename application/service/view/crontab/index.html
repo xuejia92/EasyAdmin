@@ -1,0 +1,143 @@
+{extend name='admin@public/content'}
+
+{block name="button"}
+<!--{if auth("$classuri/add")}-->
+<button data-modal='{:url("$classuri/add")}' data-title="添加定时任务" class='layui-btn layui-btn-sm layui-btn-primary'>添加定时任务</button>
+<!--{/if}-->
+
+<!--{if auth("$classuri/del")}-->
+<button data-update data-field='delete' data-action='{:url("$classuri/del")}' class='layui-btn layui-btn-sm layui-btn-primary'>删除定时任务</button>
+<!--{/if}-->
+{/block}
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form autocomplete="off" class="layui-form layui-form-pane form-search" action="{:request()->url()}" onsubmit="return false" method="get">
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">定时任务</label>
+        <div class="layui-input-inline">
+            <input name="title" value="{$Think.get.title|default=''}" placeholder="请输入定时任务名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <?php $actions=['0'=>'已结束','1'=>'等待执行','2'=>'执行中'];?>
+            <?php $status=isset($_GET['status'])?$_GET['status']:'';?>
+            <select name='status' class='layui-select' lay-search="">
+                <option {if $status===''}selected="selected"{/if} value=''> - 所有 -</option>
+                <option {if $status==='0'}selected="selected"{/if} value='0'> 已结束</option>
+                <option {if $status==='1'}selected="selected"{/if} value='1'>  等待执行</option>
+                <option {if $status==='2'}selected="selected"{/if} value='2'>  执行中</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+
+</form>
+<script>window.form.render();</script>
+<!-- 表单搜索 结束 -->
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='list-table-check-td think-checkbox'>
+                <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
+            </th>
+            <th class='text-left'>ID</th>
+            <th class='text-left'>类型</th>
+            <th class='text-left'>定时任务名</th>
+            <th class='text-left'>规则</th>
+            <th class='text-left'>最多执行</th>
+            <th class='text-left'>已执行</th>
+            <th class='text-left'>开始时间</th>
+            <th class='text-left'>结束时间</th>
+            <th class='text-left'>下次执行时间</th>
+            <th class='text-left'>最后执行时间</th>
+            <th class='text-left'>状态</th>
+            <th class='text-left'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'>
+            </td>
+            <td class='text-left'>
+                {$vo.id}
+            </td>
+            <td class='text-left nowrap'>
+                {switch name='vo.type'}
+                    {case value='0'}执行Sql{/case}
+                    {case value='1'}请求Url {/case}
+                    {case value='2'}模板定时任务 {/case}
+                    {default /}类型错误
+                {/switch}
+            </td>
+            <td class='text-left'>
+                {$vo.title}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.rule}
+            </td>
+            <td class='text-left'>
+                {$vo.most_exec_num|default="0"|raw}
+            </td>
+            <td class='text-left'>
+                {$vo.has_exec_num|default="0"|raw}
+            </td>
+            <td class='text-left'>
+                {$vo.begin_time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
+            </td>
+            <td class='text-left'>
+                {$vo.end_time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
+            </td>
+            <td class='text-left'>
+                {if $vo.pre_exec_time==0}
+                <span class='color-desc'>暂无</span>
+                {else/}
+                {$vo.pre_exec_time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
+                {/if}
+            </td>
+            <td class='text-left'>
+                {$vo.last_exec_time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
+            </td>
+            <td class='text-left'>
+                {if $vo.status eq 0}
+                <span class="color-red">已结束</span>
+                {elseif $vo.status eq 2}
+                <span class="color-green">执行中</span>
+                {elseif $vo.status eq 1}
+                <span class="color-blue">等待执行</span>
+                {/if}
+            </td>
+            <td class='text-left nowrap'>
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="编辑定时任务" data-modal='{:url("$classuri/edit")}?id={$vo.id}'>编辑</a>
+                {/if}
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" style="background-color:black" data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'>删除</a>
+                {/if}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}

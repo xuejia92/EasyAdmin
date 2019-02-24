@@ -27,20 +27,15 @@ Route::rules([        // 获取城市名称和ID通过省份ID 5a6ad3bc9c27e
             'api/Tool/getDistrictListByCid',
             ['method' => 'get', 'after' => $afterBehavior]
         ],
-        // user hello 5c55912ed6261
+        // 会员注册 5c55912ed6261
         '5c55912ed6261' => [
-            'api/user.Index/index',
-            ['method' => 'get|post', 'after' => $afterBehavior]
-        ],
-        // index/index 5c5598517c003
-        '5c5598517c003' => [
-            'api/Hn/index',
-            ['method' => 'get|post', 'after' => $afterBehavior]
+            'api/user.Register/register',
+            ['method' => 'post', 'after' => $afterBehavior]
         ],
         // 发送邮件验证码 5c665b3659fd4
         '5c665b3659fd4' => [
             'api/Tool/getVcodeByEmail',
-            ['method' => 'get', 'after' => $afterBehavior]
+            ['method' => 'post', 'after' => $afterBehavior]
         ],
         // 用户登录接口 5c667f2f32c13
         '5c667f2f32c13' => [
