@@ -1,0 +1,92 @@
+{extend name='admin@public/content'}
+
+{block name="button"}
+<!--{if auth("$classuri/repair")}-->
+<button data-modal='{:url("$classuri/index_back")}' data-title="恢复数据库列表"  class='layui-btn layui-btn-sm layui-btn-primary'>恢复数据库列表</button>
+<!--{/if}-->
+
+<!--{if auth("$classuri/export")}-->
+<button data-update data-action='{:url("$classuri/export")}'   class='layui-btn layui-btn-sm layui-btn-primary'>备份数据库</button>
+<!--{/if}-->
+
+<!--{if auth("$classuri/optimize")}-->
+<button data-update data-action='{:url("$classuri/optimize")}' class='layui-btn layui-btn-sm layui-btn-primary'>优化数据库</button>
+<!--{/if}-->
+
+<!--{if auth("$classuri/repair")}-->
+<button data-update data-action='{:url("$classuri/repair")}'  class='layui-btn layui-btn-sm layui-btn-primary'>修复数据库</button>
+<!--{/if}-->
+
+{/block}
+
+{block name="content"}
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='list-table-check-td think-checkbox'>
+                <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
+            </th>
+            <th class='text-left'>表名</th>
+            <th class='text-left'>引擎</th>
+            <th class='text-left'>数据量(条)</th>
+            <th class='text-left'>大小</th>
+            <th class='text-left'>自动索引id</th>
+            <th class='text-left'>备注</th>
+            <th class='text-left'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+                <input class="ids list-check-box" value='{$vo.id}' type='checkbox'>
+            </td>
+            <td class='text-left'>
+                {$vo.Name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.Engine}
+            </td>
+            <td class='text-left'>
+                {$vo.Rows_count}
+            </td>
+            <td class='text-left nowrap'>
+                {:format_size($vo.Data_length)}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.Auto_increment}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.Comment}
+            </td>
+            <td class='text-left nowrap'>
+                {if auth("$classuri/optimize")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" data-title="备份" data-load='{:url("$classuri/export")}?id={$vo.id}'>备份</a>
+                {/if}
+
+                {if auth("$classuri/optimize")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="优化" data-load='{:url("$classuri/optimize")}?id={$vo.id}'>优化</a>
+                {/if}
+
+                {if auth("$classuri/repair")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" data-title="修复"  data-load='{:url("$classuri/repair")}?id={$vo.id}'>修复</a>
+                {/if}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+{/block}
+
+

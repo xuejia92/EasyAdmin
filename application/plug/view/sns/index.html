@@ -1,0 +1,131 @@
+<form style="margin-left: 20px;" onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='layui-form layui-box modal-form-box'>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">Mode<br><span class="nowrap color-desc">接口模式</span></label>
+        <div class="layui-input-block">
+            {php}
+            $sms_type='qq';
+            {/php}
+            {foreach ['qq'=>'qq登录','weixin'=>'微信登录','weibo'=>'微博登录'] as $k=>$v}
+            <label class="think-radio">
+                <!--{if $sms_type eq $k}-->
+                <input checked="checked" type="radio" value="{$k}" name="sms_type">
+                <!--{else}-->
+                <input type="radio" value="{$k}" name="sms_type">
+                <!--{/if}-->
+                {$v}
+            </label>
+            {/foreach}
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div data-api-type="qq" class="hide">
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_id<br><span class="nowrap color-desc">qq_app_id</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="qq_app_id" required="required" title="请输入接口qq_app_id" placeholder="qq_app_id" value="{:sysconf('qq_app_id')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_secret<br><span class="nowrap color-desc">qq_app_secret</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="qq_app_secret" title="qq_app_secret" placeholder="请输入qq_app_secret"   required="required" value="{:sysconf('qq_app_secret')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">qq_scope<br><span class="nowrap color-desc">引用场景</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="qq_scope" required="required" title="qq_scope" placeholder="请输入qq_scope" value="{:sysconf('qq_scope')}" maxlength="32"  class="layui-input">
+                <p class="help-block">设置引用场景。</p>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">callback<br><span class="nowrap color-desc">回调地址</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="qq_callback" title="qq_callback"  required="required" placeholder="qq_callback" value="{:sysconf('qq_callback')}"   class="layui-input">
+                <p class="help-block">必填，回调地址，应严格填写。</p>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+    <div data-api-type="weixin" class="hide">
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_id<br><span class="nowrap color-desc">weixin_app_id</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weixin_app_id" required="required" title="请输入接口weixin_app_id" placeholder="weixin_app_id" value="{:sysconf('weixin_app_id')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_secret<br><span class="nowrap color-desc">qq_app_secret</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weixin_app_secret" title="weixin_app_secret" placeholder="请输入weixin_app_secret"   required="required" value="{:sysconf('weixin_app_secret')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">weixin_scope<br><span class="nowrap color-desc">引用场景</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weixin_scope" required="required" title="weixin_scope" placeholder="请输入weixin_scope" value="{:sysconf('weixin_scope')}" maxlength="32"  class="layui-input">
+                <p class="help-block">设置引用场景。</p>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">callback<br><span class="nowrap color-desc">回调地址</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weixin_callback" title="weixin_callback"  required="required" placeholder="weixin_callback" value="{:sysconf('weixin_callback')}"   class="layui-input">
+                <p class="help-block">必填，回调地址，应严格填写。</p>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+    <div data-api-type="weibo" class="hide">
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_id<br><span class="nowrap color-desc">weibo_app_id</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weibo_app_id" required="required" title="请输入接口weibo_app_id" placeholder="weibo_app_id" value="{:sysconf('weibo_app_id')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">app_secret<br><span class="nowrap color-desc">weibo_app_secret</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weibo_app_secret" title="weibo_app_secret" placeholder="请输入weibo_app_secret"   required="required" value="{:sysconf('weibo_app_secret')}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">weibo_scope<br><span class="nowrap color-desc">引用场景</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weibo_scope" required="required" title="weibo_scope" placeholder="请输入weibo_scope" value="{:sysconf('weibo_scope')}" maxlength="32"  class="layui-input">
+                <p class="help-block">设置引用场景。</p>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">callback<br><span class="nowrap color-desc">回调地址</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="weibo_callback" title="weibo_callback"  required="required" placeholder="weibo_callback" value="{:sysconf('weibo_callback')}"   class="layui-input">
+                <p class="help-block">必填，回调地址，应严格填写。</p>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+    </div>
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type="submit">保存配置</button>
+    </div>
+
+</form>
+
+<script>
+    $(function () {
+        updateViwe();
+        $('[name="sms_type"]').on('click', updateViwe);
+
+        function updateViwe() {
+            var type = $('[name="sms_type"]:checked').val();
+            $('[data-api-type]').not($('[data-api-type="' + type + '"]').removeClass('hide')).addClass('hide');
+        }
+    });
+</script>
+

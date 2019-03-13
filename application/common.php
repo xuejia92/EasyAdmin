@@ -422,3 +422,24 @@ function isCreditNo($vStr)
     return true;
 }
 
+function format_size($size){
+    $size = doubleval($size);
+    $rank =0;
+    $rankchar ='Bytes';
+    while($size>1024){
+        $size = $size/1024;
+        $rank++;
+    }
+    if($rank==1){
+        $rankchar="KB";
+    }
+    else if($rank==2){
+        $rankchar="MB";
+    }
+    else if($rank==3){
+        $rankchar="GB";
+    }
+    $size = number_format($size, 2, '.', '');
+    return "".$size." ".$rankchar;
+}
+
