@@ -1,0 +1,58 @@
+<form onsubmit="return false;" data-auto="true" method="post">
+    <!--{empty name='list'}-->
+    <p class="help-block text-center well">没 有 记 录 哦！</p>
+    <!--{else}-->
+    <input type="hidden" value="resort" name="action">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th></th>
+            <th class='text-left'>备份名称</th>
+            <th class='text-left'>备份卷数</th>
+            <th class='text-left'>备份压缩</th>
+            <th class='text-left'>备份大小</th>
+            <th class='text-left'>备份时间</th>
+            <th class='text-left'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $list as $key=>$vo}-->
+        <tr>
+            <td class='list-table-check-td think-checkbox'>
+
+            </td>
+            <td class='text-left'>
+                {$vo.name}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.part}
+            </td>
+            <td class='text-left'>
+                {$vo.compress}
+            </td>
+            <td class='text-left nowrap'>
+                {:format_size($vo.size)}
+            </td>
+            <td class='text-left nowrap'>
+                {$vo.time}
+            </td>
+            <td class='text-left nowrap'>
+                {if auth("$classuri/optimize")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" data-title="恢复" data-load='{:url("$classuri/import")}?id={$vo.id}'>恢复</a>
+                {/if}
+
+                {if auth("$classuri/repair")}
+                <span class="text-explode">|</span>
+                <a class="layui-btn layui-btn-xs layui-btn-black" data-title="删除"  data-load='{:url("$classuri/del")}?id={$vo.id}'>删除</a>
+                {/if}
+            </td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page|raw}</p>{/if}
+    <!--{/empty}-->
+</form>
+
+

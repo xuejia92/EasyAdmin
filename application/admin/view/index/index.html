@@ -3,9 +3,9 @@
 {block name='body'}
 
 <!-- 顶部菜单区域 开始 -->
-<div class="framework-topbar">
+<div class="framework-topbar" name="colorpicker">
     <div class="topbar-head pull-left">
-        <a href="{:url('@')}" class="topbar-logo pull-left">{:sysconf('app_name')} <sup>{:sysconf('app_version')}</sup></a>
+        <a href="{:url('@admin')}" class="topbar-logo pull-left">{:sysconf('app_name')} <sup>{:sysconf('app_version')}</sup></a>
     </div>
     <!--{foreach $menus as $oneMenu}-->
     <a data-menu-node="m-{$oneMenu.id}" data-open="{$oneMenu.url}" class="topbar-btn pull-left transition">
@@ -42,7 +42,6 @@
     </a>
 </div>
 <!-- 顶部菜单区域 结束 -->
-
 <!-- 左则菜单区域 开始 -->
 <div class="framework-leftbar">
     {foreach $menus as $oneMenu}

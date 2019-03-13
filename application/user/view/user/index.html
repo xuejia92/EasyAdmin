@@ -78,6 +78,7 @@
             <th class='text-left nowrap'>ID</th>
             <th class='text-left nowrap'>用户账号</th>
             <th class='text-left nowrap'>昵称</th>
+            <th class='text-left nowrap'>头像</th>
             <th class='text-left nowrap'>手机号</th>
             <!--<th class='text-left nowrap'>当前余额(元)</th>-->
             <!--<th class='text-left nowrap'>保险箱余额(元)</th>-->
@@ -103,6 +104,9 @@
             </td>
             <td class='text-left nowrap'>
                 {$vo.nickname}
+            </td>
+            <td class='text-left nowrap'>
+                <img data-tips-image width="30px" src="{$vo.avator}" alt="">
             </td>
             <td class='text-left nowrap'>
                 {$vo.phone|default="<span class='color-desc'>还没有设置手机号</span>"|raw}

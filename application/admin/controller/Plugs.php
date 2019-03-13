@@ -148,4 +148,10 @@ class Plugs extends BasicAdmin
         return $this->fetch('', ['field' => $field]);
     }
 
+    public function colorpicker()
+    {
+        $field = $this->request->get('field', 'colorpicker');
+        return $this->fetch('', ['field' => $field]);
+    }
+
 }

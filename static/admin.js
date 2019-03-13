@@ -620,6 +620,13 @@ $(function () {
         $.form.iframe(url, '图标选择');
     });
 
+    /*! 注册 data-colorpicker 事件行为 */
+    $body.on('click', '[data-colorpicker]', function () {
+        var field = $(this).attr('data-colorpicker');
+        var url = window.ROOT_URL + '/admin.php/admin/plugs/colorpicker.html?field=' + field;
+        $.form.iframe(url, '颜色选择');
+    });
+
     /*! 注册 data-tips-image 事件行为 */
     $body.on('click', '[data-tips-image]', function () {
         var img = new Image(), index = $.msg.loading();

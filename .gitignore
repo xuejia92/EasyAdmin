@@ -10,4 +10,5 @@
 /composer.lock 
 .user.ini
 /extend/vendor/Alipay/log.txt
+/static/backup
 

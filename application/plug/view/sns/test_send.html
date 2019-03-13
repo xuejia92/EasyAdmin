@@ -1,0 +1,28 @@
+<div class="layui-form layui-box modal-form-box">
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=qq">qq登录</a>
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=weibo">微博登录</a>
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=weixin">微信登录</a>
+</div>
+<pre class="layui-code" lay-title="html代码">
+
+<div class="layui-form layui-box modal-form-box">
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=qq">qq登录</a>
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=weibo">微博登录</a>
+    <a  class="layui-btn" target="_blank" href="/pub/index/index?name=weixin">微信登录</a>
+</div>
+    </pre>
+<pre class="layui-code" lay-title="php代码">
+$name = $this->request->param('name','qq');
+$config['app_id'] = sysconf($name.'_app_id');
+$config['app_secret'] = sysconf($name.'_app_secret');
+$config['scope'] = sysconf($name.'_scope');
+$config['callback'] = sysconf($name.'_callback');
+$redirect_url = OAuth::$name($config)->getRedirectUrl();
+$this->redirect($redirect_url);
+    </pre>
+<script>
+    layui.use('code', function () {
+        layui.code({encode: true});
+    });
+</script>

@@ -55,8 +55,8 @@
                 <input data-auto-none="" data-check-target='.list-check-box' type='checkbox'>
             </th>
             <th class='text-left'>ID</th>
-            <th class='text-left'>类型</th>
             <th class='text-left'>定时任务名</th>
+            <th class='text-left'>类型</th>
             <th class='text-left'>规则</th>
             <th class='text-left'>最多执行</th>
             <th class='text-left'>已执行</th>
@@ -78,15 +78,15 @@
                 {$vo.id}
             </td>
             <td class='text-left nowrap'>
+                {$vo.title}
+            </td>
+            <td class='text-left nowrap'>
                 {switch name='vo.type'}
                     {case value='0'}执行Sql{/case}
                     {case value='1'}请求Url {/case}
                     {case value='2'}模板定时任务 {/case}
                     {default /}类型错误
                 {/switch}
-            </td>
-            <td class='text-left'>
-                {$vo.title}
             </td>
             <td class='text-left nowrap'>
                 {$vo.rule}
@@ -113,7 +113,7 @@
             <td class='text-left'>
                 {$vo.last_exec_time|format_datetime|default="<span class='color-desc'>暂无</span>"|raw}
             </td>
-            <td class='text-left'>
+            <td class='text-left nowrap'>
                 {if $vo.status eq 0}
                 <span class="color-red">已结束</span>
                 {elseif $vo.status eq 2}
