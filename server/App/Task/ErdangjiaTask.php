@@ -47,6 +47,7 @@ class ErdangjiaTask extends AbstractAsyncTask
             'exec_time'=>time(),
             'content'=>'[模板定时任务]'.$vo['content'].PHP_EOL.$ret,
         ]);
+        $mysqlObject->close();
     }
 
     public function leeSign($username,$password){

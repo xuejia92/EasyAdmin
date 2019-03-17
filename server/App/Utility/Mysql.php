@@ -395,4 +395,8 @@ class Mysql
         return $this->mysql;
     }
 
+    function close():MMysql{
+        return $this->mysql->close();
+    }
+
 }
