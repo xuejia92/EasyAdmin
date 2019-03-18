@@ -18,16 +18,16 @@
       <ul class="fly-list">
           {volist name="tptc" id="vo"}
         <li class="fly-list-li">
-          <a href="{:routerurl('/user/home',array('id'=>$vo.userid))}" class="fly-list-avatar">
+          <a href="{:routerurl('/forum/user/home',array('id'=>$vo.userid))}" class="fly-list-avatar">
              <img src="{$vo.userhead!=''?$vo.userhead:$Think.session.userhead}" alt="{$vo.username}">
           </a>
           <h2 class="fly-tip">
-            <a href="{:routerurl('/forum/thread',array('id'=>$vo.id))}">{$vo.title}</a>
+            <a href="{:routerurl('/forum/forum/thread',array('id'=>$vo.id))}">{$vo.title}</a>
            {if condition="$vo['settop'] eq 1"}<span class="fly-tip-stick">置顶</span>{/if}
 			{if condition="$vo['choice'] eq 1"}<span class="fly-tip-jing">精帖</span>{/if}
           </h2>
           <p>
-            <span><a href="{:routerurl('/user/home',array('id'=>$vo.userid))}">{$vo.username}</a></span>
+            <span><a href="{:routerurl('/forum/user/home',array('id'=>$vo.userid))}">{$vo.username}</a></span>
             <span>{$vo.time|friendlyDate}</span>
             <span>{$vo.name}</span>
             <span class="fly-list-hint"> 
