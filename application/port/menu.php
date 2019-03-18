@@ -177,7 +177,7 @@
           'title' => '文档wiki',
           'node' => '',
           'icon' => 'fa fa-pencil-square-o',
-          'url' => 'http://192.168.31.106/wiki',
+          'url' => 'http://192.168.1.106/wiki',
           'params' => '',
           'target' => '_self',
           'sort' => 0,

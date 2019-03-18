@@ -1,0 +1,40 @@
+{layout name="layout" /}
+<div>
+    <h4>公共方法</h4>
+<textarea readonly class="width">
+//打印数组
+function dd($data){
+    echo "<pre>";
+    if(empty($data)){
+        var_dump($data);
+        return;
+    }
+    if(is_object($data)){
+        $data = $data->toArray();
+        foreach($data as $k=>$v){
+            if(is_object($v)){
+                $data[$k] = $v->toArray();
+            }
+        }
+        print_r($data);
+        return;
+    }
+    print_r($data);
+    return;
+}
+//递归
+function recursive($list, $parent_id=0){
+    $arr = array();
+    foreach($list as $l){
+        if($l['parent_id'] == $parent_id){
+            $arr[] = $l;
+            $child = recursive_menu($list, $l['menu_id']);
+            if(is_array($child)){
+                $arr = array_merge($arr, $child);
+            }
+        }
+    }
+    return $arr;
+}
+</textarea>
+</div>

@@ -1,0 +1,37 @@
+<h3>
+    分层控制器
+    <div class="layui-form-item" style="display: inline-block;">
+        <div class="layui-input-block">
+            <a href="{:url('code/index/eventcontroller')}?file=1&mokuai={$mokuai}&event_name={$name}" class="layui-btn" lay-submit lay-filter="basecontroller">生成公共控制器文件</a>
+        </div>
+    </div>
+</h3>
+<br>
+<pre class="layui-code" lay-title="代码" lay-skin="notepad">
+namespace app\{$mokuai}\event;
+
+class {$name}
+
+{
+    public function insert()
+    {
+        return 'insert';
+    }
+
+    public function update($id)
+    {
+        return 'update:'.$id;
+    }
+
+    public function delete($id)
+    {
+        return 'delete:'.$id;
+    }
+}
+
+</pre>
+<script>
+    layui.use('code', function(){ //加载code模块
+        layui.code(); //引用code方法
+    });
+</script>

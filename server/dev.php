@@ -42,7 +42,7 @@ return [
     ],
     'DISPLAY_ERROR' => true,
     'SYSTEM' => [
-        'WS_SERVER_PATH' => 'ws://127.0.0.1:9501',
+        'WS_SERVER_PATH' => 'ws://39.107.66.212:9501',
         'LAST_MESSAGE_MAX' => 10
     ],
     'MYSQL' => [

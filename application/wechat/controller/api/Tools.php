@@ -88,8 +88,9 @@ class Tools extends BasicAdmin
     protected function createQrc($url)
     {
         $qrCode = new QrCode();
-        $qrCode->setText($url)->setSize(300)->setPadding(20)->setImageType(QrCode::IMAGE_TYPE_PNG);
-        return \think\facade\Response::header('Content-Type', 'image/png')->data($qrCode->get());
+        $qrCode->setText($url);
+        $qrCode->setSize(300);
+        return \think\facade\Response::header('Content-Type', 'image/png')->data($qrCode->writeString());
     }
 
 }

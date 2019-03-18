@@ -71,7 +71,7 @@ class Login extends BasicAdmin
             'password' => $this->request->post('password', ''),
         ];
         if (!GeetestService::geetest_chcek_verify($this->request->post(''))) {
-            $this->error('验证失败');
+            $this->error('验证失败','@admin/login');
         }
         $validate->check($data) || $this->error($validate->getError());
         // 用户信息验证

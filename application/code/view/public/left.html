@@ -1,0 +1,33 @@
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">demo</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="{:url('demo/demo')}?id=1">阿里云短信(原阿里大于)</a></dd>
+                    <dd><a href="{:url('demo/demo')}?id=2">阿里云oss</a></dd>
+                    <dd><a href="{:url('demo/demo')}?id=3">PHPExcel导入导出</a></dd>
+                    <dd><a href="{:url('demo/demo')}?id=4">快递鸟</a></dd>
+                    <dd><a href="{:url('demo/kuaidi100')}?id=4">快递100</a></dd>
+
+                </dl>
+            </li>
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">待定</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="javascript:;">待定</a></dd>-->
+                    <!--<dd><a href="javascript:;">待定</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item"><a href="javascript:;">待定</a></li>-->
+        </ul>
+    </div>
+</div>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>

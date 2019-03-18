@@ -124,8 +124,8 @@ if (defined('FM_EMBED')) {
         mb_regex_encoding('UTF-8');
     }
 
-    session_cache_limiter('');
-    session_name(FM_SESSION_ID );
+//    session_cache_limiter('');
+//    session_name(FM_SESSION_ID );
     @session_start();
 }
 

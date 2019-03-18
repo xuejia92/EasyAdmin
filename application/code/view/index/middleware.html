@@ -1,0 +1,48 @@
+{empty name="code"}
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <input type="hidden" name="code" value="1" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">中间件名</label>
+        <div class="layui-input-block">
+            <input type="text" name="middleware_name" class="layui-input">
+            <span style="color: red;">必填</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">生成中间件代码</button>
+        </div>
+    </div>
+</form>
+{else/}
+<h3>中间件</h3><br>
+<pre class="layui-code" lay-title="代码" lay-skin="notepad">
+namespace app\http\middleware;
+class {$name}
+{
+    public function handle($request, \Closure $next)
+    {
+        //允许所有ip访问，设置请求类型
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+        header('Access-Control-Allow-Methods: GET, POST, PUT,DELETE,OPTIONS,PATCH');
+        //获取请求头
+        $info = Request::instance()->header();
+        //判断token
+        if(isset($info['token'])){
+            //有token
+        }else{
+            //无token
+            return json('无token',400);
+        }
+    }
+}
+</pre>
+<script>
+layui.use('code', function(){ //加载code模块
+    layui.code(); //引用code方法
+});
+</script>
+{/empty}
+

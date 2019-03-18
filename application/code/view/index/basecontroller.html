@@ -1,0 +1,43 @@
+<h3>
+    公共控制器
+    <div class="layui-form-item" style="display: inline-block;">
+        <div class="layui-input-block">
+    <a href="{:url('code/index/basecontroller')}?file=1&mokuai={$mokuai}" class="layui-btn" lay-submit lay-filter="basecontroller">生成公共控制器文件</a>
+        </div>
+        </div>
+</h3>
+<br>
+<pre class="layui-code" lay-title="代码" lay-skin="notepad">
+namespace app\{$mokuai}\controller;
+use controller\BasicAdmin;
+use think\Db;
+use think\Url;
+use think\Response;
+use think\Request;
+use think\Loader;
+use think\facade\Hook;
+use Demo;
+//公共控制器
+class Base extends BasicAdmin
+{
+    //定义前置方法名
+    protected $beforeActionList = [
+        'base',
+    ];
+    //空方法
+    public function _empty($name)
+    {
+        return $this->error("空方法");//可跳转到404
+    }
+    //前置方法
+    public function base()
+    {
+
+    }
+}
+</pre>
+<script>
+    layui.use('code', function(){ //加载code模块
+        layui.code(); //引用code方法
+    });
+</script>

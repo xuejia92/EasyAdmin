@@ -31,4 +31,5 @@ class Redis
         }
         return $this;
     }
+
 }

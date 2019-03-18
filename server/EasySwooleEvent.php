@@ -9,8 +9,10 @@
 namespace EasySwoole\EasySwoole;
 
 
+use App\Process\Consumer;
 use App\Process\CrontabTaskMonitor;
 use App\Process\HotReload;
+use App\Process\QueueTaskMonitor;
 use App\Task\JdClient;
 use App\Task\JdGoodClient;
 use App\Utility\Pool\MysqlPool;
@@ -67,11 +69,17 @@ class EasySwooleEvent implements Event
                 WebSocketEvents::cleanOnlineUser();
             }
         });
-        //自定义进程
+
         //热重启
         $serverManager->addProcess((new HotReload('HotReload',['disableInotify'=>true]))->getProcess());
+        //自定义进程
         $serverManager->addProcess((new CrontabTaskMonitor('CrontabTaskMonitor'))->getProcess());
-
+        $serverManager->addProcess((new QueueTaskMonitor('QueueTaskMonitor'))->getProcess());
+        //消息队列
+        $allNum = 3;
+        for ($i = 0 ;$i < $allNum;$i++){
+            ServerManager::getInstance()->getSwooleServer()->addProcess((new Consumer("consumer_{$i}"))->getProcess());
+        }
         //JdClient
         $conf = Config::getInstance()->getConf('REDIS');
         $redis = new \Redis();

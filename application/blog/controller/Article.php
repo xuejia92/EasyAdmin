@@ -72,18 +72,6 @@ class Article extends BasicAdmin
         }
     }
 
-    /**
-     * 授权管理
-     * @return array|string
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     * @throws \think\Exception
-     */
-    public function auth()
-    {
-        return $this->_form($this->table, 'auth');
-    }
 
     /**
      * 文章添加

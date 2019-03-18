@@ -66,44 +66,6 @@ class Comment extends BasicAdmin
     }
  
 
-    /**
-     * 评论添加
-     * @return array|string
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     * @throws \think\Exception
-     */
-    public function add()
-    {
-        return $this->_form($this->table, 'form');
-    }
-
-    /**
-     * 评论编辑
-     * @return array|string
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     * @throws \think\Exception
-     */
-    public function edit()
-    {
-        return $this->_form($this->table, 'form');
-    }
-
-
-    /**
-     * 表单数据默认处理
-     * @param array $data
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
-    public function _form_filter(&$data)
-    {
-
-    }
 
     /**
      * 删除评论
@@ -118,30 +80,5 @@ class Comment extends BasicAdmin
         $this->error("评论删除失败，请稍候再试！");
     }
 
-    /**
-     * 评论禁用
-     * @throws \think\Exception
-     * @throws \think\exception\PDOException
-     */
-    public function forbid()
-    {
-        if (DataService::update($this->table)) {
-            $this->success("评论禁用成功！", '');
-        }
-        $this->error("评论禁用失败，请稍候再试！");
-    }
-
-    /**
-     * 评论禁用
-     * @throws \think\Exception
-     * @throws \think\exception\PDOException
-     */
-    public function resume()
-    {
-        if (DataService::update($this->table)) {
-            $this->success("评论启用成功！", '');
-        }
-        $this->error("评论启用失败，请稍候再试！");
-    }
 
 }

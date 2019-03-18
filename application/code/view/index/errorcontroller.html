@@ -1,0 +1,28 @@
+<h3>
+    空控制器
+    <div class="layui-form-item" style="display: inline-block;">
+        <div class="layui-input-block">
+            <a href="{:url('code/index/errorController')}?file=1&mokuai={$mokuai}" class="layui-btn">生成空控制器文件</a>
+        </div>
+    </div>
+</h3>
+<br>
+<pre class="layui-code" lay-title="代码" lay-skin="notepad">
+namespace app\{$mokuai}\controller;
+use think\Controller;
+use think\Request;
+//空控制器
+class Error extends Controller
+{
+    //空控制器
+    public function index(Request $request)
+    {
+        return $this->error($request->controller().'是空控制器！');//可跳转到404
+    }
+}
+</pre>
+<script>
+    layui.use('code', function(){ //加载code模块
+        layui.code(); //引用code方法
+    });
+</script>

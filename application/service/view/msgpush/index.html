@@ -1,0 +1,84 @@
+<form autocomplete="off" class="layui-form layui-box modal-form-box" action="{:request()->url()}" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">推送服务器</label>
+        <div class="layui-input-inline">
+            <input name="serurl" id="serurl" value="{:sysconf('Service_Url')}" required="required"  placeholder="请输入地址" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">发送对象</label>
+        <div class="layui-input-block">
+            <select name='type' class='layui-select full-width' required="required"  pattern="^\d$" title="请选择类型" lay-ignore>
+                <?php $menus=[0=>'所有后台用户'];?>
+                <option value=''>请选择发送对象</option>
+                <!--{foreach $menus as $key=>$menu}-->
+                <!--{eq name='key' value='$vo.type|default=9'}-->
+                <option selected value='{$key}'>{$menu}</option>
+                <!--{else}-->
+                <option value='{$key}'>{$menu}</option>
+                <!--{/eq}-->
+                <!--{/foreach}-->
+            </select>
+            <p class="help-block color-desc"><b>必填</b>，务必填写正确</p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">发送人</label>
+        <div class="layui-input-block">
+            <input name="most_exec_num" value='{$Think.session.user.id|default="0"}({$Think.session.user.username|default="0"})' required="required"  placeholder="请输入发送人" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">发送内容</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入发送内容" title="请输入发送内容" class="layui-textarea" name="content"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">返回</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" rows="10" name="output" id="output"></textarea>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-left" style="margin-left: 110px">
+        <button class="layui-btn" type='submit' id="submit">发送</button>
+    </div>
+    <script>window.form.render();</script>
+</form>
+<script>
+    var wsUri =document.getElementById('serurl').value;
+    var output = document.getElementById('output');
+
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) {
+        writeToScreen('已连接服务器...')
+    };
+    websocket.onclose = function(evt) {
+        writeToScreen('已关闭服务器...')
+    };
+    websocket.onmessage = function(evt) {
+        writeToScreen('收到消息：'+evt.data)
+    };
+    websocket.onerror = function(evt) {
+        onError(evt)
+    };
+    
+    $('#submit').click(function () {
+        var msg = $('textarea[name=content]').val()
+        var message = {controller: 'Broadcast', action: 'roomBroadcast', params: {content: msg, type: 'text'}}
+        websocket.send(JSON.stringify(message))
+    });
+
+    function writeToScreen(message) {
+        output.value = message+"\r\n"+output.value;
+    }
+
+</script>

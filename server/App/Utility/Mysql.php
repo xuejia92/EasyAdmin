@@ -4,6 +4,7 @@ namespace App\Utility;
 
 use EasySwoole\Component\Singleton;
 use EasySwoole\EasySwoole\Config;
+use EasySwoole\Mysqli\Mysqli;
 use PDO;
 use PDOException;
 
@@ -206,7 +207,7 @@ class MMysql {
         if (!trim($this->_where)) return false;
         $data = $this->_dataFormat($tbName,$data);
         if (!$data) return;
-        $valArr = '';
+        $valArr = [];
         foreach($data as $k=>$v){
             $valArr[] = $k.'='.$v;
         }
@@ -384,7 +385,7 @@ class Mysql
     function __construct()
     {
         $conf = Config::getInstance()->getConf("MYSQL");
-        if($this->mysql==''){
+        if($this->mysql==null){
             $this->mysql = new MMysql($conf);
         }
         return $this->mysql;
