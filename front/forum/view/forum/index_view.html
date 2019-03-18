@@ -22,7 +22,7 @@
              <img src="{$vo.userhead!=''?$vo.userhead:$Think.session.userhead}" alt="{$vo.username}">
           </a>
           <h2 class="fly-tip">
-            <a href="{:url('index/thread',array('id'=>$vo.id))}">{$vo.title}</a>
+            <a href="{:url('forum/thread',array('id'=>$vo.id))}">{$vo.title}</a>
            {if condition="$vo['settop'] eq 1"}<span class="fly-tip-stick">置顶</span>{/if}
 			{if condition="$vo['choice'] eq 1"}<span class="fly-tip-jing">精帖</span>{/if}
           </h2>
